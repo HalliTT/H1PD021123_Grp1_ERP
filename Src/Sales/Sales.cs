@@ -11,21 +11,21 @@ namespace App.Sales
 
     class Sales
     {
-        public Sales(string _orderNumber, 
-                   string _creationTimestamp, 
-                   string _doneTimestamp, 
-                   string _customerNumber,
-                   State _state,
-                   List<Product> _orderList,
+        public Sales(string orderNumber, 
+                   string creationTimestamp, 
+                   string doneTimestamp, 
+                   string customerNumber,
+                   State state,
+                   List<Product.Product> orderList,
                    uint totalOrderPrice) 
         {
-            orderNumber         = _orderNumber;
-            creationTimestamp   = _creationTimestamp;
-            doneTimestamp       = _doneTimestamp;
-            customerNumber      = _customerNumber;
-            state               = _state;
-            orderList           = _orderList;
-            totalOrderPrice     = _totalOrderPrice;
+            this.orderNumber         = orderNumber;
+            this.creationTimestamp   = creationTimestamp;
+            this.doneTimestamp       = doneTimestamp;
+            this.customerNumber      = customerNumber;
+            this.state               = state;
+            this.orderList           = orderList;
+            this.totalOrderPrice     = totalOrderPrice;
         }
 
         protected string _orderNumber = null!;
@@ -63,8 +63,8 @@ namespace App.Sales
             get { return _state; }
         }
 
-        protected List<Product> _orderList;
-        public List<Product> orderList
+        protected List<Product.Product> _orderList;
+        public List<Product.Product> orderList
         {
             set { _orderList = value; }
             get { return _orderList; }
