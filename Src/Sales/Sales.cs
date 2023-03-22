@@ -1,6 +1,6 @@
 namespace App.Sales
 {
-    enum State 
+    public enum State 
     {
         None,
         Created,
@@ -9,7 +9,7 @@ namespace App.Sales
         Done,
     }
 
-    class Sales
+    public class Sales
     {
         public Sales(string orderNumber, 
                    string creationTimestamp, 
@@ -63,7 +63,7 @@ namespace App.Sales
             get { return _state; }
         }
 
-        protected List<Product.Product> _orderList;
+        protected List<Product.Product> _orderList = null!;
         public List<Product.Product> orderList
         {
             set { _orderList = value; }
