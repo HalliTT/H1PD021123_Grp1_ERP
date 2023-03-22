@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "q63dSBD9+0BEi7E4aENijARm9shEcOhMNVUuUC1WpTdSsKQNYN4saupFv3a1BmBHfEoVmB53LRuW/bxishlpgQ==",
+  "dgSpecHash": "WleyQVHzdFujPaKdzqYG67M0BRZF82eHWGNKhjdCLQC2+CQR3/DRAsbD4StgmRreoW263GVimSSelkx10tcL8g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
+  "projectFilePath": "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mhl\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.10\\microsoft.windowsdesktop.app.ref.6.0.10.nupkg.sha512",
-    "C:\\Users\\mhl\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.10\\microsoft.aspnetcore.app.ref.6.0.10.nupkg.sha512"
+    "C:\\Users\\haral\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\haral\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\haral\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\haral\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
   ],
   "logs": []
 }

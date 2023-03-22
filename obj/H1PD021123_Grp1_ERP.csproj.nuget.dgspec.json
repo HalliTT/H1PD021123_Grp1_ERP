@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj": {}
+    "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj": {
+    "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
+        "projectUniqueName": "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
         "projectName": "H1PD021123_Grp1_ERP",
-        "projectPath": "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
-        "packagesPath": "C:\\Users\\mhl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mhl\\OneDrive - RTX\\Dokumenter\\TechCollege\\H1PD021123_Grp1_ERP\\obj\\",
+        "projectPath": "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\H1PD021123_Grp1_ERP.csproj",
+        "packagesPath": "C:\\Users\\haral\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\haral\\Documents\\GitHub\\H1PD021123_Grp1_ERP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mhl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\haral\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,18 +45,27 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.10, 6.0.10]"
+              "version": "[6.0.15, 6.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.15, 6.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.15, 6.0.15]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.10, 6.0.10]"
+              "version": "[6.0.15, 6.0.15]"
             }
           ],
           "frameworkReferences": {
@@ -64,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.305\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
