@@ -1,5 +1,6 @@
 ﻿using System;
 using TECHCOOL;
+using TECHCOOL.UI;
 namespace App
 {
     internal class Program
@@ -8,6 +9,8 @@ namespace App
         {
             Console.WriteLine("Hello World!");
             
+            var shortScreen = new CompanyShortListScreen();
+            Screen.Display(shortScreen);
         }
     }
 }
