@@ -14,7 +14,7 @@ namespace App
             var fullScreen = new CompanyFullListScreen();
             Screen.Display(fullScreen);
 
-
+            var db = new Database();
         }
     }
 }
