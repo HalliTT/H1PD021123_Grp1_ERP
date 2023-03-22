@@ -7,8 +7,9 @@ namespace App
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            
+            var fullScreen = new CompanyFullListScreen();
+            Screen.Display(fullScreen);
+
             var shortScreen = new CompanyShortListScreen();
             Screen.Display(shortScreen);
         }
