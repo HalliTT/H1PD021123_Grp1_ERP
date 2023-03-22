@@ -23,16 +23,21 @@ namespace App.Product
         }
 
 
-        public void calculateProfit(double PurchasePrice, double SalesPrice)
-            {
+        public void calculateProfit()
+        {
             //double purchasePrice = PurchasePrice;
             //double salesPrice = SalesPrice;
-            double profit = PurchasePrice - SalesPrice;
-            foreach (var i in ProductId)
-                {
+            double profit = this.PurchasePrice - this.SalesPrice;
+        }
+            public double Margin()
+            {
+                throw new NotImplementedException();
+                foreach (var i in ProductId)
+                    {
                     
+                    }
+                double profitMargin = (PurchasePrice / SalesPrice) * 100;
                 }
-            double profitMargin = (PurchasePrice / SalesPrice) * 100;
             }
         }
 }
