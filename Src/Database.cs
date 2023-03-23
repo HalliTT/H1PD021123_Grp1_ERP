@@ -2,7 +2,7 @@ using TECHCOOL;
 
 namespace App
 {
-    public class Database
+    public partial class Database
     {
         public Database()
         {
