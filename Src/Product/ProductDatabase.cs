@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TECHCOOL;
 
-namespace App.Product
+namespace App
 {
     partial class Database
     {
-        private static void GetProducts()
+        public void GetProducts()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
