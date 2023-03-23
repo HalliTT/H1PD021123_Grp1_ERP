@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TECHCOOL;
+﻿using Microsoft.Data.SqlClient;
 
 namespace App
 {
@@ -11,7 +6,21 @@ namespace App
     {
         public void GetProducts()
         {
-            
+            string queryString = "SELECT * FROM dbo.Products";
+            using (SqlConnection connection = new SqlConnection(this.connectionStr))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}"));
+                    }
+                    connection.Close();
+                }
+            }
         }
     }
 }
