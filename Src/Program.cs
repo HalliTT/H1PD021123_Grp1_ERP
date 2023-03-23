@@ -10,23 +10,23 @@ namespace App
     internal class Program
     {
         static void Main(string[] args)
-
         {
 
-            var shortScreen = new CompanyShortListScreen();
-            Screen.Display(shortScreen);
+            ///// ------ Haraldur Test ------ /////
+            // var shortScreen = new CompanyShortListScreen();
+            // Screen.Display(shortScreen);
 
-            var fullScreen = new CompanyFullListScreen();
-            Screen.Display(fullScreen);
+            // var fullScreen = new CompanyFullListScreen();
+            // Screen.Display(fullScreen);
 
-            var db = new Database();
+            ///// ------ Marcus Test ------ /////
+            // var db = new Database();
 
-             
-            MyFirstScreen firstScreen = new MyFirstScreen();
-            TodoListScreen todo = new TodoListScreen();
-            CustomerListScreen customerList = new CustomerListScreen();
-            Screen.Display(customerList);
-
+            ///// ------ Sebastian Test ------ /////
+            // MyFirstScreen firstScreen = new MyFirstScreen();
+            // TodoListScreen todo = new TodoListScreen();
+            // CustomerListScreen customerList = new CustomerListScreen();
+            // Screen.Display(customerList);
         }
     }
 }
