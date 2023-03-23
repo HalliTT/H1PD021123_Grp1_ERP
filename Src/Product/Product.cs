@@ -1,9 +1,9 @@
 using System;
 using TECHCOOL;
 
-namespace App.Product
+namespace App
 {
-    public enum Unit { meter, }
+    public enum Unit { piece, meter, hour }
     public class Product
     {
         private string ProductId { get; set; }
@@ -24,7 +24,55 @@ namespace App.Product
             this.AmountInStock = AmountInStock;
             this.Unit = (Unit)Unit;
         }
-
+        //id 
+        protected string _productId;
+        protected string productId
+        {
+            set { _productId = value; }
+            get { return _productId; }
+        }
+        //name 
+        protected string _name;
+        protected string name
+        {
+            set { _name = value; }
+            get { return _name; }
+        }
+        //purchaseprice 
+        protected double _purchaseprice;
+        protected double purchaseprice
+        {
+            set { _purchaseprice = value; }
+            get { return _purchaseprice; }
+        }
+        //salesprice 
+        protected double _salesprice;
+        protected double salesprice
+        {
+            set { _salesprice = value; }
+            get { return _salesprice; }
+        }
+        //Location 
+        protected string _location;
+        protected string location
+        {
+            set { _location = value; }
+            get { return _location; }
+        }
+        //AmountInStock 
+        protected double _amountinstock;
+        protected double amountinstock
+        {
+            set { _amountinstock = value; }
+            get { return _amountinstock; }
+        }
+        //Unit 
+        protected Unit _unit;
+        protected Unit unit
+        {
+            set { _unit = value; }
+            get { return _unit; }
+        }
 
         public double calculateProfit()
         {
