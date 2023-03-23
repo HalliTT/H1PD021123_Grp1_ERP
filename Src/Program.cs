@@ -1,9 +1,4 @@
-﻿using H1PD021123_Grp1_ERP.Customer;
-using System;
-using TECHCOOL;
-using TECHCOOL.UI;
-using H1PD021123_Grp1_ERP.Screens;
-
+﻿using TECHCOOL.UI;
 
 namespace App
 {
