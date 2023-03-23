@@ -9,9 +9,10 @@ namespace App
 {
     internal class Program
     {
+        static Database db = new Database();
         static void Main(string[] args)
         {
-
+            
             ///// ------ Haraldur Test ------ /////
             // var shortScreen = new CompanyShortListScreen();
             // Screen.Display(shortScreen);
@@ -20,7 +21,7 @@ namespace App
             // Screen.Display(fullScreen);
 
             ///// ------ Marcus Test ------ /////
-            // var db = new Database();
+            
 
             ///// ------ Sebastian Test ------ /////
             // MyFirstScreen firstScreen = new MyFirstScreen();
