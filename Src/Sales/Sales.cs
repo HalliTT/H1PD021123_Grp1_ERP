@@ -1,4 +1,4 @@
-namespace App.Sales
+namespace App
 {
     public enum State 
     {
@@ -11,12 +11,12 @@ namespace App.Sales
 
     public class Sales
     {
-        public Sales(string orderNumber, 
+        public Sales(uint orderNumber, 
                    string creationTimestamp, 
                    string doneTimestamp, 
                    string customerNumber,
                    State state,
-                   List<Product.Product> orderList,
+                   List<Product> orderList,
                    uint totalOrderPrice) 
         {
             this.orderNumber         = orderNumber;
@@ -28,8 +28,8 @@ namespace App.Sales
             this.totalOrderPrice     = totalOrderPrice;
         }
 
-        protected string _orderNumber = null!;
-        public string orderNumber
+        protected uint _orderNumber;
+        public uint orderNumber
         {
             set { _orderNumber = value; }
             get { return _orderNumber; }
@@ -63,8 +63,8 @@ namespace App.Sales
             get { return _state; }
         }
 
-        protected List<Product.Product> _orderList = null!;
-        public List<Product.Product> orderList
+        protected List<Product> _orderList = null!;
+        public List<Product> orderList
         {
             set { _orderList = value; }
             get { return _orderList; }
