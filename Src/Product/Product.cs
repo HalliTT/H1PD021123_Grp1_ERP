@@ -1,7 +1,7 @@
 using System;
 using TECHCOOL;
 
-namespace App.Product
+namespace App
 {
     public enum Unit { meter, }
     public class Product

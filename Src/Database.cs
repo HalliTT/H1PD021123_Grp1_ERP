@@ -14,7 +14,6 @@ namespace App
             this.connectionStr = sqlBuilder.ToString();
         }
 
-
         protected string _connectionStr;
         public string connectionStr
         {
