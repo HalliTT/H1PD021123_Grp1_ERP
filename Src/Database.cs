@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using TECHCOOL;
 
 namespace App
 {
@@ -13,25 +14,15 @@ namespace App
             sqlBuilder.IntegratedSecurity = false;
             sqlBuilder.UserID = "H1PD021123_Gruppe1";
             sqlBuilder.Password = "H1PD021123_Gruppe1";
-            sqlBuilder.TrustServerCertificate = true;
-            sqlBuilder.IntegratedSecurity = false;
-
-            this.connection = new SqlConnection(sqlBuilder.ToString());
-            connection.Open();
-
+            this.connectionStr = sqlBuilder.ToString();
         }
 
-        // Destructor
-        ~Database() 
-        { 
-            this.connection.Close(); 
-        }
 
-        protected SqlConnection _connection = null!;
-        public SqlConnection connection
+        protected string _connectionStr;
+        public string connectionStr
         {
-            set { _connection = value; }
-            get { return _connection; }
+            set { _connectionStr = value; }
+            get { return _connectionStr; }
         }
     }
 }
