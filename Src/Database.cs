@@ -11,14 +11,25 @@ namespace App
             sqlBuilder.InitialCatalog = "H1PD021123_Gruppe1";
             sqlBuilder.UserID = "H1PD021123_Gruppe1";
             sqlBuilder.Password = "H1PD021123_Gruppe1";
-            this.connectionStr = sqlBuilder.ToString();
+            sqlBuilder.TrustServerCertificate = true;
+            sqlBuilder.IntegratedSecurity = false;
+
+            this.connection = new SqlConnection(sqlBuilder.ToString());
+            connection.Open();
+
         }
 
-        protected string _connectionStr;
-        public string connectionStr
+        // Destructor
+        ~Database() 
+        { 
+            this.connection.Close(); 
+        }
+
+        protected SqlConnection _connection = null!;
+        public SqlConnection connection
         {
-            set { _connectionStr = value; }
-            get { return _connectionStr; }
+            set { _connection = value; }
+            get { return _connection; }
         }
     }
 }

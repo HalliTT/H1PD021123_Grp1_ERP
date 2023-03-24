@@ -7,9 +7,8 @@ namespace App
         public void GetProducts()
         {
             string queryString = "SELECT * FROM dbo.Products";
-            using (SqlConnection connection = new SqlConnection(this.connectionStr))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
+
+                SqlCommand command = new SqlCommand(queryString, this.connection);
                 connection.Open();
 
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -18,9 +17,7 @@ namespace App
                     {
                         Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}"));
                     }
-                    connection.Close();
                 }
-            }
         }
     }
 }

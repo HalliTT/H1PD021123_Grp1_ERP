@@ -11,7 +11,7 @@ namespace App
 
     public class Sales
     {
-        public Sales(string orderNumber, 
+        public Sales(uint orderNumber, 
                    string creationTimestamp, 
                    string doneTimestamp, 
                    string customerNumber,
@@ -28,8 +28,8 @@ namespace App
             this.totalOrderPrice     = totalOrderPrice;
         }
 
-        protected string _orderNumber = null!;
-        public string orderNumber
+        protected uint _orderNumber;
+        public uint orderNumber
         {
             set { _orderNumber = value; }
             get { return _orderNumber; }
