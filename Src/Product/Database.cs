@@ -21,23 +21,23 @@ namespace App
                     connection.Close();
                 }
             }
-            static void GetProduct()
+            static void GetProduct(Product p)
             { 
-                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM dbo.Products (ProductId, Name, PurchasePrice,SalesPrice, Location, AmountinStock, Unit) WHERE (ProductId=1)"); 
+                SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM dbo.Products WHERE (ProductId={p.productId})"); 
             }
             static void InsertProduct(Product p)
             {
-                SqlCommand insert = new SqlCommand("INSERT INTO dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) VALUES (1,'Name', 1.2, 200.0, 'locationstf', 1.2, 'meter')");
+                SqlCommand insert = new SqlCommand($"INSERT INTO dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) VALUES ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit})");
             }
             static void UpdateProduct(Product p)
             {
 
-                SqlCommand update = new SqlCommand("UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET (1,'Name', 1.2, 200.0, 'locationstf', 1.2, 'meter') WHERE (ProdictId = 1)");
+                SqlCommand update = new SqlCommand($"UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit}) WHERE (ProdictId = {p.productId})");
 
             }
             static void DeleteProduct(Product p)
             {
-                SqlCommand delete = new SqlCommand("DELETE FROM dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) WHERE (ProductId = 1)");
+                SqlCommand delete = new SqlCommand($"DELETE FROM dbo.Products WHERE (ProductId = {p.productId})");
             }
         }
     }
