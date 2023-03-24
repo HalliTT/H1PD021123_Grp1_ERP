@@ -27,7 +27,7 @@ namespace App
                                      Convert.ToString(reader[2]), 
                                      Convert.ToString(reader[3]), 
                                      state, 
-                                     new List<Product> { new Product("12", "test", 1, 10.0, 10.0, "test", 10, Unit.meter) }, // TODO - this is dummy data and shoudl replaced by a function which can convert a string to List<Product>
+                                     new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) }, // TODO - this is dummy data and shoudl replaced by a function which can convert a string to List<Product>
                                      Convert.ToUInt32(reader[6])));
                 }
             }

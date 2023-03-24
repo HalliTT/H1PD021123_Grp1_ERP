@@ -6,7 +6,7 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string productId, string name, int Amount, double purchasePrice, double salesPrice, string location, float amountInStock, Unit Unit)
+        public Product(string productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit Unit)
         {
             this.productId = productId;
             this.name = name;
