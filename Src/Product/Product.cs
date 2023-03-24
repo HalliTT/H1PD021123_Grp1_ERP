@@ -3,72 +3,64 @@ using TECHCOOL;
 
 namespace App
 {
-    public enum Unit { piece, meter, hour }
+    public enum Unit { pieces, meters, hours }
     public class Product
     {
-        private string ProductId { get; set; }
-        protected string Name { get; set; }
-        double PurchasePrice { get; set; }
-        double SalesPrice { get; set; }
-        string Location { get; set; }
-        float AmountInStock { get; set; }
-        Unit Unit { get; set; }
-
-        public Product(string ProductId, string Name, int Amount, double PurchasePrice, double SalesPrice, string Location, float AmountInStock, Unit Unit)
+        public Product(string productId, string name, int Amount, double purchasePrice, double salesPrice, string location, float amountInStock, Unit Unit)
         {
-            this.ProductId = ProductId;
-            this.Name = Name;
-            this.PurchasePrice = PurchasePrice;
-            this.SalesPrice = SalesPrice;
-            this.Location = Location;
-            this.AmountInStock = AmountInStock;
-            this.Unit = (Unit)Unit;
+            this.productId = productId;
+            this.name = name;
+            this.purchasePrice = purchasePrice;
+            this.salesPrice = salesPrice;
+            this.location = location;
+            this.amountInStock = amountInStock;
+            this.unit = (Unit)Unit;
         }
         //id 
         protected string _productId;
-        protected string productId
+        public string productId
         {
             set { _productId = value; }
             get { return _productId; }
         }
         //name 
         protected string _name;
-        protected string name
+        public string name
         {
             set { _name = value; }
             get { return _name; }
         }
         //purchaseprice 
-        protected double _purchaseprice;
-        protected double purchaseprice
+        protected double _purchasePrice;
+        public double purchasePrice
         {
-            set { _purchaseprice = value; }
-            get { return _purchaseprice; }
+            set { _purchasePrice = value; }
+            get { return _purchasePrice; }
         }
         //salesprice 
-        protected double _salesprice;
-        protected double salesprice
+        protected double _salesPrice;
+        public double salesPrice
         {
-            set { _salesprice = value; }
-            get { return _salesprice; }
+            set { _salesPrice = value; }
+            get { return _salesPrice; }
         }
         //Location 
         protected string _location;
-        protected string location
+        public string location
         {
             set { _location = value; }
             get { return _location; }
         }
         //AmountInStock 
-        protected double _amountinstock;
-        protected double amountinstock
+        protected double _amountInStock;
+        public double amountInStock
         {
-            set { _amountinstock = value; }
-            get { return _amountinstock; }
+            set { _amountInStock = value; }
+            get { return _amountInStock; }
         }
         //Unit 
         protected Unit _unit;
-        protected Unit unit
+        public Unit unit
         {
             set { _unit = value; }
             get { return _unit; }
@@ -76,13 +68,13 @@ namespace App
 
         public double calculateProfit()
         {
-            double profit = this.PurchasePrice - this.SalesPrice;
+            double profit = this.purchasePrice - this.salesPrice;
             return profit;
         }
         public double Margin()
         {
             int test = 0;
-            foreach (var i in ProductId)
+            foreach (var i in productId)
             {
                 test++;
             }

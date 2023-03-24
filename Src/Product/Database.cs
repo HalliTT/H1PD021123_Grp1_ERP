@@ -21,24 +21,25 @@ namespace App
                     connection.Close();
                 }
             }
-            static void GetProduct(Product p)
+        }
+            public void GetProduct(Product p)
             { 
                 SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM dbo.Products WHERE (ProductId={p.productId})"); 
             }
-            static void InsertProduct(Product p)
+            public  void InsertProduct(Product p)
             {
-                SqlCommand insert = new SqlCommand($"INSERT INTO dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) VALUES ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit})");
+                SqlCommand insert = new SqlCommand($"INSERT INTO dbo.Products VALUES (Name='{p.name}', PurchasePrice='{p.purchasePrice}', SalesPrice='{p.salesPrice}', Location='{p.location}', AmountInStock='{p.amountInStock}', Unit='{p.unit}')");
             }
-            static void UpdateProduct(Product p)
+            public  void UpdateProduct(Product p)
             {
-
-                SqlCommand update = new SqlCommand($"UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit}) WHERE (ProdictId = {p.productId})");
+                
+                SqlCommand update = new SqlCommand($"UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET (Name='{p.name}', PurchasePrice='{p.purchasePrice}', SalesPrice='{p.salesPrice}', Location='{p.location}', AmountInStock='{p.amountInStock}', Unit='{p.unit}') WHERE (ProdictId = {p.productId})");
 
             }
-            static void DeleteProduct(Product p)
+            public  void DeleteProduct(Product p)
             {
                 SqlCommand delete = new SqlCommand($"DELETE FROM dbo.Products WHERE (ProductId = {p.productId})");
             }
         }
     }
-}
+
