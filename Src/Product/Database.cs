@@ -21,6 +21,10 @@ namespace App
                     connection.Close();
                 }
             }
+            static void GetProduct()
+            { 
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM dbo.Products (ProductId, Name, PurchasePrice,SalesPrice, Location, AmountinStock, Unit) WHERE (ProductId=1)"); 
+            }
             static void InsertProduct(Product p)
             {
                 SqlCommand insert = new SqlCommand("INSERT INTO dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) VALUES (1,'Name', 1.2, 200.0, 'locationstf', 1.2, 'meter')");
