@@ -38,5 +38,26 @@ namespace App
                 return;
             }
         }
+
+
+
+        public class SalesSingleListScreen : Screen
+        {
+            public SalesSingleListScreen(Sales selected)
+            {
+                listSales.Add(selected);
+            }
+            public ListPage<Sales> listSales = new ListPage<Sales>();
+            public override string Title { get; set; } = "salg";
+            protected override void Draw()
+            {
+                Clear(this);
+                listSales.AddColumn("Sales Order Number", "orderNumber", 20);
+                listSales.AddColumn("Date", "creationTimestamp", 20);
+                listSales.AddColumn("Customer Id", "customerNumber", 20);
+                listSales.Draw();
+            }
+
+        }
     }
 }
