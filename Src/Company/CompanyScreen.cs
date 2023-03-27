@@ -13,7 +13,7 @@ namespace App
             ListPage<Company.Company> listCompany = new ListPage<Company.Company>();
             listCompany.Add(new Company.Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark", "Dkk", "29 22 00 10", "Mars@Mars.dk"));
             listCompany.AddColumn("Id", "companyId");
-            listCompany.AddColumn("Company", "companyName");
+            listCompany.AddColumn("Company",    "companyName");
             listCompany.AddColumn("Road", "companyRoad");
             listCompany.AddColumn("House Number", "companyHouseNumber");
             listCompany.AddColumn("Zip Code", "companyZipCode");

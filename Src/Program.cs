@@ -5,9 +5,10 @@ namespace App
     internal class Program
     {
         static Database db = new Database();
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-
+            CompanyFullListScreen fullListScreen = new CompanyFullListScreen();
+            Screen.Display(fullListScreen);
             ///// ------ Haraldur Test ------ /////
             // var shortScreen = new CompanyShortListScreen();
             // Screen.Display(shortScreen);
@@ -16,7 +17,7 @@ namespace App
 
             ///// ------ DB - TEST ------ /////
             
-            List<Product> productList = new List<Product> { new Product("12", "test", 1, 10.0, 10.0, "test", 10, Unit.meter) };
+            List<Product> productList = new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) };
 
             var timestamp = DateTime.Now.ToString();
 
