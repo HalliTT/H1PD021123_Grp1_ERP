@@ -5,40 +5,69 @@ namespace App
 {
     public partial class Database
     {
-        public void GetProducts()
+        public List<Product> GetProducts()
         {
             string queryString = "SELECT * FROM dbo.Products";
-            using (SqlConnection connection = new SqlConnection(this.connectionStr))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                connection.Open();
 
-                using (SqlDataReader reader = command.ExecuteReader())
+            SqlCommand command = new SqlCommand(queryString, this.connection);
+
+            command.ExecuteNonQuery();
+
+            List<Product> products = new List<Product>();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}"));
-                    }
-                    connection.Close();
+                    // Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}"));
                 }
             }
-            static void GetProduct(Product p)
-            { 
-                SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM dbo.Products WHERE (ProductId={p.productId})"); 
-            }
-            static void InsertProduct(Product p)
+            return products;
+        }
+        public void GetProduct(Product p)
             {
-                SqlCommand insert = new SqlCommand($"INSERT INTO dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) VALUES ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit})");
-            }
-            static void UpdateProduct(Product p)
-            {
+                string queryString = $"SELECT * FROM dbo.Products WHERE (ProductId={p.productId})";
 
-                SqlCommand update = new SqlCommand($"UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET ({p.productId},{p.name}, {p.purchasePrice}, {p.salesPrice}, {p.location}, {p.amountInStock}, {p.unit}) WHERE (ProdictId = {p.productId})");
+                SqlCommand command = new SqlCommand(queryString,this.connection);
+                
+                command.ExecuteNonQuery();
+                
+                List<Product> product = new List<Product> {};
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    App.Unit unit;
+                    Enum.TryParse<App.Unit>(Convert.ToString(reader[6]), out unit);
+
+                    new List<Product> { new Product(Convert.ToString(reader[0]), Convert.ToString(reader[1]), Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToString(reader[4]), Convert.ToInt64(reader[5]), unit};
+                }
+             }
+    }
+            public  void InsertProduct(Product p)
+            {
+                string queryString = $"INSERT INTO dbo.Products VALUES (Name='{p.name}', PurchasePrice='{p.purchasePrice}', SalesPrice='{p.salesPrice}', Location='{p.location}', AmountInStock='{p.amountInStock}', Unit='{p.unit}')";
+                
+                SqlCommand command = new SqlCommand(queryString, this.connection);
+                 
+                command.ExecuteNonQuery();
+            }
+            public  void UpdateProduct(Product p)
+            {
+            string queryString = $"UPDATE dbo.Products (ProductId,Name,PurchasePrice,SalesPrice,Location,AmountInStock,Unit) SET (Name='{p.name}', PurchasePrice='{p.purchasePrice}', SalesPrice='{p.salesPrice}', Location='{p.location}', AmountInStock='{p.amountInStock}', Unit='{p.unit}') WHERE (ProdictId = {p.productId})";
+           
+            SqlCommand command = new SqlCommand(queryString, this.connection);
+
+            command.ExecuteNonQuery();
 
             }
-            static void DeleteProduct(Product p)
+            public  void DeleteProduct(Product p)
             {
-                SqlCommand delete = new SqlCommand($"DELETE FROM dbo.Products WHERE (ProductId = {p.productId})");
+             string queryString = $"DELETE FROM dbo.Products WHERE(ProductId = { p.productId})";
+                
+             SqlCommand command = new SqlCommand(queryString, this.connection);
+
+             command.ExecuteNonQuery();
             }
         }
     }

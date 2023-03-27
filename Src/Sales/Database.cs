@@ -1,5 +1,5 @@
 using Microsoft.Data.SqlClient;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace App
 {
@@ -23,17 +23,13 @@ namespace App
                     App.State state;
                     Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
 
-                    Console.WriteLine($"Orderlines: {reader[5]}");
-
-                    /*
                     order.Add(new Sales(Convert.ToUInt32(reader[0]), 
                                      Convert.ToString(reader[1]), 
                                      Convert.ToString(reader[2]), 
                                      Convert.ToString(reader[3]), 
                                      state,
-                                     JsonSerializer.Deserialize<List<OrderLine>>(Convert.ToString(reader[5])),
+                                     JsonConvert.DeserializeObject<List<OrderLine>>(Convert.ToString(reader[5])),
                                      Convert.ToUInt32(reader[6])));
-                    */
                 }
             }
 
@@ -63,7 +59,7 @@ namespace App
 
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{JsonSerializer.Serialize(order.orderList)}', {order.totalOrderPrice})";
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{ JsonConvert.SerializeObject(order.orderLine)}', {order.totalOrderPrice})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
             
@@ -72,7 +68,7 @@ namespace App
 
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerNumber='{order.customerNumber}', State='{order.state.ToString()}', OrderList='{order.orderList.ToString()}', TotalOrderPrice={order.totalOrderPrice}) WHERE OrderNumber={order.orderNumber}";
+            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerNumber='{order.customerNumber}', State='{order.state.ToString()}', OrderList='{JsonConvert.SerializeObject(order.orderLine)}', TotalOrderPrice={order.totalOrderPrice}) WHERE OrderNumber={order.orderNumber}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
             
