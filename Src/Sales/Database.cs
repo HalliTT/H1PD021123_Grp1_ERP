@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using System.Text.Json;
 
 namespace App
 {
@@ -22,13 +23,17 @@ namespace App
                     App.State state;
                     Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
 
-                    order.Append(new Sales(Convert.ToUInt32(reader[0]), 
+                    Console.WriteLine($"Orderlines: {reader[5]}");
+
+                    /*
+                    order.Add(new Sales(Convert.ToUInt32(reader[0]), 
                                      Convert.ToString(reader[1]), 
                                      Convert.ToString(reader[2]), 
                                      Convert.ToString(reader[3]), 
-                                     state, 
-                                     new List<Product> { new Product("12", "test", 1, 10.0, 10.0, "test", 10, Unit.meter) }, // TODO - this is dummy data and shoudl replaced by a function which can convert a string to List<Product>
+                                     state,
+                                     JsonSerializer.Deserialize<List<OrderLine>>(Convert.ToString(reader[5])),
                                      Convert.ToUInt32(reader[6])));
+                    */
                 }
             }
 
@@ -58,7 +63,7 @@ namespace App
 
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{order.orderList.ToString()}', {order.totalOrderPrice})";
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{JsonSerializer.Serialize(order.orderList)}', {order.totalOrderPrice})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
             

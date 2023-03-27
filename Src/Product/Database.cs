@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
+/*
 namespace App
 {
     public partial class Database
@@ -42,3 +43,4 @@ namespace App
         }
     }
 }
+*/

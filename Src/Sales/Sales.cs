@@ -16,7 +16,7 @@ namespace App
                    string doneTimestamp, 
                    string customerNumber,
                    State state,
-                   List<Product> orderList,
+                   List<OrderLine> orderList,
                    uint totalOrderPrice) 
         {
             this.orderNumber         = orderNumber;
@@ -63,8 +63,8 @@ namespace App
             get { return _state; }
         }
 
-        protected List<Product> _orderList = null!;
-        public List<Product> orderList
+        protected List<OrderLine> _orderList = null!;
+        public List<OrderLine> orderList
         {
             set { _orderList = value; }
             get { return _orderList; }
