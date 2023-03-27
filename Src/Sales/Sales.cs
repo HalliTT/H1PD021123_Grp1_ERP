@@ -24,7 +24,7 @@ namespace App
             this.doneTimestamp       = doneTimestamp;
             this.customerNumber      = customerNumber;
             this.state               = state;
-            this.orderList           = orderList;
+          //  this.orderList           = orderList;
             this.totalOrderPrice     = totalOrderPrice;
         }
 
