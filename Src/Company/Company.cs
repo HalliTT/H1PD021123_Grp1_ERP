@@ -1,6 +1,6 @@
 using System;
 using TECHCOOL;
-namespace App.Company
+namespace App
 {
     internal class Company
     {
