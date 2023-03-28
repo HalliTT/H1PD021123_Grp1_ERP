@@ -30,7 +30,7 @@ namespace App
             Console.WriteLine("You Selected: " + selected);
 
             
-            if (selected != null )
+            if (selected != null ) //Not sure its gonna work later on, might need a change
             {
                 ProductDescription screen = new ProductDescription();
                 Screen.Display(screen);
