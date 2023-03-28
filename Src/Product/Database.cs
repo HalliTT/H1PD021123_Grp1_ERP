@@ -40,7 +40,7 @@ namespace App
                     App.Unit unit;
                     Enum.TryParse<App.Unit>(Convert.ToString(reader[6]), out unit);
 
-                    new List<Product> { new Product(Convert.ToString(reader[0]), Convert.ToString(reader[1]), Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToString(reader[4]), Convert.ToInt64(reader[5]), unit};
+                    new List<Product> { new Product(Convert.ToString(reader[0]), Convert.ToString(reader[1]), Convert.ToDouble(reader[2]), Convert.ToDouble(reader[3]), Convert.ToString(reader[4]), Convert.ToInt64(reader[5]), unit)};
                 }
              }
     }
