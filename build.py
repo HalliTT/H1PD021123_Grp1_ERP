@@ -14,12 +14,8 @@ def main():
         print("ERROR: build.py should be runned from root dir")
         exit()
         
-    if platform == "linux" or platform == "win32":
-        run(["dotnet", "build", str(Path("./Src")), "--output", outputDir()])
-        
     else:
-        print("ERROR: can only build for Windows or Linux")
-        exit()
+        run(["dotnet", "build", str(Path("./Src")), "--output", outputDir()])
 
 if __name__ == "__main__":
     main()

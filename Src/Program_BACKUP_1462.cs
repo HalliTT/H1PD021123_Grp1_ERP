@@ -7,8 +7,14 @@ namespace App
         static Database db = new Database();
         public static void Main(string[] args)
         {
+<<<<<<< HEAD
             CompanyFullListScreen fullListScreen = new CompanyFullListScreen();
             Screen.Display(fullListScreen);
+            ///// ------ Haraldur Test ------ /////
+            // var shortScreen = new CompanyShortListScreen();
+            // Screen.Display(shortScreen);
+            // var fullScreen = new CompanyFullListScreen();
+            // Screen.Display(fullScreen);
 
             ///// ------ DB - TEST ------ /////
             
@@ -18,8 +24,10 @@ namespace App
 
             var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
             
+=======
 
             ///// ------ Haraldur SalesScreen ------ /////
+>>>>>>> d561f06aa1beaa8a1d3bc476d426ffa8f4342d07
             var db = new Database();
             var orders = db.GetOrders();
             var listSales = new ListPage<Sales>();

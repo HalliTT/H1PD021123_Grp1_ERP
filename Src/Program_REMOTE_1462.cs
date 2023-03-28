@@ -5,19 +5,8 @@ namespace App
     internal class Program
     {
         static Database db = new Database();
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            CompanyFullListScreen fullListScreen = new CompanyFullListScreen();
-            Screen.Display(fullListScreen);
-
-            ///// ------ DB - TEST ------ /////
-            
-            List<Product> productList = new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) };
-
-            var timestamp = DateTime.Now.ToString();
-
-            var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
-            
 
             ///// ------ Haraldur SalesScreen ------ /////
             var db = new Database();
