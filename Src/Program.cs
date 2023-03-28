@@ -37,8 +37,8 @@ namespace App
 
             ///// ------ Sebastian Test ------ /////
            
-            ProductScreen screen = new ProductScreen();
-            Screen.Display(screen); vb
+            //ProductScreen screen = new ProductScreen();
+            //Screen.Display(screen); 
            
         }
     }
