@@ -7,8 +7,8 @@ namespace App
         static Database db = new Database();
         public static void Main(string[] args)
         {
-            CompanyFullListScreen fullListScreen = new CompanyFullListScreen();
-            Screen.Display(fullListScreen);
+            CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
+            Screen.Display(companyFullListScreen);
 
             ///// ------ DB - TEST ------ /////
             
@@ -16,7 +16,7 @@ namespace App
 
             var timestamp = DateTime.Now.ToString();
 
-            var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
+           // var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
             
 
             ///// ------ Haraldur SalesScreen ------ /////
