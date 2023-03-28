@@ -69,5 +69,4 @@ namespace App
              command.ExecuteNonQuery();
             }
         }
-    }
-
+}
