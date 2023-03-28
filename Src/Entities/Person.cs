@@ -1,5 +1,4 @@
-﻿using H1PD021123_Grp1_ERP.Customer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace H1PD021123_Grp1_ERP.Entities
         string surname;
         private Adress adress;
         private string phoneNumber;
-        
+
 
 
         public string getName
@@ -28,7 +27,7 @@ namespace H1PD021123_Grp1_ERP.Entities
             set { surname = value; }
         }
 
-       public string getPhoneNumber
+        public string getPhoneNumber
         {
             get { return phoneNumber; }
             set { phoneNumber = value; }
@@ -38,7 +37,7 @@ namespace H1PD021123_Grp1_ERP.Entities
         {
             string fullname = name + " " + surname;
             return fullname;
-            
+
         }
     }
 }

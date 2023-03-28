@@ -1,5 +1,4 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using H1PD021123_Grp1_ERP.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace H1PD021123_Grp1_ERP.Entities
     {
         private string roadName;
         private string doorNumber;
-        private string zipCode;         
+        private string zipCode;
         private string state;
         private string city;
 

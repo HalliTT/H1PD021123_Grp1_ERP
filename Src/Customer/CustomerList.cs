@@ -4,21 +4,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace H1PD021123_Grp1_ERP.Screens
+namespace App
 {
-    class CustomerList
+    public class CustomerList
     {
-        public string CustomerID { get; set; } = "";
-        public string CustomerName { get; set; } = "";
-        public string CustomerPhone { get; set; } = "";
-        public string CustomerMail { get; set; } = "";  
-
-        public CustomerList(string customerId, string customerName, string customerPhone, string customerMail) 
+        //Constructort
+        public CustomerList(uint customerId, string customerFullName, string customerPhone, string customerMail)
         {
             CustomerID = customerId;
-            CustomerName = customerName;
+            CustomerFullName = customerFullName;
             CustomerPhone = customerPhone;
             CustomerMail = customerMail;
+        }
+
+        //Id
+        protected uint _customerId;
+        public uint CustomerID
+        {
+            set { _customerId = value; }
+            get { return _customerId; }
+        }
+
+        //Name
+        protected string _customerFullName;
+        public string CustomerFullName
+        {
+            set { _customerFullName = value; }
+            get { return _customerFullName; }
+        }
+
+        //Phone
+        protected string _customerPhone;
+        public string CustomerPhone
+        {
+            set { _customerPhone = value; }
+            get { return _customerPhone; }
+        }
+
+        //Email
+        protected string _customerMail;
+        public string CustomerMail
+        {
+            set { _customerMail = value; }
+            get { return _customerMail; }
         }
     }
 }

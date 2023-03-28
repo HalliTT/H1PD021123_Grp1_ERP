@@ -5,19 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using H1PD021123_Grp1_ERP.Entities;
 
-namespace H1PD021123_Grp1_ERP.Customer
+namespace App
 {
-   public class Customer : Person
+    public class Person
     {
-        private string customerID {  get; set; }
+        private string customerID { get; set; }
 
         private string lastOrderDate = DateTime.Now.ToString();
-
-
         public string CustomerID
         {
             get { return customerID; }
-            set { customerID = value; }                
+            set { customerID = value; }
         }
 
         public string LastOrderDate
