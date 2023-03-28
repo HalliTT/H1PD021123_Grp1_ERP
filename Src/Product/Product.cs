@@ -6,7 +6,7 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit Unit)
+        public Product(string productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
         {
             this.productId = productId;
             this.name = name;
@@ -14,7 +14,7 @@ namespace App
             this.salesPrice = salesPrice;
             this.location = location;
             this.amountInStock = amountInStock;
-            this.unit = (Unit)Unit;
+            this.unit = unit;
         }
         //id 
         protected string _productId;
