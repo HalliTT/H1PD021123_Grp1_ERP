@@ -1,4 +1,5 @@
-﻿using TECHCOOL.UI;
+﻿using H1PD021123_Grp1_ERP.Product;
+using TECHCOOL.UI;
 
 namespace App
 {
@@ -16,15 +17,13 @@ namespace App
 
             ///// ------ DB - TEST ------ /////
             
-            List<Product> productList = new List<Product> { new Product("12", "test", 1, 10.0, 10.0, "test", 10, Unit.meter) };
-
+           
             var timestamp = DateTime.Now.ToString();
-
-            var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
+           var order = new Sales(1234, timestamp, timestamp, "12", State.None, 200);
             
             var db = new Database();
 
-            db.InsertOrder(order);
+            //db.InsertOrder(order);
 
             Console.WriteLine("Press enter to delete order from db");
             Console.ReadLine();
@@ -37,10 +36,10 @@ namespace App
             // products.PrintProducts();
 
             ///// ------ Sebastian Test ------ /////
-            // MyFirstScreen firstScreen = new MyFirstScreen();
-            // TodoListScreen todo = new TodoListScreen();
-            // CustomerListScreen customerList = new CustomerListScreen();
-            // Screen.Display(customerList);
+           
+            ProductScreen screen = new ProductScreen();
+            Screen.Display(screen); vb
+           
         }
     }
 }

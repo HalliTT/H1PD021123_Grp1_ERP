@@ -1,3 +1,5 @@
+using TECHCOOL.UI;
+
 namespace App
 {
     public enum State 
@@ -16,7 +18,7 @@ namespace App
                    string doneTimestamp, 
                    string customerNumber,
                    State state,
-                   List<Product> orderList,
+                   /*ListPage<App.Product> orderList,*/   // Simon sagde den skal fjernes, salesorder kender ikke til listen 
                    uint totalOrderPrice) 
         {
             this.orderNumber         = orderNumber;

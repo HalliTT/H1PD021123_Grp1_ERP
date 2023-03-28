@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using TECHCOOL.UI;
 
 namespace App
 {
@@ -27,8 +28,7 @@ namespace App
                                      Convert.ToString(reader[2]), 
                                      Convert.ToString(reader[3]), 
                                      state, 
-                                     new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) }, // TODO - this is dummy data and shoudl replaced by a function which can convert a string to List<Product>
-                                     Convert.ToUInt32(reader[6])));
+                                      Convert.ToUInt32(reader[6])));
                 }
             }
 
@@ -56,15 +56,15 @@ namespace App
             return orders;
         }
 
-        public void InsertOrder(Sales order)
-        {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{order.orderList.ToString()}', {order.totalOrderPrice})";
+        //public void InsertOrder(Sales order)
+        //{
+        //    string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{order.orderList.ToString()}', {order.totalOrderPrice})";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+        //    SqlCommand command = new SqlCommand(queryString, this.connection);
             
-            command.ExecuteNonQuery();
-        }
-
+        //    command.ExecuteNonQuery();
+        //}
+         
         public void UpdateOrder(Sales order)
         {
             string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerNumber='{order.customerNumber}', State='{order.state.ToString()}', OrderList='{order.orderList.ToString()}', TotalOrderPrice={order.totalOrderPrice}) WHERE OrderNumber={order.orderNumber}";
