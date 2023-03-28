@@ -2,13 +2,14 @@ using System;
 using TECHCOOL;
 namespace App
 {
+    public enum CompanyCurrency { DKK, USD, EUR }
     public class Company
     {
         /// Constructer
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(string companyId, string companyName, string companyRoad, string companyHouseNumber, string companyZipCode, string companyCity, string companyCountry, string companyCurrency, string companyCvr, string companyEmail)
+        public Company(string companyId, string companyName, string companyRoad, string companyHouseNumber, string companyZipCode, string companyCity, string companyCountry, CompanyCurrency companyCurrency, string companyCvr, string companyEmail)
         {
             this.companyId = companyId;
             this.companyName = companyName;
@@ -79,8 +80,8 @@ namespace App
         }
 
         //Currency
-        protected string _companyCurrency;
-        public string companyCurrency
+        protected CompanyCurrency _companyCurrency;
+        public CompanyCurrency companyCurrency
         {
             set { _companyCurrency = value; }
             get { return _companyCurrency; }

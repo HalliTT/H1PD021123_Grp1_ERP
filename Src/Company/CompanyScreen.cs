@@ -24,7 +24,7 @@ namespace App
         {
             Clear(this);
             ListPage<Company> listCompany = new ListPage<Company>();
-            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark", "Dkk", "29 22 00 10", "Mars@Mars.dk"));
+            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark", CompanyCurrency.DKK, "29 22 00 10", "Mars@Mars.dk"));
             listCompany.AddColumn($"id", "companyId");
             listCompany.AddColumn("Company", "companyName");
             listCompany.AddColumn("Road", "companyRoad");
@@ -62,12 +62,45 @@ namespace App
         protected override void Draw()
         {
             Clear(this);
-            listCompany.Add(new Company("200", "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark", "Dkk", "29 54 90 22", "Venus@venus.dk"));
-            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark", "Dkk", "29 22 00 10", "Mars@Mars.dk"));
+            listCompany.Add(new Company("200", "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",CompanyCurrency.DKK, "29 54 90 22", "Venus@venus.dk"));
+            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark", CompanyCurrency.DKK, "29 22 00 10", "Mars@Mars.dk"));
             listCompany.AddColumn("Company", "companyName");
             listCompany.AddColumn("Country", "companyCountry");
             listCompany.AddColumn("Currency", "companyCurrency");
             listCompany.Draw();
+            Company selected = listCompany.Select();
+            if (selected != null)
+            {
+                // TEST
+                Form<Company> editor = new Form<Company>();
+
+                //Add a textbox
+                Clear(this);
+                editor.TextBox("Company Name", "companyName");
+                editor.TextBox("Road", "companyRoad");
+                editor.TextBox("House Nr.", "companyHouseNumber");
+                editor.TextBox("Zip Code", "companyZipCode");
+                editor.TextBox("City", "companyCity");
+                editor.TextBox("Country", "companyCountry");
+                editor.SelectBox("Currency", "companyCurrency");
+                editor.AddOption("Currency", "USD", "USD");
+                editor.AddOption("Currency", "DKK", "DKK");
+                editor.AddOption("Currency", "EUR", "EUR");
+                editor.Edit(selected);
+
+                Clear(this);
+                Console.WriteLine($"Company {selected.companyName} is {selected.companyCurrency}");
+
+                //Draw the editor
+                editor.Edit(selected);
+                //
+                Screen.Display(new CompanyShortListScreen(selected));
+            }
+            else
+            {
+                Quit();
+                return;
+            }
         }
     }
     public class EditCompany : Screen
@@ -84,7 +117,7 @@ namespace App
                 "9000", 
                 "Aalborg", 
                 "Denmark", 
-                "Dkk", 
+                CompanyCurrency.DKK, 
                 "29 54 90 22", 
                 "Venus@venus.dk"
                 );
@@ -92,6 +125,7 @@ namespace App
             Form<Company> editor = new Form<Company>();
 
             //Add a textbox
+            Clear(this);
             editor.TextBox("Company Name", "companyName");
             editor.TextBox("Road", "companyRoad");
             editor.TextBox("House Nr.", "companyHouseNumber");
