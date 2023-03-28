@@ -18,10 +18,7 @@ namespace App
                    string doneTimestamp, 
                    string customerNumber,
                    State state,
-
-                   
                    List<OrderLine> orderLine,
-
                    uint totalOrderPrice) 
         {
             this.orderNumber         = orderNumber;
