@@ -10,10 +10,10 @@ namespace App
             string queryString = $"SELECT * FROM dbo.Orders WHERE (OrderNumber = {orderNumber})";
 
             SqlCommand command = new SqlCommand(queryString, connection);
-            
+
             command.ExecuteNonQuery();
 
-            List<Sales> order = new List<Sales> {};
+            List<Sales> order = new List<Sales> { };
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
@@ -23,10 +23,10 @@ namespace App
                     App.State state;
                     Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
 
-                    order.Add(new Sales(Convert.ToUInt32(reader[0]), 
-                                     Convert.ToString(reader[1]), 
-                                     Convert.ToString(reader[2]), 
-                                     Convert.ToString(reader[3]), 
+                    order.Add(new Sales(Convert.ToUInt32(reader[0]),
+                                     Convert.ToString(reader[1]),
+                                     Convert.ToString(reader[2]),
+                                     Convert.ToString(reader[3]),
                                      state,
                                      JsonConvert.DeserializeObject<List<OrderLine>>(Convert.ToString(reader[5])),
                                      Convert.ToUInt32(reader[6])));
@@ -44,13 +44,22 @@ namespace App
 
             command.ExecuteNonQuery();
 
-            List<Sales> orders = new List<Sales> {};
+            List<Sales> orders = new List<Sales> { };
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    // TODO - idk what is needed to be done with read.
+                    App.State state;
+                    Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
+
+                    orders.Add(new Sales(Convert.ToUInt32(reader[0]),
+                                     Convert.ToString(reader[1]),
+                                     Convert.ToString(reader[2]),
+                                     Convert.ToString(reader[3]),
+                                     state,
+                                     JsonConvert.DeserializeObject<List<OrderLine>>(Convert.ToString(reader[5])),
+                                     Convert.ToUInt32(reader[6])));
                 }
             }
 
@@ -59,11 +68,11 @@ namespace App
 
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{ JsonConvert.SerializeObject(order.orderLine)}', {order.totalOrderPrice})";
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderNumber}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerNumber}', '{order.state.ToString()}', '{JsonConvert.SerializeObject(order.orderLine)}', {order.totalOrderPrice})";
 
-        //    SqlCommand command = new SqlCommand(queryString, this.connection);
-            
-        //    command.ExecuteNonQuery();
+            SqlCommand command = new SqlCommand(queryString, this.connection);
+
+            command.ExecuteNonQuery();
         }
          
         public void UpdateOrder(Sales order)
@@ -71,7 +80,7 @@ namespace App
             string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerNumber='{order.customerNumber}', State='{order.state.ToString()}', OrderList='{JsonConvert.SerializeObject(order.orderLine)}', TotalOrderPrice={order.totalOrderPrice}) WHERE OrderNumber={order.orderNumber}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
-            
+
             command.ExecuteNonQuery();
         }
 
@@ -80,8 +89,8 @@ namespace App
             string queryString = $"DELETE FROM dbo.Orders WHERE OrderNumber={order.orderNumber}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
-            
+
             command.ExecuteNonQuery();
-        } 
-    }    
+        }
+    }
 }

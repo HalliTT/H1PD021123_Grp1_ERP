@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using TECHCOOL;
 
 namespace App
@@ -6,7 +7,7 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
+        public Product(string productId, string name, decimal purchasePrice, decimal salesPrice, string location, float amountInStock, Unit unit)
         {
             this.productId = productId;
             this.name = name;
@@ -31,15 +32,15 @@ namespace App
             get { return _name; }
         }
         //purchaseprice 
-        protected double _purchasePrice;
-        public double purchasePrice
+        protected static decimal _purchasePrice;
+        public decimal purchasePrice
         {
             set { _purchasePrice = value; }
             get { return _purchasePrice; }
         }
         //salesprice 
-        protected double _salesPrice;
-        public double salesPrice
+        protected static decimal _salesPrice;
+        public decimal salesPrice
         {
             set { _salesPrice = value; }
             get { return _salesPrice; }
@@ -66,9 +67,9 @@ namespace App
             get { return _unit; }
         }
 
-        public double calculateProfit()
+        public static decimal calculateProfit(decimal salesPrice, decimal purchasePrice)
         {
-            double profit = this.purchasePrice - this.salesPrice;
+            decimal profit = purchasePrice - salesPrice;
             return profit;
         }
         public double Margin()
@@ -80,6 +81,12 @@ namespace App
             }
             return test;
             //TODO double profitMargin = (PurchasePrice / SalesPrice) * 100;
+        }
+
+        public static decimal getProfitInPercentage() { 
+
+           decimal profit = Product._purchasePrice  / Product.calculateProfit(Product._purchasePrice, Product._salesPrice) * 100;;
+           return profit;
         }
     }
 }

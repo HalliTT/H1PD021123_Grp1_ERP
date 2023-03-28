@@ -11,8 +11,8 @@ namespace H1PD021123_Grp1_ERP.Product
     {
         public string productId { get; set; } = "";
         public string name { get; set; } = "";
-        public double purchasePrice { get; set; }
-        public double salesPrice { get; set; } 
+        public decimal purchasePrice { get; set; }
+        public decimal salesPrice { get; set; } 
         public string location { get; set; } = "";
         public string amountInStock { get; set; } = "";
         public Unit unit { get; set; } 

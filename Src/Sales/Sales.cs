@@ -19,7 +19,9 @@ namespace App
                    string customerNumber,
                    State state,
                    List<OrderLine> orderLine,
-                   uint totalOrderPrice) 
+                   uint totalOrderPrice,
+                   decimal profitInPercentage,
+                   decimal profitInDKK) 
         {
             this.orderNumber         = orderNumber;
             this.creationTimestamp   = creationTimestamp;
@@ -28,6 +30,10 @@ namespace App
             this.state               = state;
             this.orderLine           = orderLine;
             this.totalOrderPrice     = totalOrderPrice;
+            this.profitInPercentage  = profitInPercentage;
+            this.profitInDKK         = profitInDKK;
+
+            
         }
 
         protected uint _orderNumber;
@@ -78,5 +84,17 @@ namespace App
             set { _totalOrderPrice = value; }
             get { return _totalOrderPrice; }
         }
+
+        protected decimal _profitInPercetage;
+
+        public decimal profitInPercentage
+        {
+            set { _profitInPercetage = Product.getProfitInPercentage(); }
+            get { return _profitInPercetage; }
+        }
+
+        
+
+       
     }
 }

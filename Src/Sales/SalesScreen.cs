@@ -6,23 +6,58 @@ namespace App
 {
     public class SalesFullListScreen : Screen
     {
+        public SalesFullListScreen(ListPage<Sales> nnlist)
+        {
+            this.salesList = nnlist;
+        }
+
+        protected ListPage<Sales> _salesList;
+        public ListPage<Sales> salesList
+        {
+            set { _salesList = value; }
+            get { return _salesList; }
+        }
+
         public override string Title { get; set; } = "List of sales";
         protected override void Draw()
         {
             Clear(this);
-            ListPage<Sales> listSales = new ListPage<Sales>();
-            // listSales.Add(new Sales("700", "128", "128", "22", "asdas", "asdsd", "sdas"));
-            listSales.AddColumn("Id", "companyId");
-            listSales.AddColumn("Company", "companyName");
-            listSales.AddColumn("Road", "companyRoad");
-            listSales.AddColumn("House Number", "companyHouseNumber");
-            listSales.AddColumn("Zip Code", "companyZipCode");
-            listSales.AddColumn("City", "companyCity");
-            listSales.AddColumn("Country", "companyCountry");
-            listSales.AddColumn("Currency", "companyCurrency");
-            listSales.AddColumn("CVR", "companyCvr");
-            listSales.AddColumn("Email", "companyEmail");
-            listSales.Draw();
+            salesList.AddColumn("orderNumber", "orderNumber", 20);
+            salesList.AddColumn("creationTimestamp", "creationTimestamp", 20);
+            salesList.AddColumn("customerNumber", "customerNumber", 20);
+            salesList.AddColumn("totalOrderPrice", "totalOrderPrice", 20);
+
+            Sales selected = salesList.Select();
+            if (selected != null)
+            {
+                Screen.Display(new SalesSingleListScreen(selected));
+            }
+            else
+            {
+                Quit();
+                return;
+            }
+        }
+
+
+
+        public class SalesSingleListScreen : Screen
+        {
+            public SalesSingleListScreen(Sales selected)
+            {
+                listSales.Add(selected);
+            }
+            public ListPage<Sales> listSales = new ListPage<Sales>();
+            public override string Title { get; set; } = "salg";
+            protected override void Draw()
+            {
+                Clear(this);
+                listSales.AddColumn("Sales Order Number", "orderNumber", 20);
+                listSales.AddColumn("Date", "creationTimestamp", 20);
+                listSales.AddColumn("Customer Id", "customerNumber", 20);
+                listSales.Draw();
+            }
+
         }
     }
 }
