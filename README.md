@@ -35,6 +35,7 @@ This project is using **TECHCOOL** to create screen and dispaly in console.
 
 - .Net version: 6.0
 - Microsoft.Data.SqlClient version: 5.1.0
+- Newtonsoft: 13.0.3
 - TECHCOOL version: 1.3.2
 
 ## **Setup**
