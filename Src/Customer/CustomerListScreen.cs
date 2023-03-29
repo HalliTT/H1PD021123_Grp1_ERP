@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 
-namespace H1PD021123_Grp1_ERP.Screens
+namespace Aap
 {
     public class CustomerListScreen : Screen
     {

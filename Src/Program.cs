@@ -7,28 +7,29 @@ namespace App
         static Database db = new Database();
         public static void Main(string[] args)
         {
-            CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
-            Screen.Display(companyFullListScreen);
+            // CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
+            // Screen.Display(companyFullListScreen);
 
             ///// ------ DB - TEST ------ /////
-            
-            List<Product> productList = new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) };
+
+            var customerid = Guid.NewGuid();
+            var orderId = Guid.NewGuid();
+
+            var productList = new List<OrderLine> { new OrderLine(orderId, new Product(Guid.NewGuid(), "test", 10.0, 10.0, "test", 10, Unit.meters), 1, orderId, Guid.NewGuid()) };
 
             var timestamp = DateTime.Now.ToString();
 
-           // var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
-            
+            var order = new Sales(orderId, timestamp, timestamp, customerid, State.None, productList, 200);
+
 
             ///// ------ Haraldur SalesScreen ------ /////
             var db = new Database();
-            var orders = db.GetOrders();
-            var listSales = new ListPage<Sales>();
-            foreach (var orderI in orders)
-            {
-                listSales.Add(orderI);
-            }
-            var fullListScreen = new SalesFullListScreen(listSales);
-            Screen.Display(fullListScreen);
+
+            db.InsertOrder(order);
+
+            var person = new Person(Guid.NewGuid(), "iAmFirstName", "iAmLastName", "222", "as@as.dk", new Adress("dk", "2990", "Aalbo", "newcoa", "22"), Role.Customer, db.GetTimeStamp(customerid));
+
+            db.InsertPerson(person);
 
             // db.DeleteOrder(order);
             // db.DeleteOrder(orderTwo);
