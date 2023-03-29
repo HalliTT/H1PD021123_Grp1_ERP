@@ -1,6 +1,6 @@
 namespace App
 {
-    public enum State 
+    public enum State
     {
         None,
         Created,
@@ -11,28 +11,28 @@ namespace App
 
     public class Sales
     {
-        public Sales(uint orderNumber, 
-                   string creationTimestamp, 
-                   string doneTimestamp, 
-                   string customerNumber,
+        public Sales(Guid orderId,
+                   string creationTimestamp,
+                   string doneTimestamp,
+                   Guid customerId,
                    State state,
                    List<OrderLine> orderLine,
-                   uint totalOrderPrice) 
+                   uint totalOrderPrice)
         {
-            this.orderNumber         = orderNumber;
-            this.creationTimestamp   = creationTimestamp;
-            this.doneTimestamp       = doneTimestamp;
-            this.customerNumber      = customerNumber;
-            this.state               = state;
-            this.orderLine           = orderLine;
-            this.totalOrderPrice     = totalOrderPrice;
+            this.orderId = orderId;
+            this.creationTimestamp = creationTimestamp;
+            this.doneTimestamp = doneTimestamp;
+            this.customerId = customerId;
+            this.state = state;
+            this.orderLine = orderLine;
+            this.totalOrderPrice = totalOrderPrice;
         }
 
-        protected uint _orderNumber;
-        public uint orderNumber
+        protected Guid _orderId;
+        public Guid orderId
         {
-            set { _orderNumber = value; }
-            get { return _orderNumber; }
+            set { _orderId = value; }
+            get { return _orderId; }
         }
 
         protected string _creationTimestamp = null!;
@@ -49,11 +49,11 @@ namespace App
             get { return _doneTimestamp; }
         }
 
-        protected string _customerNumber = null!;
-        public string customerNumber
+        protected Guid _customerId;
+        public Guid customerId
         {
-            set { _customerNumber = value; }
-            get { return _customerNumber; }
+            set { _customerId = value; }
+            get { return _customerId; }
         }
 
         protected State _state;

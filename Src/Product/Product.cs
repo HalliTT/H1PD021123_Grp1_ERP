@@ -6,7 +6,7 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
+        public Product(Guid productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
         {
             this.productId = productId;
             this.name = name;
@@ -17,8 +17,8 @@ namespace App
             this.unit = unit;
         }
         //id 
-        protected string _productId;
-        public string productId
+        protected Guid _productId;
+        public Guid productId
         {
             set { _productId = value; }
             get { return _productId; }
@@ -71,15 +71,15 @@ namespace App
             double profit = this.purchasePrice - this.salesPrice;
             return profit;
         }
-        public double Margin()
-        {
-            int test = 0;
-            foreach (var i in productId)
-            {
-                test++;
-            }
-            return test;
-            //TODO double profitMargin = (PurchasePrice / SalesPrice) * 100;
-        }
+        // public double Margin()
+        // {
+        //     int test = 0;
+        //     foreach (var i in productId)
+        //     {
+        //         test++;
+        //     }
+        //     return test;
+        //     //TODO double profitMargin = (PurchasePrice / SalesPrice) * 100;
+        // }
     }
 }

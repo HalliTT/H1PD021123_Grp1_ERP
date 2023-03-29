@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 
-namespace H1PD021123_Grp1_ERP.Screens
+namespace Aap
 {
     public class CustomerListScreen : Screen
     {
@@ -13,14 +13,14 @@ namespace H1PD021123_Grp1_ERP.Screens
 
         protected override void Draw()
         {
-            Clear(this);
-            ListPage<CustomerList> list = new ListPage<CustomerList>();
-            list.Add(new CustomerList("#8123", "Sebastian Wrobel", "+45 34 34 34 34", "sebastian@kutas.pl"));
+            // Clear(this);
+            // ListPage<CustomerList> list = new ListPage<CustomerList>();
+            // list.Add(new CustomerList("#8123", "Sebastian Wrobel", "+45 34 34 34 34", "sebastian@kutas.pl"));
 
-            
 
-            CustomerList selected = list.Select();
-            Console.WriteLine("You selected: " + selected);
+
+            // CustomerList selected = list.Select();
+            // Console.WriteLine("You selected: " + selected);
 
         }
     }

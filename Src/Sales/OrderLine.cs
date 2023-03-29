@@ -2,21 +2,21 @@ namespace App
 {
     public class OrderLine
     {
-        public OrderLine(string id, 
-                         Product product, 
-                         uint quantity, 
-                         string salesId, 
-                         string productId)
+        public OrderLine(Guid id,
+                         Product product,
+                         uint quantity,
+                         Guid salesId,
+                         Guid productId)
         {
-            this.id         = id;
-            this.product    = product;
-            this.quantity   = quantity;
-            this.salesId    = salesId;
-            this.productId  = productId;
+            this.id = id;
+            this.product = product;
+            this.quantity = quantity;
+            this.salesId = salesId;
+            this.productId = productId;
         }
 
-        protected string _id;
-        public string id
+        protected Guid _id;
+        public Guid id
         {
             set { _id = value; }
             get { return _id; }
@@ -36,19 +36,19 @@ namespace App
             get { return _quantity; }
         }
 
-        protected string _salesId;
-        public string salesId
+        protected Guid _salesId;
+        public Guid salesId
         {
             set { _salesId = value; }
             get { return _salesId; }
         }
 
-        protected string _productId;
-        public string productId
+        protected Guid _productId;
+        public Guid productId
         {
             set { _productId = value; }
             get { return _productId; }
         }
-        
-    }   
+
+    }
 }
