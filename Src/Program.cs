@@ -4,7 +4,6 @@ namespace App
 {
     internal class Program
     {
-        static Database db = new Database();
         public static void Main(string[] args)
         {
             // CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
@@ -12,24 +11,36 @@ namespace App
 
             ///// ------ DB - TEST ------ /////
 
-            var customerid = Guid.NewGuid();
-            var orderId = Guid.NewGuid();
-
-            var productList = new List<OrderLine> { new OrderLine(orderId, new Product(Guid.NewGuid(), "test", 10.0, 10.0, "test", 10, Unit.meters), 1, orderId, Guid.NewGuid()) };
-
-            var timestamp = DateTime.Now.ToString();
-
-            var order = new Sales(orderId, timestamp, timestamp, customerid, State.None, productList, 200);
-
-
-            ///// ------ Haraldur SalesScreen ------ /////
             var db = new Database();
 
-            db.InsertOrder(order);
+            // var customerid = Guid.NewGuid();
+            // var orderId = Guid.NewGuid();
 
-            var person = new Person(Guid.NewGuid(), "iAmFirstName", "iAmLastName", "222", "as@as.dk", new Adress("dk", "2990", "Aalbo", "newcoa", "22"), Role.Customer, db.GetTimeStamp(customerid));
+            // var productList = new List<OrderLine> { new OrderLine(orderId, new Product(Guid.NewGuid(), "test", 10.0, 10.0, "test", 10, Unit.meters), 1, orderId, Guid.NewGuid()) };
 
-            db.InsertPerson(person);
+            // var timestamp = DateTime.Now.ToString();
+
+            // var order = new Sales(orderId, timestamp, timestamp, customerid, State.None, productList, 200);
+
+            // db.InsertOrder(order);
+
+            // var person = new Person(customerid, "iAmFirstName", "iAmLastName", "222", "as@as.dk", new Adress("dk", "2990", "Aalbo", "newcoa", "22"), Role.Customer, db.GetTimeStamp(customerid));
+
+            // db.InsertPerson(person);
+
+            //Sales and person
+            var orders = db.GetOrders();
+
+            var extendedSalesList = new ListPage<ExtendedSales> { };
+            foreach (var _order in orders)
+            {
+                var _person = db.GetPerson(_order.customerId);
+                var extendedOrder = new ExtendedSales(_order.orderId, _order.creationTimestamp, _order.doneTimestamp, _order.customerId, _order.state, _order.orderLine, _person[0].firstName + " " + _person[0].lastName, _order.totalOrderPrice);
+
+                extendedSalesList.Add(extendedOrder);
+            }
+            var dd = new SalesFullListScreen(extendedSalesList);
+            Screen.Display(dd);
 
             // db.DeleteOrder(order);
             // db.DeleteOrder(orderTwo);

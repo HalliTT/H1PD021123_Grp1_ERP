@@ -8,10 +8,9 @@ namespace App
                              Guid customerId,
                              State state,
                              List<OrderLine> orderLine,
-                             string firstName,
-                             string lastName,
-                             uint totalOrderPrice) 
-                             : base (orderId,
+                             string name,
+                             uint totalOrderPrice)
+                             : base(orderId,
                              creationTimestamp,
                              doneTimestamp,
                              customerId,
@@ -19,32 +18,24 @@ namespace App
                              orderLine,
                              totalOrderPrice)
         {
-            this.firstName  = firstName;
-            this.lastName   = lastName;
+            this.name = name;
         }
 
-        protected string _firstName = null!;
-        public string firstName 
+        protected string _name = null!;
+        public string name
         {
-            set { _firstName = value; }
-            get { return _firstName; }
+            set { _name = value; }
+            get { return _name; }
         }
 
         protected string _lastName = null!;
-        public string lastName 
+        public string lastName
         {
             set { _lastName = value; }
             get { return _lastName; }
         }
 
-        // Return a list where first and last name has been added to the Sales object
-        public List<ExtendedSales> SalesWihName(List<ExtendedSales> list)
-        {
-            list.Add(this);
 
-            return list;
-        }
 
-        
     }
 }

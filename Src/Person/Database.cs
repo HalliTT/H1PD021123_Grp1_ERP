@@ -12,9 +12,9 @@ namespace App
         }
 
         //Get one customer same as ID
-        public List<Person> GetPerson(uint customerID)
+        public List<Person> GetPerson(Guid customerID)
         {
-            string queryString = $"SELECT * FROM dbo.Persons WHERE (Id = {customerID})";
+            string queryString = $"SELECT * FROM dbo.Persons WHERE (Id LIKE '{customerID.ToString()}')";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -24,15 +24,15 @@ namespace App
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
-                App.Role role;
-                Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
-
-                Guid id;
-                Guid.TryParse(Convert.ToString(reader[0]), out id);
-
-
                 while (reader.Read())
                 {
+                    // Trying to parse string to enum<State>
+                    App.Role role;
+                    Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
+
+                    Guid id;
+                    Guid.TryParse(Convert.ToString(reader[0]), out id);
+
                     person.Add(new Person(
                         id,
                         Convert.ToString(reader[1]),
@@ -61,15 +61,14 @@ namespace App
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
-
-                App.Role role;
-                Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
-
-                Guid id;
-                Guid.TryParse(Convert.ToString(reader[0]), out id);
-
                 while (reader.Read())
                 {
+                    App.Role role;
+                    Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
+
+                    Guid id;
+                    Guid.TryParse(Convert.ToString(reader[0]), out id);
+
                     person.Add(new Person(
                         id,
                         Convert.ToString(reader[1]),

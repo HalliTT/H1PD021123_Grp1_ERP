@@ -6,13 +6,13 @@ namespace App
 {
     public class SalesFullListScreen : Screen
     {
-        public SalesFullListScreen(ListPage<Sales> nnlist)
+        public SalesFullListScreen(ListPage<ExtendedSales> nnlist)
         {
             this.salesList = nnlist;
         }
 
-        protected ListPage<Sales> _salesList;
-        public ListPage<Sales> salesList
+        protected ListPage<ExtendedSales> _salesList;
+        public ListPage<ExtendedSales> salesList
         {
             set { _salesList = value; }
             get { return _salesList; }
@@ -22,10 +22,12 @@ namespace App
         protected override void Draw()
         {
             Clear(this);
-            salesList.AddColumn("orderNumber", "orderNumber", 20);
-            salesList.AddColumn("creationTimestamp", "creationTimestamp", 20);
-            salesList.AddColumn("customerNumber", "customerNumber", 20);
-            salesList.AddColumn("totalOrderPrice", "totalOrderPrice", 20);
+            salesList.AddColumn("Order Id", "orderId", 40);
+            salesList.AddColumn("Creation", "creationTimestamp", 25);
+            salesList.AddColumn("Done", "doneTimestamp", 25);
+            salesList.AddColumn("Customer Id", "customerId", 40);
+            salesList.AddColumn("Name", "name", 20);
+            salesList.AddColumn("Price", "totalOrderPrice", 20);
 
             Sales selected = salesList.Select();
             if (selected != null)
@@ -52,9 +54,11 @@ namespace App
             protected override void Draw()
             {
                 Clear(this);
-                listSales.AddColumn("Sales Order Number", "orderNumber", 20);
-                listSales.AddColumn("Date", "creationTimestamp", 20);
-                listSales.AddColumn("Customer Id", "customerNumber", 20);
+                listSales.AddColumn("Order Id", "orderId", 40);
+                listSales.AddColumn("Creation", "creationTimestamp", 25);
+                listSales.AddColumn("Done", "doneTimestamp", 25);
+                listSales.AddColumn("Customer Id", "customerId", 40);
+                listSales.AddColumn("Name", "name", 20);
                 listSales.Draw();
             }
 
