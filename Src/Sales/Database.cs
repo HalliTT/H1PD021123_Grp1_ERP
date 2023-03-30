@@ -74,7 +74,7 @@ namespace App
                     Guid.TryParse(Convert.ToString(reader[0]), out id);
 
                     Guid customerId;
-                    Guid.TryParse(Convert.ToString(reader[0]), out customerId);
+                    Guid.TryParse(Convert.ToString(reader[3]), out customerId);
 
                     orders.Add(new Sales(
                                     id,
