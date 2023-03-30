@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace App
+﻿namespace App
 {
     public enum Role
     {
@@ -15,7 +9,14 @@ namespace App
     public class Person
     {
         //Constructor
-        public Person(Guid id, string firstName, string lastName, string phone, string mail, Adress address, Role role, string creationTimeStamp)
+        public Person(Guid id, 
+                      string firstName, 
+                      string lastName, 
+                      string phone, 
+                      string mail, 
+                      Adress address, 
+                      Role role, 
+                      string creationTimeStamp)
         {
             this.id = id;
             this.firstName = firstName;
