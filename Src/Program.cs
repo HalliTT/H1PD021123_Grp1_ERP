@@ -7,7 +7,6 @@ namespace App
     {
         public static void Main(string[] args)
         {
-<<<<<<< HEAD
             Console.WriteLine("choose: 1. short list companies 2. full list companies");
             int choice = Int32.Parse(Console.ReadLine());
                 switch (choice)
@@ -28,7 +27,7 @@ namespace App
 
             //List<Product> productList = new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) };
 
-            var timestamp = DateTime.Now.ToString();
+            //var timestamp = DateTime.Now.ToString();
 
             // var order = new Sales(1234, timestamp, timestamp, "12", State.None, productList, 200);
             
@@ -43,7 +42,6 @@ namespace App
             // }
             // var fullListScreen = new SalesFullListScreen(listSales);
             // Screen.Display(fullListScreen);
-=======
             // CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
             // Screen.Display(companyFullListScreen);
 
@@ -67,7 +65,6 @@ namespace App
             var person = new Person(Guid.NewGuid(), "iAmFirstName", "iAmLastName", "222", "as@as.dk", new Adress("dk", "2990", "Aalbo", "newcoa", "22"), Role.Customer, db.GetTimeStamp(customerid));
 
             db.InsertPerson(person);
->>>>>>> f40f94d5469b86c5caf179ea1473702a25e2a813
 
             // db.DeleteOrder(order);
             // db.DeleteOrder(orderTwo);
