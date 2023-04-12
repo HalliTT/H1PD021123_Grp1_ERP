@@ -2,11 +2,10 @@ use H1PD021123_Gruppe1;
 
 create table Orders
 (
-	OrderId	text not null,
-	CreationTimestamp text not null,
-	DoneTimestamp text not null,
-	CustomerId text not null,
-	State text not null,
-	OrderList text not null,
-	TotalOrderPrice int not null,
+	Id	INT PRIMARY KEY IDENTITY (1,1),
+	CreationTimestamp DATETIME NOT NULL DEFAULT GetDate(),
+	DoneTimestamp TEXT NOT NULL,
+	CustomerId INT NOT NULL REFERENCES Persons(Id),
+	State TEXT NOT NULL,
+	TotalOrderPrice INT NOT NULL,
 )
