@@ -28,7 +28,7 @@
             this.creationTimeStamp = creationTimeStamp;
             this.lastPurchase = this.creationTimeStamp;
 
-            this.fullName = getFullName();
+            this._fullName = getFullName();
         }
 
         //Id
@@ -119,7 +119,6 @@
         public string fullName
         {
             get { return _fullName; }
-            set { _fullName = value; }
         }
 
         public string getFullName()
