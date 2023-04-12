@@ -5,16 +5,24 @@ namespace App
 {
     public partial class Database
     {
-        public string GetTimeStamp(Guid customerID)
+        public string GetTimeStamp(int customerId = 0)
         {
-            var order = GetOrder(customerId: customerID.ToString());
+            var order = GetOrder(customerId: customerId);
             return order[0].creationTimestamp;
         }
 
         //Get one customer same as ID
-        public List<Person> GetPerson(Guid customerID)
+        public List<Person> GetPerson(int customerId = 0)
         {
-            string queryString = $"SELECT * FROM dbo.Persons WHERE (Id LIKE '{customerID.ToString()}')";
+            string queryString = "";
+            if (customerId > 0)
+            {
+                queryString = $"SELECT * FROM dbo.Person WHERE Id IS '{customerId}'";
+            }
+            else
+            {
+                queryString = $"SELECT * FROM dbo.Person";
+            }
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -31,7 +39,6 @@ namespace App
                     Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
 
                     person.Add(new Person(
-                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
@@ -44,45 +51,11 @@ namespace App
             }
             return person;
         }
-
-        //Get alle customers
-        public List<Person> GetPersons()
-        {
-            string queryString = "SELECT * FROM dbo.Persons";
-
-            SqlCommand command = new SqlCommand(queryString, this.connection);
-
-            command.ExecuteNonQuery();
-
-            List<Person> person = new List<Person> { };
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    App.Role role;
-                    Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
-
-                    person.Add(new Person(
-                        Convert.ToInt32(reader[0]),
-                        Convert.ToString(reader[1]),
-                        Convert.ToString(reader[2]),
-                        Convert.ToString(reader[3]),
-                        Convert.ToString(reader[4]),
-                        JsonConvert.DeserializeObject<Adress>(Convert.ToString(reader[5])), //Adress personAdress
-                        role,
-                        Convert.ToString(reader[7]) //Sales timeStamp
-                        ));
-                }
-            }
-            return person;
-        }
-
 
         //Add Customer
         public void InsertPerson(Person person)
         {
-            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.id.ToString()}', '{person.firstName}', '{person.lastName}', '{person.phone}', '{person.mail}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
+            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.mail}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

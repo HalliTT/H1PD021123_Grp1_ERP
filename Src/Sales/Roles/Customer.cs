@@ -32,8 +32,5 @@ namespace App
             set { _lastName = value; }
             get { return _lastName; }
         }
-
-
-
     }
 }

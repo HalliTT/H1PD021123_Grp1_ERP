@@ -5,17 +5,16 @@ namespace App
 {
     public partial class Database
     {
-        public List<OrderLine> GetOrderList(string orderId = "", string productId = "")
+        public List<OrderLine> GetOrderList(int orderId = 0, int productId = 0)
         {
             string queryString = "";
-            if (orderId.Length > 0 && productId.Length <= 0)
+            if (orderId > 0 && productId <= 0)
             {
                 queryString = $"SELECT * FROM dbo.OrdersList WHERE ordersId IS '{orderId}'";
             }
-            else if (productId.Length > 0 && orderId.Length <= 0)
+            else if (productId > 0 && orderId <= 0)
             {
                 queryString = $"SELECT * FROM dbo.OrdersList WHERE ProductId IS '{productId}'";
-
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -38,14 +37,14 @@ namespace App
             return orderLines;
         }
 
-        public List<Sales> GetOrder(string orderId = "", string customerId = "")
+        public List<Sales> GetOrder(int orderId = 0, int customerId = 0)
         {
             string queryString = "";
-            if (orderId.Length > 0 && customerId.Length <= 0)
+            if (orderId > 0 && customerId <= 0)
             {
                 queryString = $"SELECT * FROM dbo.Orders WHERE Id LIKE '{orderId}'";
             }
-            else if (customerId.Length > 0 && orderId.Length <= 0)
+            else if (customerId > 0 && orderId <= 0)
             {
                 queryString = $"SELECT * FROM dbo.Orders WHERE CustomerId LIKE '{customerId}'";
             }
@@ -88,13 +87,28 @@ namespace App
             command.ExecuteNonQuery();
         }
 
-        public void InsertOrdersList(OrderLine line)
+        public int InsertOrdersList(OrderLine line)
         {
-            string queryString = $"INSERT INTO dbo.OrdersList VALUES ('{line.ordersId}', '{line.productId}', '{line.amount}')";
+            string queryString = $"INSERT INTO dbo.OrdersList VALUES ({line.ordersId}, {line.productId}, {line.amount})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
             command.ExecuteNonQuery();
+
+            queryString = $"SELECT Id FROM dbo.OrdersList WHERE ordersId = {line.ordersId} AND productId = {line.ordersId}";
+
+            command = new SqlCommand(queryString, connection);
+
+            int Id = -1;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Id = Convert.ToInt32(reader[0]);
+                }
+            }
+            return Id;
         }
 
 

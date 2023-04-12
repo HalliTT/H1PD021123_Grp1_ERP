@@ -5,10 +5,10 @@ namespace App
 {
     public partial class Database
     {
-        public List<Product> GetProducts(string productId)
+        public List<Product> GetProducts(int productId = 0)
         {
             string queryString = "";
-            if (productId.Length > 0)
+            if (productId > 0)
             {
                 queryString = $"SELECT * FROM dbo.Products WHERE Id LIKE '{productId}'";
             }

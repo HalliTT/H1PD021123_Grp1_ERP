@@ -8,4 +8,5 @@ create table Products
 	Location TEXT NOT NULL,
 	AmountInStock FLOAT NOT NULL,
 	Unit TEXT NOT NULL,
+	SalesPrice MONEY NOT NULL
 )

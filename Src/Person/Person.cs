@@ -9,7 +9,7 @@
     public class Person
     {
         //Constructor
-        public Person(int id,
+        public Person(
                       string firstName,
                       string lastName,
                       string phone,
@@ -18,7 +18,6 @@
                       Role role,
                       string creationTimeStamp)
         {
-            this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.phone = phone;
