@@ -32,6 +32,7 @@ namespace App
 
     public class CompanyFullListScreen : Screen
     {
+
         public override string Title { get; set; } = "Full List of Companies";
 
         public void CompanyFullList(ListPage<Company> Clist)
@@ -49,9 +50,24 @@ namespace App
 
         public ListPage<Company> listCompany = new ListPage<Company>();
 
-        protected override void Draw(Guid id)
+        protected override void Draw()
         {
             Clear();
+            foreach (var i in companyList)
+            {
+                listCompany.Add(new Company("Venus", string string, string, string, string, string, Currency currency,string, string));
+                listCompany.AddColumn($"id", "id");
+                listCompany.AddColumn("Company", "name");
+                listCompany.AddColumn("Road", "road");
+                listCompany.AddColumn("House Number", "houseNumber");
+                listCompany.AddColumn("Zip Code", "zipCode");
+                listCompany.AddColumn("City", "city");
+                listCompany.AddColumn("Country", "country");
+                listCompany.AddColumn("Currency", "currency");
+                listCompany.AddColumn("CVR", "cvr");
+                listCompany.AddColumn("Email", "email");
+            }
+/*
             listCompany.Add(new Company(id, "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
                 Currency.DKK, "29 54 90 22", "Venus@venus.dk"));
             listCompany.Add(new Company(id, "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
@@ -66,7 +82,7 @@ namespace App
             listCompany.AddColumn("Currency", "companyCurrency");
             listCompany.AddColumn("CVR", "companyCvr");
             listCompany.AddColumn("Email", "companyEmail");
-
+*/
             Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
 
