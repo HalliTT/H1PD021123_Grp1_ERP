@@ -15,7 +15,7 @@ namespace App
             this.amountInStock = amountInStock;
             this.unit = unit;
 
-            this.profit = calcProfit();
+            this._profit = calcProfit();
         }
 
         protected int _Id;
@@ -70,7 +70,6 @@ namespace App
         protected string _profit;
         public string profit
         {
-            set { _profit = value; }
             get { return _profit; }
         }
 
