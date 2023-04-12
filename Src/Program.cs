@@ -85,6 +85,17 @@ namespace App
             // var products = new Product.Product("", "", 0, 0, 0, "", 0, Product.Unit.meter);
             // products.PrintProducts();
 
+            var list = new ListPage<Product> {};
+    
+            var p1 = new Product(Guid.NewGuid(), "p1", 90, 100, "test", 2, Unit.meters);
+            list.Add(p1);
+
+            var p2 = new Product(Guid.NewGuid(), "p2", 100, 200, "test", 25, Unit.pieces);
+            list.Add(p2);
+
+            var screen = new ProductFullList(list);
+            Screen.Display(screen);
+
         }
     }
 }

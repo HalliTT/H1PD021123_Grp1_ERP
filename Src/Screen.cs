@@ -308,7 +308,7 @@ namespace App
             Clear(this);
 
             customerList.AddColumn("Id", "id");
-            customerList.AddColumn("Name", "firstName");
+            customerList.AddColumn("Name", "fullName");
             customerList.AddColumn("Phone", "phone");
             customerList.AddColumn("Email", "mail");
 
@@ -337,7 +337,7 @@ namespace App
         {
             Clear(this);
 
-            customers.AddColumn("Name", "firstName");
+            customers.AddColumn("Name", "fullName");
             customers.AddColumn("Address", "address");
             customers.AddColumn("Last purchase", "lastPurchase");
 
@@ -345,6 +345,48 @@ namespace App
         }
     }
     
+    public class ProductFullList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public ProductFullList(ListPage<Product> list)
+        {
+            this.list = list;
+        }
+
+        protected ListPage<Product> _list = null!;
+
+        public ListPage<Product> list
+        {
+            set { _list = value; }
+            get { return _list; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            list.AddColumn("Id", "productId");
+            list.AddColumn("Name", "name");
+            list.AddColumn("Amount", "amountInStock");
+            list.AddColumn("Purchase price", "purchasePrice");
+            list.AddColumn("Sales price", "salesPrice");
+            list.AddColumn("Profit", "profit");
+
+            var selected = list.Select();
+
+            if (selected != null)
+            {
+                Clear(this);
+                Console.WriteLine("TODO: implement P3");
+            }
+            else
+            {
+                Quit();
+                return;
+            }
+        }
+    }
 }
 
 

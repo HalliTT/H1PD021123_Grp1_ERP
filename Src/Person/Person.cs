@@ -27,6 +27,8 @@
             this.role = role;
             this.creationTimeStamp = creationTimeStamp;
             this.lastPurchase = this.creationTimeStamp;
+
+            this.fullName = getFullName();
         }
 
         //Id
@@ -97,27 +99,32 @@
         public string lastPurchase
         {
             get { return _lastPurchase; }
-            set { _lastPurchase = value; }
+            set 
+            {
+                var db = new Database();
+                var orders = db.GetOrders();
+
+                foreach (var order in orders)
+                {
+                    if (order.customerId == this.id)
+                    {
+                        _lastPurchase = order.creationTimestamp;
+                    }
+                }
+            }
+        }
+
+        protected string _fullName;
+
+        public string fullName
+        {
+            get { return _fullName; }
+            set { _fullName = value; }
         }
 
         public string getFullName()
         {
-            string fullname = firstName + " " + lastName;
-            return fullname;
-        }
-
-        public void getLastPurchase()
-        {
-            var db = new Database();
-            var orders = db.GetOrders();
-
-            foreach (var order in orders)
-            {
-                if (order.customerId == this.id)
-                {
-                    this.lastPurchase = order.creationTimestamp;
-                }
-            }
+            return this.firstName + " " + this.lastName;
         }
     }
 }
