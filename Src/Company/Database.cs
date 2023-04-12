@@ -45,7 +45,7 @@ namespace App
             return company;
         }
 
-        //Get all companies
+        // Get all companies
         public List<Company> GetCompanies()
         {
             string queryString = "SELECT * FROM dbo.Companies";

@@ -28,6 +28,7 @@ namespace App
             this.email = this.email;
         }
 
+
         //Id
         protected string _id;
         public string id
@@ -102,6 +103,16 @@ namespace App
 
         //Customer Service Email
         protected string _email;
+        private Guid id1;
+        private string? v1;
+        private string? v2;
+        private string? v3;
+        private string? v4;
+        private string? v5;
+        private string? v6;
+        private string? v7;
+        private string? v8;
+
         public string email
         {
             set { email = value; }

@@ -1,3 +1,5 @@
+using Org.BouncyCastle.Bcpg;
+using System.Security.Cryptography;
 using TECHCOOL.UI;
 
 namespace App
@@ -14,11 +16,11 @@ namespace App
             // Screens //
 
             // Sale
-            // menu.Add(new SaleShortListScreen());
+            //menu.Add(new SalesFullListScreen());
 
             // Company
-            menu.Add(new CompanyShortListScreen());
-
+            //menu.Add(new CompanyList());
+            
             // Product 
             // menu.Add(new ProductShortListScreen());
 
@@ -30,10 +32,10 @@ namespace App
 
     }
 
-    public class CompanyFullListScreen : Screen
+    public class CompanyList : Screen
     {
 
-        public override string Title { get; set; } = "Full List of Companies";
+        public override string Title { get; set; } = "List of Companies";
 
         public void CompanyFullList(ListPage<Company> Clist)
         {
@@ -53,44 +55,29 @@ namespace App
         protected override void Draw()
         {
             Clear();
-            foreach (var i in companyList)
+            companyList = new ListPage<Company>();
+            foreach (var i in companyList.ToString())
             {
-                listCompany.Add(new Company("Venus", string string, string, string, string, string, Currency currency,string, string));
-                listCompany.AddColumn($"id", "id");
+                listCompany.Add(new Company(Guid.Empty, "name", "road", "houseNumber", "zipCode","city", "country", Currency.DKK, "cvr", "email" ));
+                
                 listCompany.AddColumn("Company", "name");
-                listCompany.AddColumn("Road", "road");
-                listCompany.AddColumn("House Number", "houseNumber");
-                listCompany.AddColumn("Zip Code", "zipCode");
-                listCompany.AddColumn("City", "city");
                 listCompany.AddColumn("Country", "country");
                 listCompany.AddColumn("Currency", "currency");
-                listCompany.AddColumn("CVR", "cvr");
-                listCompany.AddColumn("Email", "email");
+                listCompany.AddKey(ConsoleKey.F1, EditCompany);
             }
-/*
-            listCompany.Add(new Company(id, "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
-                Currency.DKK, "29 54 90 22", "Venus@venus.dk"));
-            listCompany.Add(new Company(id, "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
-                Currency.DKK, "29 22 00 10", "Mars@Mars.dk"));
-            listCompany.AddColumn($"id", "companyId");
-            listCompany.AddColumn("Company", "companyName");
-            listCompany.AddColumn("Road", "companyRoad");
-            listCompany.AddColumn("House Number", "companyHouseNumber");
-            listCompany.AddColumn("Zip Code", "companyZipCode");
-            listCompany.AddColumn("City", "companyCity");
-            listCompany.AddColumn("Country", "companyCountry");
-            listCompany.AddColumn("Currency", "companyCurrency");
-            listCompany.AddColumn("CVR", "companyCvr");
-            listCompany.AddColumn("Email", "companyEmail");
-*/
+            
             Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
 
-
+            // TODO: need to add catch for F1 input using AddKey from Techcool
             if (selected != null)
             {
-                // TEST
+                // clear techcool draws
                 Clear(this);
+                EditCompany(selected);
+
+                // TEST //
+                /*
                 //Add a textbox
                 editor.TextBox("Company Name", "companyName");
                 editor.TextBox("Road", "companyRoad");
@@ -110,132 +97,49 @@ namespace App
 
                 //Draw the editor
                 editor.Edit(selected);
-                //
-                Screen.Display(new CompanyFullListScreen());
+
+                // return to menu
+                Screen.Display(new CompanyList());
+                
+                */
             }
             else
             {
-                Quit();
+                // Quit();
                 return;
             }
         }
-    }
-
-    public class CompanyShortListScreen : Screen
-    {
-
-        public override string Title { get; set; } = "Short List of Companies";
-
-        public void CompanyShortList(ListPage<Company> SClist)
-        {
-            this.companyList = SClist;
-        }
-
-        protected ListPage<Company> _companyList;
-
-        public ListPage<Company> companyList
-        {
-            set { _companyList = value; }
-            get { return _companyList; }
-        }
-
-        public ListPage<Company> listCompany = new ListPage<Company>();
-        Form<Company> editor = new Form<Company>();
-
-        public void NewCompany(Company company)
+        public void EditCompany(Company company)
         {
             Company selected = listCompany.Select();
-            // TEST
+            Form<Company> editor = new Form<Company>();
+            
+            // Clear console for clean draw
             Clear(this);
+
             //Add a textbox
-            var editCompanyName = editor.TextBox("Company Name", "companyName");
-            var editCompanyRoad = editor.TextBox("Road", "companyRoad");
-            editor.TextBox("House Nr.", "companyHouseNumber");
-            editor.TextBox("Zip Code", "companyZipCode");
-            editor.TextBox("City", "companyCity");
-            editor.TextBox("Country", "companyCountry");
+            editor.TextBox("Company Name", "name");
+            editor.TextBox("Road", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
             editor.Edit(selected);
-            // Console.WriteLine($"Company {selected.companyName} is {selected.companyCurrency}");
-        }
 
-        protected override void Draw(Guid id)
-        {
-            Company selected = listCompany.Select();
-
-            Clear();
-            listCompany.Add(new Company(id, "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
-                Currency.DKK, "29 54 90 22", "Venus@venus.dk"));
-            listCompany.Add(new Company(id, "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
-                Currency.DKK, "29 22 00 10", "Mars@Mars.dk"));
-            listCompany.AddColumn("Company", "companyName");
-            listCompany.AddColumn("Road", "companyRoad");
-            listCompany.AddColumn("House Number", "companyHouseNumber");
-            listCompany.AddColumn("Zip Code", "companyZipCode");
-            listCompany.AddColumn("City", "companyCity");
-
-            // input
-            listCompany.AddKey(ConsoleKey.F1, NewCompany);
-            // listCompany.Draw();
-
-            if (selected != null)
+            Console.TreatControlCAsInput = true;
+            ConsoleKeyInfo conKey = Console.ReadKey();
+            if (conKey.Equals(ConsoleKey.Escape)) 
             {
-                //Draw the editor
-                editor.Edit(selected);
-
-                //
-                Screen.Display(new CompanyShortListScreen());
-            }
-            else
-            {
-                Quit();
-                return;
+                // send inputs as new Query
+                Database.UpdatePerson(Company);
             }
         }
-
-
-        // TEST setup - below code safe to delete when function for screen is implemented fully //
-        // public class EditCompany : Screen
-        // {
-        //     public override string Title { get; set; } = "Edit Company"; 
-        // protected override void Draw()
-        // {
-        //     Clear(this);
-        //     Company listCompany = new Company(
-        //         "200", 
-        //         "Venus", 
-        //         "Landevejen", 
-        //         "2", 
-        //         "9000", 
-        //         "Aalborg", 
-        //         "Denmark", 
-        //         CompanyCurrency.DKK, 
-        //         "29 54 90 22", 
-        //         "Venus@venus.dk"
-        //         );
-        //     //Create instance
-        //     Form<Company> editor = new Form<Company>();
-        //
-        //     //Add a textbox
-        //     Clear(this);
-        //     editor.TextBox("Company Name", "companyName");
-        //     editor.TextBox("Road", "companyRoad");
-        //     editor.TextBox("House Nr.", "companyHouseNumber");
-        //     editor.TextBox("Zip Code", "companyZipCode");
-        //     editor.TextBox("City", "companyCity");
-        //     editor.TextBox("Country", "Priority");
-        //     editor.SelectBox("Currency", "Currency");
-        //     editor.AddOption("Currency", "USD", "USD");
-        //     editor.AddOption("Currency", "DKK", "DKK");
-        //     editor.AddOption("Currency", "EUR", "EUR");
-        //     editor.Edit(listCompany);
-        //
-        //     Clear(this);
-        //     Console.WriteLine($"Company {listCompany.companyName} is {listCompany.companyCurrency}");
-        //
-        //     //Draw the editor
-        //     editor.Edit(listCompany);
-        // }
-    }
 
     public class SalesFullListScreen : Screen
     {
@@ -275,8 +179,6 @@ namespace App
                 return;
             }
         }
-
-
 
         public class SalesSingleListScreen : Screen
         {
