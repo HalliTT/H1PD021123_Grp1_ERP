@@ -5,17 +5,53 @@ namespace App
 {
     public partial class Database
     {
+        public List<OrderLine> GetOrderList(string orderId = "", string productId = "")
+        {
+            string queryString = "";
+            if (orderId.Length > 0 && productId.Length <= 0)
+            {
+                queryString = $"SELECT * FROM dbo.OrdersList WHERE ordersId IS '{orderId}'";
+            }
+            else if (productId.Length > 0 && orderId.Length <= 0)
+            {
+                queryString = $"SELECT * FROM dbo.OrdersList WHERE ProductId IS '{productId}'";
+
+            }
+
+            SqlCommand command = new SqlCommand(queryString, connection);
+
+            command.ExecuteNonQuery();
+
+            List<OrderLine> orderLines = new List<OrderLine> { };
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    orderLines.Add(new OrderLine(
+                                   Convert.ToInt32(reader[1]),
+                                   Convert.ToInt32(reader[2]),
+                                   Convert.ToInt32(reader[3])
+                    ));
+                }
+            }
+            return orderLines;
+        }
+
         public List<Sales> GetOrder(string orderId = "", string customerId = "")
         {
             string queryString = "";
             if (orderId.Length > 0 && customerId.Length <= 0)
             {
-                queryString = $"SELECT * FROM dbo.Orders WHERE OrderId LIKE '{orderId}'";
+                queryString = $"SELECT * FROM dbo.Orders WHERE Id LIKE '{orderId}'";
             }
             else if (customerId.Length > 0 && orderId.Length <= 0)
             {
                 queryString = $"SELECT * FROM dbo.Orders WHERE CustomerId LIKE '{customerId}'";
-
+            }
+            else
+            {
+                queryString = $"SELECT * FROM dbo.Orders";
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -32,76 +68,40 @@ namespace App
                     App.State state;
                     Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
 
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
-
-                    // Customer id
-                    Guid cId;
-                    Guid.TryParse(Convert.ToString(reader[0]), out cId);
-
                     order.Add(new Sales(
-                                    id,
                                     Convert.ToString(reader[1]),
                                     Convert.ToString(reader[2]),
-                                    cId,
+                                    Convert.ToInt32(reader[3]),
                                     state,
-                                    JsonConvert.DeserializeObject<List<OrderLine>>(Convert.ToString(reader[5])),
-                                    Convert.ToUInt32(reader[6])));
+                                    Convert.ToUInt32(reader[5])));
                 }
             }
-
             return order;
-        }
-
-        public List<Sales> GetOrders()
-        {
-            string queryString = "SELECT * FROM dbo.Orders";
-
-            SqlCommand command = new SqlCommand(queryString, this.connection);
-
-            command.ExecuteNonQuery();
-
-            List<Sales> orders = new List<Sales> { };
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    App.State state;
-                    Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
-
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
-
-                    Guid customerId;
-                    Guid.TryParse(Convert.ToString(reader[3]), out customerId);
-
-                    orders.Add(new Sales(
-                                    id,
-                                    Convert.ToString(reader[1]),
-                                    Convert.ToString(reader[2]),
-                                    customerId,
-                                    state,
-                                    JsonConvert.DeserializeObject<List<OrderLine>>(Convert.ToString(reader[5])),
-                                    Convert.ToUInt32(reader[6])));
-                }
-            }
-
-            return orders;
         }
 
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.orderId.ToString()}', '{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerId.ToString()}', '{order.state.ToString()}', '{JsonConvert.SerializeObject(order.orderLine)}', {order.totalOrderPrice})";
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerId}', '{order.state.ToString()}', '{order.totalOrderPrice}')";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
             command.ExecuteNonQuery();
         }
 
+        public void InsertOrdersList(OrderLine line)
+        {
+            string queryString = $"INSERT INTO dbo.OrdersList VALUES ('{line.ordersId}', '{line.productId}', '{line.amount}')";
+
+            SqlCommand command = new SqlCommand(queryString, this.connection);
+
+            command.ExecuteNonQuery();
+        }
+
+
+
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId='{order.customerId.ToString()}', State='{order.state.ToString()}', OrderList='{JsonConvert.SerializeObject(order.orderLine)}', TotalOrderPrice={order.totalOrderPrice}) WHERE OrderId={order.orderId.ToString()}";
+            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId='{order.customerId}', State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.orderId}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
@@ -110,7 +110,7 @@ namespace App
 
         public void DeleteOrder(Sales order)
         {
-            string queryString = $"DELETE FROM dbo.Orders WHERE OrderNumber={order.orderId}";
+            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.orderId}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
