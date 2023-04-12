@@ -283,6 +283,110 @@ namespace App
                 listSales.Draw();
             }
 
+        }  
+    }
+
+    public class CustomerFullList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public CustomerFullList(ListPage<Person> list)
+        {
+            this.customerList = list;
+        }
+
+        protected ListPage<Person> _customerList = null!;
+
+        public ListPage<Person> customerList
+        {
+            set { _customerList = value; }
+            get { return _customerList; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            customerList.AddColumn("Id", "id");
+            customerList.AddColumn("Name", "fullName");
+            customerList.AddColumn("Phone", "phone");
+            customerList.AddColumn("Email", "mail");
+
+            customerList.Draw();
+        }
+    }
+
+    public class CustomerShortList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public CustomerShortList(ListPage<Person> list)
+        {
+            this.customers = list;
+        }
+
+        protected ListPage<Person> _customers = null!;
+
+        public ListPage<Person> customers
+        {
+            set { _customers = value; }
+            get { return _customers; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            customers.AddColumn("Name", "fullName");
+            customers.AddColumn("Address", "address");
+            customers.AddColumn("Last purchase", "lastPurchase");
+
+            customers.Draw();
+        }
+    }
+    
+    public class ProductFullList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public ProductFullList(ListPage<Product> list)
+        {
+            this.list = list;
+        }
+
+        protected ListPage<Product> _list = null!;
+
+        public ListPage<Product> list
+        {
+            set { _list = value; }
+            get { return _list; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            list.AddColumn("Id", "productId");
+            list.AddColumn("Name", "name");
+            list.AddColumn("Amount", "amountInStock");
+            list.AddColumn("Purchase price", "purchasePrice");
+            list.AddColumn("Sales price", "salesPrice");
+            list.AddColumn("Profit", "profit");
+
+            var selected = list.Select();
+
+            if (selected != null)
+            {
+                Clear(this);
+                Console.WriteLine("TODO: implement P3");
+            }
+            else
+            {
+                Quit();
+                return;
+            }
         }
     }
 }
+
+
