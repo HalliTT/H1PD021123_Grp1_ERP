@@ -7,22 +7,22 @@ namespace App
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("choose: 1. short list companies 2. full list companies");
-            int choice = Int32.Parse(Console.ReadLine());
-                switch (choice)
-                {
-                    case 1:
-                        CompanyShortListScreen companyShortListScreen = new CompanyShortListScreen();
-                        Screen.Display(companyShortListScreen);   
-                        break;
-                    case 2:
-                        CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
-                        Screen.Display(companyFullListScreen);
-                        break;
-                    default:
-                        Console.WriteLine("wrong input");
-                        break;
-                }
+            // Console.WriteLine("choose: 1. short list companies 2. full list companies");
+            // int choice = Int32.Parse(Console.ReadLine());
+            //     switch (choice)
+            //     {
+            //         case 1:
+            //             CompanyShortListScreen companyShortListScreen = new CompanyShortListScreen();
+            //             Screen.Display(companyShortListScreen);   
+            //             break;
+            //         case 2:
+            //             CompanyFullListScreen companyFullListScreen = new CompanyFullListScreen();
+            //             Screen.Display(companyFullListScreen);
+            //             break;
+            //         default:
+            //             Console.WriteLine("wrong input");
+            //             break;
+            //     }
         ///// ------ DB - TEST ------ /////
 
             //List<Product> productList = new List<Product> { new Product("12", "test", 10.0, 10.0, "test", 10, Unit.meters) };
@@ -47,7 +47,7 @@ namespace App
 
             ///// ------ DB - TEST ------ /////
 
-            var db = new Database();
+            //var db = new Database();
 
             // var customerid = Guid.NewGuid();
             // var orderId = Guid.NewGuid();
@@ -65,18 +65,18 @@ namespace App
             // db.InsertPerson(person);
 
             //Sales and person
-            var orders = db.GetOrders();
+            // var orders = db.GetOrders();
 
-            var extendedSalesList = new ListPage<ExtendedSales> { };
-            foreach (var _order in orders)
-            {
-                var _person = db.GetPerson(_order.customerId);
-                var extendedOrder = new ExtendedSales(_order.orderId, _order.creationTimestamp, _order.doneTimestamp, _order.customerId, _order.state, _order.orderLine, _person[0].firstName + " " + _person[0].lastName, _order.totalOrderPrice);
+            // var extendedSalesList = new ListPage<ExtendedSales> { };
+            // foreach (var _order in orders)
+            // {
+            //     var _person = db.GetPerson(_order.customerId);
+            //     var extendedOrder = new ExtendedSales(_order.orderId, _order.creationTimestamp, _order.doneTimestamp, _order.customerId, _order.state, _order.orderLine, _person[0].firstName + " " + _person[0].lastName, _order.totalOrderPrice);
 
-                extendedSalesList.Add(extendedOrder);
-            }
-            var dd = new SalesFullListScreen(extendedSalesList);
-            Screen.Display(dd);
+            //     extendedSalesList.Add(extendedOrder);
+            // }
+            // var display = new SalesFullListScreen(extendedSalesList);
+            // Screen.Display(display);
 
             // db.DeleteOrder(order);
             // db.DeleteOrder(orderTwo);
@@ -85,14 +85,7 @@ namespace App
             // var products = new Product.Product("", "", 0, 0, 0, "", 0, Product.Unit.meter);
             // products.PrintProducts();
 
-            ///// ------ Sebastian Test ------ /////
-            // MyFirstScreen firstScreen = new MyFirstScreen();
-            // TodoListScreen todo = new TodoListScreen();
-            // CustomerListScreen customerList = new CustomerListScreen();
-            // Screen.Display(customerList);
         }
-
-        static Database db = new Database();
     }
 }
 

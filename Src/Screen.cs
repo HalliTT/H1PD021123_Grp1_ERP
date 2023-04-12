@@ -283,6 +283,68 @@ namespace App
                 listSales.Draw();
             }
 
+        }  
+    }
+
+    public class CustomerFullList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public CustomerFullList(ListPage<Person> list)
+        {
+            this.customerList = list;
+        }
+
+        protected ListPage<Person> _customerList = null!;
+
+        public ListPage<Person> customerList
+        {
+            set { _customerList = value; }
+            get { return _customerList; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            customerList.AddColumn("Id", "id");
+            customerList.AddColumn("Name", "firstName");
+            customerList.AddColumn("Phone", "phone");
+            customerList.AddColumn("Email", "mail");
+
+            customerList.Draw();
         }
     }
+
+    public class CustomerShortList : Screen
+    {
+        public override string Title { get; set; } = "Customer - Full List";
+
+        public CustomerShortList(ListPage<Person> list)
+        {
+            this.customers = list;
+        }
+
+        protected ListPage<Person> _customers = null!;
+
+        public ListPage<Person> customers
+        {
+            set { _customers = value; }
+            get { return _customers; }
+        }
+
+        protected override void Draw()
+        {
+            Clear(this);
+
+            customers.AddColumn("Name", "firstName");
+            customers.AddColumn("Address", "address");
+            customers.AddColumn("Last purchase", "lastPurchase");
+
+            customers.Draw();
+        }
+    }
+    
 }
+
+
