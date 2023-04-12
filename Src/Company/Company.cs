@@ -2,105 +2,110 @@ using System;
 using TECHCOOL;
 namespace App
 {
-    public enum CompanyCurrency { DKK, USD, EUR }
+    public enum Currency
+    {
+        DKK,
+        USD,
+        EUR
+    };
     public class Company
     {
         /// Constructer
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(string companyId, string companyName, string companyRoad, string companyHouseNumber, string companyZipCode, string companyCity, string companyCountry, CompanyCurrency companyCurrency, string companyCvr, string companyEmail)
+        public Company(Guid id, string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
-            this.companyId = companyId;
-            this.companyName = companyName;
-            this.companyRoad = companyRoad;
-            this.companyHouseNumber = companyHouseNumber;
-            this.companyZipCode = companyZipCode;
-            this.companyCity = companyCity;
-            this.companyCountry = companyCountry;
-            this.companyCurrency = companyCurrency;
-            this.companyCvr = companyCvr;
-            this.companyEmail = companyEmail;
+            this.id = this.id;
+            this.name = this.name;
+            this.road = this.road;
+            this.houseNumber = this.houseNumber;
+            this.zipCode = this.zipCode;
+            this.city = this.city;
+            this.country = this.country;
+            this.currency = this.currency;
+            this.cvr = this.cvr;
+            this.email = this.email;
         }
 
         //Id
-        protected string _companyId;
-        public string companyId
+        protected string _id;
+        public string id
         {
-            set { _companyId = value; }
-            get { return _companyId; }
+            set { id = value; }
+            get { return _id; }
         }
 
         //Name
-        protected string _companyName;
-        public string companyName
+        protected string _name;
+        public string name
         {
-            set { _companyName = value; }
-            get { return _companyName; }
+            set { name = value; }
+            get { return _name; }
         }
 
         //Road
-        protected string _companyRoad;
-        public string companyRoad
+        protected string _road;
+        public string road
         {
-            set { _companyRoad = value; }
-            get { return _companyRoad; }
+            set { road = value; }
+            get { return _road; }
         }
 
         //House Number
-        protected string _companyHouseNumber;
-        public string companyHouseNumber
+        protected string _houseNumber;
+        public string houseNumber
         {
-            set { _companyHouseNumber = value; }
-            get { return _companyHouseNumber; }
+            set { houseNumber = value; }
+            get { return _houseNumber; }
         }
 
         //Zipcode
-        protected string _companyZipCode;
-        public string companyZipCode
+        protected string _zipCode;
+        public string zipCode
         {
-            set { _companyZipCode = value; }
-            get { return _companyZipCode; }
+            set { zipCode = value; }
+            get { return _zipCode; }
         }
 
         //City
-        protected string _companyCity;
-        public string companyCity
+        protected string _city;
+        public string city
         {
-            set { _companyCity = value; }
-            get { return _companyCity; }
+            set { city = value; }
+            get { return _city; }
         }
 
         //Country
-        protected string _companyCountry;
-        public string companyCountry
+        protected string _country;
+        public string country
         {
-            set { _companyCountry = value; }
-            get { return _companyCountry; }
+            set { country = value; }
+            get { return _country; }
         }
 
         //Currency
-        protected CompanyCurrency _companyCurrency;
-        public CompanyCurrency companyCurrency
+        protected Currency _currency;
+        public Currency currency
         {
-            set { _companyCurrency = value; }
-            get { return _companyCurrency; }
+            set { currency = value; }
+            get { return _currency; }
         }
 
         //CVR
-        protected string _companyCvr;
-        public string companyCvr
+        protected string _cvr;
+        public string cvr
         {
-            set { _companyCvr = value; }
-            get { return _companyCvr; }
+            set { cvr = value; }
+            get { return _cvr; }
         }
 
         //Customer Service Email
-        protected string _companyEmail;
-        public string companyEmail
+        protected string _email;
+        public string email
         {
-            set { _companyEmail = value; }
-            get { return _companyEmail; }
+            set { email = value; }
+            get { return _email; }
         }
     }
 }

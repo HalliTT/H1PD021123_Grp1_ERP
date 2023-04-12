@@ -49,13 +49,13 @@ namespace App
 
         public ListPage<Company> listCompany = new ListPage<Company>();
 
-        protected override void Draw()
+        protected override void Draw(Guid id)
         {
             Clear();
-            listCompany.Add(new Company("200", "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
-                CompanyCurrency.DKK, "29 54 90 22", "Venus@venus.dk"));
-            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
-                CompanyCurrency.DKK, "29 22 00 10", "Mars@Mars.dk"));
+            listCompany.Add(new Company(id, "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
+                Currency.DKK, "29 54 90 22", "Venus@venus.dk"));
+            listCompany.Add(new Company(id, "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
+                Currency.DKK, "29 22 00 10", "Mars@Mars.dk"));
             listCompany.AddColumn($"id", "companyId");
             listCompany.AddColumn("Company", "companyName");
             listCompany.AddColumn("Road", "companyRoad");
@@ -142,15 +142,15 @@ namespace App
             // Console.WriteLine($"Company {selected.companyName} is {selected.companyCurrency}");
         }
 
-        protected override void Draw()
+        protected override void Draw(Guid id)
         {
             Company selected = listCompany.Select();
 
             Clear();
-            listCompany.Add(new Company("200", "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
-                CompanyCurrency.DKK, "29 54 90 22", "Venus@venus.dk"));
-            listCompany.Add(new Company("700", "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
-                CompanyCurrency.DKK, "29 22 00 10", "Mars@Mars.dk"));
+            listCompany.Add(new Company(id, "Venus", "Landevejen", "2", "9000", "Aalborg", "Denmark",
+                Currency.DKK, "29 54 90 22", "Venus@venus.dk"));
+            listCompany.Add(new Company(id, "Mars", "Hovedvejen", "88", "9200", "Nørresundby", "Denmark",
+                Currency.DKK, "29 22 00 10", "Mars@Mars.dk"));
             listCompany.AddColumn("Company", "companyName");
             listCompany.AddColumn("Road", "companyRoad");
             listCompany.AddColumn("House Number", "companyHouseNumber");
