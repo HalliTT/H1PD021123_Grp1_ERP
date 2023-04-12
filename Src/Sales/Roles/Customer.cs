@@ -2,20 +2,18 @@ namespace App
 {
     public class ExtendedSales : Sales
     {
-        public ExtendedSales(Guid orderId,
+        public ExtendedSales(
                              string creationTimestamp,
                              string doneTimestamp,
-                             Guid customerId,
+                             int customerId,
                              State state,
-                             List<OrderLine> orderLine,
                              string name,
                              uint totalOrderPrice)
-                             : base(orderId,
+                             : base(
                              creationTimestamp,
                              doneTimestamp,
                              customerId,
                              state,
-                             orderLine,
                              totalOrderPrice)
         {
             this.name = name;

@@ -17,13 +17,21 @@ namespace App
                    State state,
                    uint totalOrderPrice)
         {
-
             this.creationTimestamp = creationTimestamp;
             this.doneTimestamp = doneTimestamp;
             this.customerId = customerId;
             this.state = state;
             this.totalOrderPrice = totalOrderPrice;
         }
+
+        protected int _Id;
+        public int Id
+        {
+            set { _Id = value; }
+            get { return _Id; }
+        }
+
+
         protected string _creationTimestamp = null!;
         public string creationTimestamp
         {

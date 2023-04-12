@@ -101,7 +101,7 @@ namespace App
 
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId='{order.customerId}', State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.orderId}";
+            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId='{order.customerId}', State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.Id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
@@ -110,7 +110,7 @@ namespace App
 
         public void DeleteOrder(Sales order)
         {
-            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.orderId}";
+            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.Id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

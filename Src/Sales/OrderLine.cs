@@ -11,7 +11,13 @@ namespace App
             this.amount = amount;
         }
 
-        //OrderId
+        protected int _Id;
+        public int Id
+        {
+            set { _Id = value; }
+            get { return _Id; }
+        }
+
         protected int _ordersId;
         public int ordersId
         {
@@ -19,7 +25,6 @@ namespace App
             get { return _ordersId; }
         }
 
-        //ProductId
         protected int _productId;
         public int productId
         {
@@ -27,7 +32,6 @@ namespace App
             get { return _productId; }
         }
 
-        //Amount
         protected int _amount;
         public int amount
         {

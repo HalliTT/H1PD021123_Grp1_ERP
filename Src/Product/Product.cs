@@ -18,11 +18,11 @@ namespace App
             this.profit = calcProfit();
         }
 
-        protected int _productId;
-        public int productId
+        protected int _Id;
+        public int Id
         {
-            set { _productId = value; }
-            get { return _productId; }
+            set { _Id = value; }
+            get { return _Id; }
         }
 
         protected string _name;

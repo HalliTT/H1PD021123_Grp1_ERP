@@ -30,11 +30,8 @@ namespace App
                     App.Role role;
                     Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
 
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
-
                     person.Add(new Person(
-                        id,
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
@@ -66,11 +63,8 @@ namespace App
                     App.Role role;
                     Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
 
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
-
                     person.Add(new Person(
-                        id,
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
