@@ -97,7 +97,7 @@ namespace App
         }
 
         // update
-        public void UpdatePerson(Company company)
+        public void UpdateCompany(Company company)
         {
             string queryString =
                 $"UPDATE dbo.Companies SET (Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{JsonConvert.SerializeObject(company.currency.ToString())}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
