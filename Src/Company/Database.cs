@@ -74,7 +74,7 @@ namespace App
                         Convert.ToString(reader[4]),
                         Convert.ToString(reader[5]),
                         Convert.ToString(reader[6]),
-                        JsonConvert.DeserializeObject<Currency>(Convert.ToString(reader[6])), //currency
+                        currency, //currency
                         Convert.ToString(reader[7]),
                         Convert.ToString(reader[8])
                     ));
@@ -89,7 +89,7 @@ namespace App
         public void InsertCompany(Company company)
         {
             string queryString =
-                $"INSERT INTO dbo.Companies VALUES ('{company.id}', '{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}',{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
+                $"INSERT INTO dbo.Companies VALUES ('{company.id}', '{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
