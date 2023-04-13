@@ -58,7 +58,7 @@ namespace App
             Clear();
             Database database = new Database();
             companyList = new ListPage<Company>();
-            foreach (var company in database.GetCompanies())
+            foreach (var company in database.GetCompany())
             {
                 listCompany.Add(company);
             }
@@ -95,7 +95,7 @@ namespace App
             editor.TextBox("CVR", "cvr");
             editor.TextBox("Email", "email");
             editor.Edit(company);
-            
+
             Database database = new Database();
             database.InsertCompany(company);
             Clear();
@@ -118,11 +118,11 @@ namespace App
 
         public void EditCompany(Company company)
         {
-            
-            
+
+
             Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
-            
+
             //Add a textbox
             Console.Clear();
             editor.TextBox("Company Name", "name");
