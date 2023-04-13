@@ -5,9 +5,9 @@ namespace App
 {
     public partial class Database
     {
-        public List<Company> GetCompany(Guid CompanyId)
+        public List<Company> GetCompany(int CompanyId)
         {
-            string queryString = $"SELECT * FROM dbo.Company WHERE (Id LIKE '{CompanyId.ToString()}')";
+            string queryString = $"SELECT * FROM dbo.Company WHERE (Id LIKE '{CompanyId}')";
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -81,7 +81,7 @@ namespace App
         public void InsertCompany(Company company)
         {
             string queryString =
-                $"INSERT INTO dbo.Companies VALUES ('{company.id}', '{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
+                $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

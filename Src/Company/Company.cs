@@ -16,15 +16,15 @@ namespace App
         /// </summary>
         public Company(string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
-            this.name = this.name;
-            this.road = this.road;
-            this.houseNumber = this.houseNumber;
-            this.zipCode = this.zipCode;
-            this.city = this.city;
-            this.country = this.country;
-            this.currency = this.currency;
-            this.cvr = this.cvr;
-            this.email = this.email;
+            this.name = name;
+            this.road = road;
+            this.houseNumber = houseNumber;
+            this.zipCode = zipCode;
+            this.city = city;
+            this.country = country;
+            this.currency = currency;
+            this.cvr = cvr;
+            this.email = email;
         }
 
         //Id
