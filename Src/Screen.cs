@@ -121,14 +121,10 @@ namespace App
             editor.TextBox("Email", "email");
             editor.Edit(selected);
 
-            Console.TreatControlCAsInput = true;
-            ConsoleKeyInfo conKey = Console.ReadKey();
-            if (conKey.Equals(ConsoleKey.Escape))
-            {
-                // send inputs as new Query
-                Database database = new Database();
-                database.UpdateCompany(selected);
-            }
+            // send inputs as new Query
+            Database database = new Database();
+            database.UpdateCompany(selected);
+
         }
 
         public class SalesFullListScreen : Screen

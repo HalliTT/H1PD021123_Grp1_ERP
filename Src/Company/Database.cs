@@ -24,6 +24,7 @@ namespace App
                     Enum.TryParse<App.Currency>(Convert.ToString(reader[7]), out currency);
 
                     company.Add(new Company(
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
@@ -60,6 +61,7 @@ namespace App
 
 
                     company.Add(new Company(
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
@@ -92,7 +94,7 @@ namespace App
         public void UpdateCompany(Company company)
         {
             string queryString =
-                $"UPDATE dbo.Companies SET (Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{JsonConvert.SerializeObject(company.currency.ToString())}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
+                $"UPDATE dbo.Companies SET Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{company.currency.ToString()}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

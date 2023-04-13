@@ -14,8 +14,9 @@ namespace App
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
+        public Company(int id, string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
+            this.id = id;
             this.name = name;
             this.road = road;
             this.houseNumber = houseNumber;
@@ -31,7 +32,7 @@ namespace App
         protected int _id;
         public int id
         {
-            set { id = value; }
+            set { _id = value; }
             get { return _id; }
         }
 
