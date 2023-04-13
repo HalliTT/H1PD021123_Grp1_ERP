@@ -4,7 +4,7 @@
 
 - H1PD021123
 - Group 1
-- Marcus, Niclas, Haraldur, Sebastian
+- Marcus, Niclas, Haraldur
 
 ## **Table of contents**
 
