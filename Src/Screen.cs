@@ -11,6 +11,7 @@ namespace App
         protected override void Draw()
         {
             //Screen.Display(new MenuScreen());
+            Clear();
             Menu menu = new Menu();
 
             // Screens //
@@ -61,52 +62,69 @@ namespace App
             {
                 listCompany.Add(company);
             }
+
+            Clear();
             listCompany.AddColumn("Company", "name");
             listCompany.AddColumn("Country", "country");
             listCompany.AddColumn("Currency", "currency");
-            listCompany.AddKey(ConsoleKey.F1, ShowCompany);
+            listCompany.AddKey(ConsoleKey.F1, NewCompany);
             listCompany.AddKey(ConsoleKey.F2, EditCompany);
+            listCompany.AddKey(ConsoleKey.F5, DeleteCompany);
 
             Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
+            if (listCompany.Select() != null)
+            {
+                ShowCompany(selected);
+            }
+        }
 
-            // TODO: need to add catch for F1 input using AddKey from Techcool
-            if (selected != null)
-            {
-                // clear techcool draws
-                Clear(this);
-                EditCompany(selected);
-            }
-            else
-            {
-                // Quit();
-                return;
-            }
+        public void NewCompany(Company company)
+        {
+            Form<Company> editor = new Form<Company>();
+            editor.TextBox("Company Name", "name");
+            editor.TextBox("Road", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(company);
+            
+            Database database = new Database();
+            database.InsertCompany(company);
+            Clear();
+            listCompany.Add(company);
         }
 
         public void ShowCompany(Company company)
         {
-            Clear();
-            listCompany.AddColumn("Company", "name");
-            listCompany.AddColumn("Address Line 1", "road");
-            listCompany.AddColumn("Address Line 2", "houseNumber");
-            listCompany.AddColumn("Zipcode", "zipCode");
-            listCompany.AddColumn("City", "city");
-            listCompany.AddColumn("Country", "country");
-            listCompany.AddColumn("Currency", "currency");
-            listCompany.AddColumn("CVR", "cvr");
-            listCompany.AddColumn("Email", "email");
+            Console.Clear();
+            Console.WriteLine($"Company: {company.name}");
+            Console.WriteLine($"Address Line 1: {company.road}");
+            Console.WriteLine($"Address Line 2: {company.houseNumber}");
+            Console.WriteLine($"Zipcode: {company.zipCode}");
+            Console.WriteLine($"City: {company.city}");
+            Console.WriteLine($"Country: {company.country}");
+            Console.WriteLine($"Currency: {company.currency}");
+            Console.WriteLine($"CVR: {company.cvr}");
+            Console.WriteLine($"Email: {company.email}");
         }
 
         public void EditCompany(Company company)
         {
+            
+            
             Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
-
-            // Clear console for clean draw
-            Clear(this);
-
+            
             //Add a textbox
+            Console.Clear();
             editor.TextBox("Company Name", "name");
             editor.TextBox("Road", "road");
             editor.TextBox("House Nr.", "houseNumber");
@@ -124,8 +142,18 @@ namespace App
             // send inputs as new Query
             Database database = new Database();
             database.UpdateCompany(selected);
+            Clear();
 
         }
+
+        public void DeleteCompany(Company company)
+        {
+            Form<Company> editor = new Form<Company>();
+            Database database = new Database();
+            database.DeleteCompany(company);
+            listCompany.Remove(company);
+        }
+
 
         public class SalesFullListScreen : Screen
         {
@@ -146,7 +174,7 @@ namespace App
 
             protected override void Draw()
             {
-                Clear(this);
+                Clear();
                 salesList.AddColumn("Order Id", "orderId", 40);
                 salesList.AddColumn("Creation", "creationTimestamp", 25);
                 salesList.AddColumn("Done", "doneTimestamp", 25);
@@ -157,10 +185,12 @@ namespace App
                 Sales selected = salesList.Select();
                 if (selected != null)
                 {
+                    Clear();
                     Screen.Display(new SalesSingleListScreen(selected));
                 }
                 else
                 {
+                    Clear();
                     Quit();
                     return;
                 }
@@ -178,7 +208,7 @@ namespace App
 
                 protected override void Draw()
                 {
-                    Clear(this);
+                    Clear();
                     listSales.AddColumn("Order Id", "orderId", 40);
                     listSales.AddColumn("Creation", "creationTimestamp", 25);
                     listSales.AddColumn("Done", "doneTimestamp", 25);
