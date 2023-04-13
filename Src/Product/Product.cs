@@ -6,10 +6,10 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(Guid productId, string name, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
+        public Product(string name, string description, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
         {
-            this.productId = productId;
             this.name = name;
+            this.description = description;
             this.purchasePrice = purchasePrice;
             this.salesPrice = salesPrice;
             this.location = location;
@@ -17,13 +17,14 @@ namespace App
             this.unit = unit;
 
             this._profit = calcProfit();
+            this._percentageProfit = calcPercentageProfit();
         }
 
-        protected Guid _productId;
-        public Guid productId
+        protected int _Id;
+        public int Id
         {
-            set { _productId = value; }
-            get { return _productId; }
+            set { _Id = value; }
+            get { return _Id; }
         }
 
         protected string _name;
@@ -74,7 +75,24 @@ namespace App
             get { return _profit; }
         }
 
+        protected string _percentageProfit;
+        public string percentageProfit
+        {
+            get { return _percentageProfit; }
+        }
+        protected string _description;
+        public string description
+        {
+            set { _description = value; }
+            get { return _description; }
+        }
+
         public string calcProfit()
+        {
+            return Convert.ToString(this.salesPrice - this.purchasePrice) + " kr";
+        }
+
+        public string calcPercentageProfit()
         {
             var profit = (this.salesPrice - this.purchasePrice) / this.salesPrice * 100;
             return profit.ToString() + " %";

@@ -2,52 +2,41 @@ namespace App
 {
     public class OrderLine
     {
-        public OrderLine(Guid id,
-                         Product product,
-                         uint quantity,
-                         Guid salesId,
-                         Guid productId)
+        public OrderLine(int ordersId,
+                         int productId,
+                         int amount)
         {
-            this.id = id;
-            this.product = product;
-            this.quantity = quantity;
-            this.salesId = salesId;
+            this.ordersId = ordersId;
             this.productId = productId;
+            this.amount = amount;
         }
 
-        protected Guid _id;
-        public Guid id
+        protected int _Id;
+        public int Id
         {
-            set { _id = value; }
-            get { return _id; }
+            set { _Id = value; }
+            get { return _Id; }
         }
 
-        protected Product _product;
-        public Product product
+        protected int _ordersId;
+        public int ordersId
         {
-            set { _product = value; }
-            get { return _product; }
+            set { _ordersId = value; }
+            get { return _ordersId; }
         }
 
-        protected uint _quantity;
-        public uint quantity
-        {
-            set { _quantity = value; }
-            get { return _quantity; }
-        }
-
-        protected Guid _salesId;
-        public Guid salesId
-        {
-            set { _salesId = value; }
-            get { return _salesId; }
-        }
-
-        protected Guid _productId;
-        public Guid productId
+        protected int _productId;
+        public int productId
         {
             set { _productId = value; }
             get { return _productId; }
+        }
+
+        protected int _amount;
+        public int amount
+        {
+            set { _amount = value; }
+            get { return _amount; }
         }
 
     }

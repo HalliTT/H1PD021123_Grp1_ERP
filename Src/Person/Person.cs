@@ -9,16 +9,15 @@
     public class Person
     {
         //Constructor
-        public Person(Guid id, 
-                      string firstName, 
-                      string lastName, 
-                      string phone, 
-                      string mail, 
-                      Adress address, 
-                      Role role, 
+        public Person(
+                      string firstName,
+                      string lastName,
+                      string phone,
+                      string mail,
+                      Adress address,
+                      Role role,
                       string creationTimeStamp)
         {
-            this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.phone = phone;
@@ -32,8 +31,8 @@
         }
 
         //Id
-        protected Guid _id;
-        public Guid id
+        protected int _id;
+        public int id
         {
             get { return _id; }
             set { _id = value; }
@@ -99,6 +98,19 @@
         public string lastPurchase
         {
             get { return _lastPurchase; }
+            set
+            {
+                var db = new Database();
+                var orders = db.GetOrder();
+
+                foreach (var order in orders)
+                {
+                    if (order.customerId == this.id)
+                    {
+                        _lastPurchase = order.creationTimestamp;
+                    }
+                }
+            }
         }
 
         protected string _fullName;
@@ -116,7 +128,7 @@
         public string getLastPurchase()
         {
             var db = new Database();
-            var orders = db.GetOrders();
+            var orders = db.GetOrder();
 
             var creationTimeStamp = this.creationTimeStamp;
 
