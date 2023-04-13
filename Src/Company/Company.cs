@@ -14,9 +14,8 @@ namespace App
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(Guid id, string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
+        public Company(string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
-            this.id = this.id;
             this.name = this.name;
             this.road = this.road;
             this.houseNumber = this.houseNumber;
@@ -28,10 +27,9 @@ namespace App
             this.email = this.email;
         }
 
-
         //Id
-        protected string _id;
-        public string id
+        protected int _id;
+        public int id
         {
             set { id = value; }
             get { return _id; }
@@ -41,7 +39,7 @@ namespace App
         protected string _name;
         public string name
         {
-            set { name = value; }
+            set { _name = value; }
             get { return _name; }
         }
 
@@ -49,7 +47,7 @@ namespace App
         protected string _road;
         public string road
         {
-            set { road = value; }
+            set { _road = value; }
             get { return _road; }
         }
 
@@ -57,7 +55,7 @@ namespace App
         protected string _houseNumber;
         public string houseNumber
         {
-            set { houseNumber = value; }
+            set { _houseNumber = value; }
             get { return _houseNumber; }
         }
 
@@ -65,7 +63,7 @@ namespace App
         protected string _zipCode;
         public string zipCode
         {
-            set { zipCode = value; }
+            set { _zipCode = value; }
             get { return _zipCode; }
         }
 
@@ -73,7 +71,7 @@ namespace App
         protected string _city;
         public string city
         {
-            set { city = value; }
+            set { _city = value; }
             get { return _city; }
         }
 
@@ -81,7 +79,7 @@ namespace App
         protected string _country;
         public string country
         {
-            set { country = value; }
+            set { _country = value; }
             get { return _country; }
         }
 
@@ -89,7 +87,7 @@ namespace App
         protected Currency _currency;
         public Currency currency
         {
-            set { currency = value; }
+            set { _currency = value; }
             get { return _currency; }
         }
 
@@ -97,25 +95,15 @@ namespace App
         protected string _cvr;
         public string cvr
         {
-            set { cvr = value; }
+            set { _cvr = value; }
             get { return _cvr; }
         }
 
         //Customer Service Email
         protected string _email;
-        private Guid id1;
-        private string? v1;
-        private string? v2;
-        private string? v3;
-        private string? v4;
-        private string? v5;
-        private string? v6;
-        private string? v7;
-        private string? v8;
-
         public string email
         {
-            set { email = value; }
+            set { _email = value; }
             get { return _email; }
         }
     }

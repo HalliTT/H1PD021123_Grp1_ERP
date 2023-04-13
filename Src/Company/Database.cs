@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace App
@@ -24,18 +23,14 @@ namespace App
                     App.Currency currency;
                     Enum.TryParse<App.Currency>(Convert.ToString(reader[7]), out currency);
 
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
-
                     company.Add(new Company(
-                        id,
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
                         Convert.ToString(reader[5]),
                         Convert.ToString(reader[6]),
-                        JsonConvert.DeserializeObject<Currency>(Convert.ToString(reader[7])), //currency
+                        currency, //currency
                         Convert.ToString(reader[8]),
                         Convert.ToString(reader[9])
                     ));
@@ -63,18 +58,15 @@ namespace App
                     Currency currency;
                     Enum.TryParse<Currency>(Convert.ToString(reader[7]), out currency);
 
-                    Guid id;
-                    Guid.TryParse(Convert.ToString(reader[0]), out id);
 
                     company.Add(new Company(
-                        id,
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
                         Convert.ToString(reader[5]),
                         Convert.ToString(reader[6]),
-                        JsonConvert.DeserializeObject<Currency>(Convert.ToString(reader[6])), //currency
+                        currency, //currency
                         Convert.ToString(reader[7]),
                         Convert.ToString(reader[8])
                     ));
@@ -89,7 +81,7 @@ namespace App
         public void InsertCompany(Company company)
         {
             string queryString =
-                $"INSERT INTO dbo.Companies VALUES ('{company.id}', '{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}',{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
+                $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}',{JsonConvert.SerializeObject(company.currency.ToString())}', '{company.cvr}', '{company.email})";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
