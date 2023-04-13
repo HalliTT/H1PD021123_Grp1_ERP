@@ -118,11 +118,7 @@ namespace App
 
         public void EditCompany(Company company)
         {
-            
-            
-            Company selected = listCompany.Select();
             Form<Company> editor = new Form<Company>();
-            
             //Add a textbox
             Console.Clear();
             editor.TextBox("Company Name", "name");
@@ -137,11 +133,11 @@ namespace App
             editor.AddOption("Currency", "EUR", "EUR");
             editor.TextBox("CVR", "cvr");
             editor.TextBox("Email", "email");
-            editor.Edit(selected);
+            editor.Edit(company);
 
             // send inputs as new Query
             Database database = new Database();
-            database.UpdateCompany(selected);
+            database.UpdateCompany(company);
             Clear();
 
         }
