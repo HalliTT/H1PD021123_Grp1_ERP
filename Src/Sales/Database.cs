@@ -1,5 +1,4 @@
 using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
 
 namespace App
 {
@@ -80,11 +79,26 @@ namespace App
 
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', '{order.customerId}', '{order.state.ToString()}', '{order.totalOrderPrice}')";
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
             command.ExecuteNonQuery();
+
+            queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
+
+            command = new SqlCommand(queryString, this.connection);
+
+            int IdScope = -1;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    IdScope = Convert.ToInt32(reader[0]);
+                }
+            }
+            order.Id = IdScope;
         }
 
         public int InsertOrdersList(OrderLine line)
@@ -115,7 +129,7 @@ namespace App
 
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId='{order.customerId}', State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.Id}";
+            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.Id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
