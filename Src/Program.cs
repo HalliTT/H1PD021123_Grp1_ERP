@@ -7,7 +7,6 @@ namespace App
     {
         public static void Main(string[] args)
         {
-            Screen.Display(new MenuScreen());
         }
     }
 }

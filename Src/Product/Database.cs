@@ -33,10 +33,11 @@ namespace App
 
                     products.Add(new Product(
                                     Convert.ToString(reader[1]),
-                                    Convert.ToDouble(reader[2]),
+                                    Convert.ToString(reader[2]),
                                     Convert.ToDouble(reader[3]),
-                                    Convert.ToString(reader[4]),
-                                    Convert.ToInt32(reader[5]),
+                                    Convert.ToDouble(reader[4]),
+                                    Convert.ToString(reader[5]),
+                                    Convert.ToInt32(reader[6]),
                                     unit));
                 }
             }
