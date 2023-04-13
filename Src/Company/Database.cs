@@ -10,7 +10,7 @@ namespace App
             string queryString = "";
             if (CompanyId > 0)
             {
-                queryString = $"SELECT * FROM dbo.Company WHERE (Id LIKE '{CompanyId}')";
+                queryString = $"SELECT * FROM dbo.Companies WHERE (Id LIKE '{CompanyId}')";
             }
             else
             {
