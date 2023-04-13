@@ -76,33 +76,6 @@ namespace App
                 // clear techcool draws
                 Clear(this);
                 EditCompany(selected);
-
-                // TEST //
-                /*
-                //Add a textbox
-                editor.TextBox("Company Name", "companyName");
-                editor.TextBox("Road", "companyRoad");
-                editor.TextBox("House Nr.", "companyHouseNumber");
-                editor.TextBox("Zip Code", "companyZipCode");
-                editor.TextBox("City", "companyCity");
-                editor.TextBox("Country", "companyCountry");
-                editor.SelectBox("Currency", "companyCurrency");
-                editor.AddOption("Currency", "USD", "USD");
-                editor.AddOption("Currency", "DKK", "DKK");
-                editor.AddOption("Currency", "EUR", "EUR");
-                editor.TextBox("CVR", "companyCvr");
-                editor.TextBox("Email", "companyEmail");
-                editor.Edit(selected);
-                //Console.WriteLine($"Company {selected.companyName} is {selected.companyCurrency}");
-                var input = Console.ReadKey();
-
-                //Draw the editor
-                editor.Edit(selected);
-
-                // return to menu
-                Screen.Display(new CompanyList());
-                
-                */
             }
             else
             {
