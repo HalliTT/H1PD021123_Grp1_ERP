@@ -1,5 +1,3 @@
-using Org.BouncyCastle.Bcpg;
-using System.Security.Cryptography;
 using TECHCOOL.UI;
 
 namespace App
@@ -26,7 +24,7 @@ namespace App
             // menu.Add(new ProductShortListScreen());
 
             // Customer
-            // menu.Add(new CustomerShortListScreen());
+            menu.Add(new CustomerList());
 
             menu.Start(this);
         }
@@ -218,12 +216,14 @@ namespace App
         }
     }
 
+    ////////////////////////////////////
 
-    public class CustomerFullList : Screen
+    public class CustomerList : Screen
     {
-        public override string Title { get; set; } = "Customer - Full List";
 
-        public CustomerFullList(ListPage<Person> list)
+        public override string Title { get; set; } = "List of Customer";
+
+        public void CustomerFullList(ListPage<Person> list)
         {
             this.customerList = list;
         }
@@ -236,16 +236,80 @@ namespace App
             get { return _customerList; }
         }
 
+        public ListPage<Person> listCostumer = new ListPage<Person>();
+
+
         protected override void Draw()
         {
-            Clear(this);
+            Clear();
+            Database database = new Database();
+            customerList = new ListPage<Person>();
+            foreach (var person in database.GetPerson())
+            {
+                listCostumer.Add(person);
+            }
 
-            customerList.AddColumn("Id", "id");
-            customerList.AddColumn("Name", "fullName");
-            customerList.AddColumn("Phone", "phone");
-            customerList.AddColumn("Email", "mail");
 
-            customerList.Draw();
+            Clear();
+            // listCostumer.AddColumn("Id", "id");
+            listCostumer.AddColumn("Name", "fullName");
+            listCostumer.AddColumn("Phone", "phone");
+            listCostumer.AddColumn("Email", "mail");
+            listCostumer.AddKey(ConsoleKey.F1, NewCostumer);
+            listCostumer.AddKey(ConsoleKey.F2, EditCostumer);
+            listCostumer.AddKey(ConsoleKey.F5, DeleteCostumer);
+
+            Person selected = listCostumer.Select();
+            Form<Company> editor = new Form<Company>();
+            if (listCostumer.Select() != null)
+            {
+                ShowCostumer(selected);
+            }
+        }
+
+        public void NewCostumer(Person customer)
+        {
+        }
+        public void EditCostumer(Person customer)
+        {
+            Form<Person> editor = new Form<Person>();
+
+            //Add a textbox
+            Console.Clear();
+            editor.TextBox("Company Name", "name");
+            editor.TextBox("Road", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(customer);
+
+            // send inputs as new Query
+            Database database = new Database();
+            database.UpdatePerson(customer);
+            Clear();
+        }
+
+        public void DeleteCostumer(Person customer)
+        {
+            Form<Person> editor = new Form<Person>();
+            Database database = new Database();
+            database.DeletePerson(customer);
+            customerList.Remove(customer);
+        }
+
+        public void ShowCostumer(Person costumer)
+        {
+            Console.Clear();
+            Console.WriteLine($"Name: {costumer.fullName}");
+            Console.WriteLine($"Address: {costumer.addString}");
+            Console.WriteLine($"Last Bought: {costumer.lastPurchase}");
         }
     }
 

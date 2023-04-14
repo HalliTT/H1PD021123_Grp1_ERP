@@ -14,7 +14,7 @@
                       string lastName,
                       string phone,
                       string mail,
-                      Adress address,
+                      Address address,
                       Role role,
                       string creationTimeStamp)
         {
@@ -26,7 +26,7 @@
             this.role = role;
             this.creationTimeStamp = creationTimeStamp;
 
-            this._creationTimeStamp = getLastPurchase();
+            this._lastPurchase = getLastPurchase();
             this._fullName = getFullName();
         }
 
@@ -70,12 +70,18 @@
             set { _mail = value; }
         }
 
-        //Adress
-        protected Adress _adress;
-        public Adress address
+        //Address
+        protected Address _address;
+        public Address address
         {
-            get { return _adress; }
-            set { _adress = value; }
+            get { return _address; }
+            set { _address = value; }
+
+        }
+
+        public string addString
+        {
+            get { return address.ToString(); }
         }
 
         //Role

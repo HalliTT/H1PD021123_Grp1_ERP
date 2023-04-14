@@ -1,18 +1,27 @@
-﻿namespace App
+﻿using System.Text;
+
+namespace App
 {
     /// 
-    /// Adress used in Person
+    /// Address used in Person
     ///
-    public class Adress
+    public class Address
     {
         //Constructor
-        public Adress(string country, string zipCode, string city, string roadName, string doorNumber)
+        public Address(string country, string zipCode, string city, string roadName, string doorNumber)
         {
             this.country = country;
             this.zipCode = zipCode;
             this.city = city;
             this.roadName = roadName;
             this.doorNumber = doorNumber;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0} {1} {2} {3} {4}", country, zipCode, city, roadName, doorNumber);
+            return sb.ToString();
         }
 
         //Country
