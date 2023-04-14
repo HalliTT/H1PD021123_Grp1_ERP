@@ -21,7 +21,7 @@ public class UnitTest1
 
     }
     [Fact]
-    public void Test1()
+    public void TestCompanyList()
     {
         CompanyList c = new CompanyList();
         Assert.NotNull(c.listCompany);
