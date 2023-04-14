@@ -27,6 +27,9 @@ namespace App
             this.cvr = cvr;
             this.email = email;
         }
+        public Company()
+        {
+        }
 
         //Id
         protected int _id;
