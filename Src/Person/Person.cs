@@ -26,8 +26,8 @@
             this.role = role;
             this.creationTimeStamp = creationTimeStamp;
 
-            this._creationTimeStamp = getLastPurchase();
-            this._fullName = getFullName();
+            this._creationTimeStamp = GetLastPurchase();
+            this._fullName = GetFullName();
         }
 
         //Id
@@ -120,12 +120,12 @@
             get { return _fullName; }
         }
 
-        public string getFullName()
+        public string GetFullName()
         {
             return this.firstName + " " + this.lastName;
         }
 
-        public string getLastPurchase()
+        public string GetLastPurchase()
         {
             var db = new Database();
             var orders = db.GetOrder();
