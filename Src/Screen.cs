@@ -1,3 +1,4 @@
+using System.Drawing;
 using Org.BouncyCastle.Bcpg;
 using System.Security.Cryptography;
 using TECHCOOL.UI;
@@ -151,7 +152,129 @@ namespace App
             listCompany.Remove(company);
         }
     }
+    ////////////////SALE ORDERS////////////////////
 
+    public class SalesList : Screen
+    {
+
+        public override string Title { get; set; } = "List of sale orders";
+
+        public void SaleOrdersList(ListPage<Sales> Olist)
+        {
+            this.orderList = Olist;
+        }
+
+        protected ListPage<Sales> _orderList = null!;
+
+        public ListPage<Sales> orderList
+        {
+            set { _orderList = value; }
+            get { return _orderList; }
+        }
+
+        public ListPage<Sales> listSales = new ListPage<Sales>();
+
+        protected override void Draw()
+        {
+            Clear();
+            Database database = new Database();
+            orderList = new ListPage<Sales>();
+            foreach (var company in database.GetOrder())
+            {
+                listSales.Add(company);
+            }
+
+            Clear();
+            listSales.AddColumn("Order Id", "orderId", 40);
+            listSales.AddColumn("Creation", "creationTimestamp", 25);
+            listSales.AddColumn("Done", "doneTimestamp", 25);
+            listSales.AddColumn("Customer Id", "customerId", 40);
+            listSales.AddColumn("Name", "name", 20);
+            listSales.AddKey(ConsoleKey.F1, NewSaleOrder);
+            listSales.AddKey(ConsoleKey.F2, EditOrder);
+            listSales.AddKey(ConsoleKey.F5, DeleteOrder);
+
+            Sales selected = listSales.Select();
+            Form<Sales> editor = new Form<Sales>();
+            if (listSales.Select() != null)
+            {
+                ShowOrder(selected);
+            }
+        }
+
+        public void NewSaleOrder(Sales order)
+        {
+            Form<Company> editor = new Form<Company>();
+            editor.TextBox("Company Name", "name");
+            editor.TextBox("Road", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(order);
+
+            Database database = new Database();
+            database.InsertCompany(order);
+            Clear();
+            listSales.Add(order);
+        }
+
+
+        public void ShowOrder(ExtendedSales order)
+        {
+            Console.Clear();
+            Console.WriteLine($"FirstName: {order.customerId}");
+            Console.WriteLine($"Last Name: {order.doneTimestamp}");
+            Console.WriteLine($"Address Line 1 (road): {company.houseNumber}");
+            Console.WriteLine($"Address Line 2 (number): {company.zipCode}");
+            Console.WriteLine($"City: {company.city}");
+            Console.WriteLine($"Country: {company.country}");
+            Console.WriteLine($"Currency: {company.currency}");
+            Console.WriteLine($"CVR: {company.cvr}");
+            Console.WriteLine($"Email: {company.email}");
+        }
+
+        public void EditOrder(Sales order)
+        {
+            Form<Sales> editor = new Form<Sales>();
+
+            //Add a textbox
+            Console.Clear();
+            editor.TextBox("First Name", "first");
+            editor.TextBox("Last Name", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(order);
+
+            // send inputs as new Query
+            Database database = new Database();
+            database.UpdateOrder(order);
+            Clear();
+
+        }
+
+        public void DeleteOrder(Sales order)
+        {
+            Form<Company> editor = new Form<Company>();
+            Database database = new Database();
+            database.DeleteOrder(order);
+            listSales.Remove(order);
+        }
+    }
     ////////////////////////////////////
 
     public class SalesFullListScreen : Screen
@@ -174,12 +297,7 @@ namespace App
         protected override void Draw()
         {
             Clear();
-            salesList.AddColumn("Order Id", "orderId", 40);
-            salesList.AddColumn("Creation", "creationTimestamp", 25);
-            salesList.AddColumn("Done", "doneTimestamp", 25);
-            salesList.AddColumn("Customer Id", "customerId", 40);
-            salesList.AddColumn("Name", "name", 20);
-            salesList.AddColumn("Price", "totalOrderPrice", 20);
+           
 
             Sales selected = salesList.Select();
             if (selected != null)
