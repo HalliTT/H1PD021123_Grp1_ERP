@@ -14,9 +14,8 @@ namespace App
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(int id, string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
+        public Company(string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
-            this.id = id;
             this.name = name;
             this.road = road;
             this.houseNumber = houseNumber;
@@ -27,9 +26,7 @@ namespace App
             this.cvr = cvr;
             this.email = email;
         }
-        public Company()
-        {
-        }
+        public Company() {}
 
         //Id
         protected int _id;

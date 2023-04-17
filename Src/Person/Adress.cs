@@ -1,12 +1,14 @@
-﻿namespace App
+﻿using System.Text;
+
+namespace App
 {
     /// 
-    /// Adress used in Person
+    /// Address used in Person
     ///
-    public class Adress
+    public class Address
     {
         //Constructor
-        public Adress(string country, string zipCode, string city, string roadName, string doorNumber)
+        public Address(string country, string zipCode, string city, string roadName, string doorNumber)
         {
             this.country = country;
             this.zipCode = zipCode;
@@ -14,7 +16,7 @@
             this.roadName = roadName;
             this.doorNumber = doorNumber;
         }
-
+        
         //Country
         protected string _country;
         public string country

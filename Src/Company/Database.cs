@@ -32,8 +32,7 @@ namespace App
                     App.Currency currency;
                     Enum.TryParse<App.Currency>(Convert.ToString(reader[7]), out currency);
 
-                    company.Add(new Company(
-                        Convert.ToInt32(reader[0]),
+                    var obj = new Company(
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
@@ -43,7 +42,11 @@ namespace App
                         currency, //currency
                         Convert.ToString(reader[8]),
                         Convert.ToString(reader[9])
-                    ));
+                    );
+
+                    obj.id = Convert.ToInt32(reader[0]);
+
+                    company.Add(obj);
                 }
             }
 

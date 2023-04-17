@@ -12,10 +12,10 @@ namespace App
     public class Sales
     {
         public Sales(string creationTimestamp,
-                   string doneTimestamp,
-                   int customerId,
-                   State state,
-                   uint totalOrderPrice)
+                     string doneTimestamp,
+                     int customerId,
+                     State state,
+                     uint totalOrderPrice)
         {
             this.creationTimestamp = creationTimestamp;
             this.doneTimestamp = doneTimestamp;
@@ -24,13 +24,12 @@ namespace App
             this.totalOrderPrice = totalOrderPrice;
         }
 
-        protected int _Id;
-        public int Id
+        protected int _id;
+        public int id
         {
-            set { _Id = value; }
-            get { return _Id; }
+            set { _id = value; }
+            get { return _id; }
         }
-
 
         protected string _creationTimestamp = null!;
         public string creationTimestamp
@@ -58,6 +57,22 @@ namespace App
         {
             set { _state = value; }
             get { return _state; }
+        }
+
+        public string fullName
+        {
+            get {
+                var db = new Database();
+                
+                var person = db.GetPerson(this._customerId);
+
+                if (person.Capacity > 0)
+                {
+                    return person[0].fullName;
+                }
+
+                return "Unknown";
+            }
         }
 
         protected uint _totalOrderPrice;

@@ -97,7 +97,7 @@ namespace App
                     IdScope = Convert.ToInt32(reader[0]);
                 }
             }
-            order.Id = IdScope;
+            order.id = IdScope;
         }
 
         public int InsertOrdersList(OrderLine line)
@@ -128,7 +128,7 @@ namespace App
 
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.Id}";
+            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
@@ -137,7 +137,7 @@ namespace App
 
         public void DeleteOrder(Sales order)
         {
-            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.Id}";
+            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

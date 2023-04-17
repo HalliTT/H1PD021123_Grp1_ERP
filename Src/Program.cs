@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using TECHCOOL.UI;
+﻿using TECHCOOL.UI;
 
 namespace App
 {
@@ -7,20 +6,13 @@ namespace App
     {
         public static void Main(string[] args)
         {
-            var list = new ListPage<Product> {};
+            var list = new ListPage<Sales> { };
 
-            var product = new Product("product", "test", 10, 100, "DK", 2, Unit.meters);
-            list.Add(product);
+            var obj = new Sales(DateTime.Now.ToString(), DateTime.Now.ToString(), 2, State.Created, 2000);
+            list.Add(obj);
 
-            var selected = new ListPage<Product> {};
-
-            var form = new Form<Product> {};
-
-            form.TextBox("Name", "name");
-
-            var screen = new ProductInterface ("Product list", list, selected, form);
+            var screen = new SalesInterface("Sales list", list);
             screen.Show();
         }
     }
 }
-

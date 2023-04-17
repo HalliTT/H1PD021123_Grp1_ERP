@@ -13,26 +13,33 @@
                       string firstName,
                       string lastName,
                       string phone,
-                      string mail,
-                      Adress address,
-                      Role role,
-                      string creationTimeStamp)
+                      string email,
+                      Address address,
+                      Role role)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.phone = phone;
-            this.mail = mail;
+            this.email = email;
             this.address = address;
             this.role = role;
-            this.creationTimeStamp = creationTimeStamp;
 
-            this._creationTimeStamp = GetLastPurchase();
+            // Creation timestamp is equal to GetLastPurchase(), 
+            // since user will created when purchase has been made.
+            if (role == Role.Customer)
+            {
+                this._creationTimeStamp = GetLastPurchase();
+            }
+            else
+            {
+                this._creationTimeStamp = DateTime.Now.ToString();
+            }
+
             this._fullName = GetFullName();
         }
 
-        public Person()
-        {}
-        //Id
+        public Person() {}
+
         protected int _id;
         public int id
         {
@@ -40,7 +47,6 @@
             set { _id = value; }
         }
 
-        //Name
         protected string _firstName;
         public string firstName
         {
@@ -48,7 +54,6 @@
             set { _firstName = value; }
         }
 
-        //Last Name
         protected string _lastName;
         public string lastName
         {
@@ -56,7 +61,6 @@
             set { _lastName = value; }
         }
 
-        //Phone
         protected string _phone;
         public string phone
         {
@@ -64,23 +68,41 @@
             set { _phone = value; }
         }
 
-        //Email
-        protected string _mail;
-        public string mail
+        protected string _email;
+        public string email
         {
-            get { return _mail; }
-            set { _mail = value; }
+            get { return _email; }
+            set { _email = value; }
         }
 
-        //Adress
-        protected Adress _adress;
-        public Adress address
+        protected Address _address;
+        public Address address
         {
-            get { return _adress; }
-            set { _adress = value; }
+            get { return _address; }
+            set { _address = value; }
+
         }
 
-        //Role
+        public string addressRoadName
+        {
+            get { return address.roadName; }
+        }
+
+        public string addressDoorNumber
+        {
+            get { return address.doorNumber; }
+        }
+
+        public string addressZipCode
+        {
+            get { return address.zipCode; }
+        }
+
+        public string addressCity
+        {
+            get { return address.city; }
+        }
+
         protected Role _role;
         public Role role
         {
@@ -88,7 +110,6 @@
             set { _role = value; }
         }
 
-        //creationTimeStamp
         protected string _creationTimeStamp;
         public string creationTimeStamp
         {
@@ -96,23 +117,9 @@
             set { _creationTimeStamp = value; }
         }
 
-        protected string _lastPurchase;
         public string lastPurchase
         {
-            get { return _lastPurchase; }
-            set
-            {
-                var db = new Database();
-                var orders = db.GetOrder();
-
-                foreach (var order in orders)
-                {
-                    if (order.customerId == this.id)
-                    {
-                        _lastPurchase = order.creationTimestamp;
-                    }
-                }
-            }
+            get { return GetLastPurchase(); }
         }
 
         protected string _fullName;
@@ -132,7 +139,7 @@
             var db = new Database();
             var orders = db.GetOrder();
 
-            var creationTimeStamp = this.creationTimeStamp;
+            var lastPurchase = this.creationTimeStamp;
 
             foreach (var order in orders)
             {
@@ -142,7 +149,7 @@
                 }
             }
 
-            return creationTimeStamp;
+            return lastPurchase;
         }
     }
 }
