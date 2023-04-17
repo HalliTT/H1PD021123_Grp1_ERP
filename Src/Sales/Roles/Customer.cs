@@ -1,13 +1,13 @@
 namespace App
 {
-    public class ExtendedSales : Sales
+    public class Customer : Sales
     {
-        public ExtendedSales(
+        public Customer(
                              string creationTimestamp,
                              string doneTimestamp,
                              int customerId,
                              State state,
-                             string name,
+                             string firstName,
                              uint totalOrderPrice)
                              : base(
                              creationTimestamp,
@@ -20,10 +20,10 @@ namespace App
         }
 
         protected string _name = null!;
-        public string name
+        public string firstName
         {
-            set { _name = value; }
-            get { return _name; }
+            set { _firstName = value; }
+            get { return _firstName; }
         }
 
         protected string _lastName = null!;
