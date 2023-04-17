@@ -11,13 +11,13 @@ namespace App
             this._list_selected = new ListPage<Sales> {};
             this._editor = new Form<Sales> {};
 
-            this._intrface = new Interface<Sales> (this._title, 
+            this._interface = new Interface<Sales> (this._title, 
                                                      this._list, 
                                                      this._list_selected, 
                                                      this._editor);
         }
 
-        protected Interface<Sales> _intrface;
+        protected Interface<Sales> _interface;
 
         protected string _title = null!;
         public string title
@@ -58,8 +58,9 @@ namespace App
             this._list_selected.AddColumn("Name", "fullName");
             
             // Editor interface
+            
+            Screen.Display(this._interface);
 
-            return this._intrface;
         } 
     }
 }
