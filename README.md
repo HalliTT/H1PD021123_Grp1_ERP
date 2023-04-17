@@ -12,7 +12,8 @@
 - [Technologies](#technologies)
 - [Setup](#setup)
 - [License](#license)
-- [Docs](#license)
+- [Docs](#Docs)
+- [SqlQuery](#SqlQuery)
 
 ## **General info**
 
@@ -56,7 +57,14 @@ $ dotnet run
 - [Agreements](./Docs/Aftale.pdf)
 - [Burn Down](./Docs/BurnDown.xlsx)
 - [Requirement specification](./Docs/Kravspecifikation.pdf)
-- [Screen diagram](./Docs/Kravspecifikation.pdf)
 - [Screen diagram](./Docs/ScreenDiagram.pdf)
-- [Screen diagram](./Docs/DatabaseDiagram.pdf)
-- [Screen diagram](./Docs/ClassDiagram.pdf)
+- [Database diagram](./Docs/DatabaseDiagram.pdf)
+- [Class diagram](./Docs/ClassDiagram.pdf)
+
+## **SqlQuery**
+
+- [Companies](./SqlQuery/CreateCompaniesTable.sql)
+- [OrdersList](./SqlQuery/CreateOrdersListTable.sql)
+- [orders](./SqlQuery/CreateOrdersTable.sql)
+- [Person](./SqlQuery/CreatePersonTable.sql)
+- [Product](./SqlQuery/CreateProductTable.sql)
