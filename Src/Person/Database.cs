@@ -38,15 +38,17 @@ namespace App
                     App.Role role;
                     Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
 
-                    person.Add(new Person(
+                    var obj = new Person(
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
                         JsonConvert.DeserializeObject<Address>(Convert.ToString(reader[5])), //Address personAddress
-                        role,
-                        Convert.ToString(reader[7]) //Sales timeStamp
-                        ));
+                        role);
+                    
+                    obj.creationTimeStamp = Convert.ToString(reader[7]);
+
+                    person.Add(obj);                    
                 }
             }
             return person;
@@ -55,7 +57,7 @@ namespace App
         //Add Customer
         public void InsertPerson(Person person)
         {
-            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.mail}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
+            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.email}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
@@ -65,7 +67,7 @@ namespace App
         //Update Customer
         public void UpdatePerson(Person person)
         {
-            string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.mail}', Addres='{JsonConvert.SerializeObject(person.address)}', WHERE Id={person.id}";
+            string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.email}', Addres='{JsonConvert.SerializeObject(person.address)}', WHERE Id={person.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 

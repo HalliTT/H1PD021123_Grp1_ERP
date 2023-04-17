@@ -8,6 +8,7 @@ namespace App
                              int customerId,
                              State state,
                              string firstName,
+                             string lastName,
                              uint totalOrderPrice)
                              : base(
                              creationTimestamp,
@@ -16,10 +17,11 @@ namespace App
                              state,
                              totalOrderPrice)
         {
-            this.name = name;
+            this._firstName = firstName;
+            this._lastName = lastName;
         }
 
-        protected string _name = null!;
+        protected string _firstName = null!;
         public string firstName
         {
             set { _firstName = value; }
