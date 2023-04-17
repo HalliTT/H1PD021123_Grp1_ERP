@@ -22,7 +22,7 @@ This project is written in **C#** and has a Database wich utilies **MS SQL** to 
 
 This project is using **TECHCOOL** to create screen and dispaly in console.
 
-`Additional: Too See how the code is structured:` [Database](./Docs/Aftale.docx) // [Classes](./Docs/Aftale.docx) `opdatere den her med link til class og database structure`
+`Additional: Too See how the code is structured:` [Database](./Docs/DatabaseDiagram.pdf) // [Classes](./Docs/Aftale.docx) `opdatere den her med link til class og database structure`
 
 ## **Technologies**
 
@@ -53,6 +53,10 @@ $ dotnet run
 
 ## **Docs**
 
-- [Agreements](./Docs/Aftale.docx)
+- [Agreements](./Docs/Aftale.pdf)
 - [Burn Down](./Docs/BurnDown.xlsx)
 - [Requirement specification](./Docs/Kravspecifikation.pdf)
+- [Screen diagram](./Docs/Kravspecifikation.pdf)
+- [Screen diagram](./Docs/ScreenDiagram.pdf)
+- [Screen diagram](./Docs/DatabaseDiagram.pdf)
+- [Screen diagram](./Docs/ClassDiagram.pdf)
