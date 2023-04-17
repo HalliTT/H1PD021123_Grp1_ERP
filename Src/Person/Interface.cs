@@ -67,8 +67,6 @@ namespace App
 
             Screen.Display(this._intrface);
 
-            this._intrface.Edit();
         } 
-
     }
 }

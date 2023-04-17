@@ -79,6 +79,5 @@ namespace App
 
             Screen.Display(this._intrface);
         } 
-
     }
 }
