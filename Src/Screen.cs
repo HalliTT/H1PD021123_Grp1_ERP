@@ -173,7 +173,8 @@ namespace App
             get { return _orderList; }
         }
 
-        public ListPage<Sales> SalesOrderDetails = new ListPage<Sales>();
+        public ListPage<Sales> salesOrderList = new ListPage<Sales>();
+        public ListPage<Customer> customerList = new ListPage<Customer>();
 
         protected override void Draw()
         {
@@ -182,8 +183,7 @@ namespace App
             orderList = new ListPage<Sales>();
             foreach (Sales order in database.GetOrder())
             {
-                Sales extSales = new Sales(string , creationTimestamp, string, int, State, uint)
-                SalesOrderDetails.Add(order);
+                salesOrderList.Add(order);
             }
 
             foreach (Person listcustomer in database.GetPerson())
@@ -192,45 +192,42 @@ namespace App
             }
 
             Clear();
-            SalesOrderDetails.AddColumn("Order Id", "orderId", 40);
-            SalesOrderDetails.AddColumn("Creation", "creationTimestamp", 25);
-            SalesOrderDetails.AddColumn("Done", "doneTimestamp", 25);
-            SalesOrderDetails.AddColumn("Customer Id", "customerId", 40);
-            SalesOrderDetails.AddColumn("Name", "name", 20);
-            SalesOrderDetails.AddKey(ConsoleKey.F1, NewSaleOrder);
-            SalesOrderDetails.AddKey(ConsoleKey.F2, EditOrder);
-            SalesOrderDetails.AddKey(ConsoleKey.F5, DeleteOrder);
+            salesOrderList.AddColumn("Order Id", "orderId", 40);
+            salesOrderList.AddColumn("Creation", "creationTimestamp", 25);
+            salesOrderList.AddColumn("Done", "doneTimestamp", 25);
+            salesOrderList.AddColumn("Customer Id", "customerId", 40);
+            salesOrderList.AddColumn("Name", "name", 20);
+            salesOrderList.AddKey(ConsoleKey.F1, NewSaleOrder);
+            salesOrderList.AddKey(ConsoleKey.F2, EditOrder);
+            salesOrderList.AddKey(ConsoleKey.F5, DeleteOrder);
 
-            Sales selected = listSales.Select();
+            Sales selected = salesOrderList.Select();
             Form<Sales> editor = new Form<Sales>();
-            if (listSales.Select() != null)
+            if (salesOrderList.Select() != null)
             {
                 ShowOrder(selected);
             }
         }
 
-        public void NewSaleOrder(Sales order)
+        public void NewSaleOrder(Person newCustomer)
         {
             // Fornavn, Efternavn, Vej, Husnummer, Postnummer, By, Telefonnummer, Email,
-            Form<Sales> editor = new Form<Sales>();
-            editor.TextBox("Company Name", "name");
-            editor.TextBox("Road", "road");
-            editor.TextBox("House Nr.", "houseNumber");
+            Form<Person> editor = new Form<Person>();
+            editor.TextBox("First Name", "firstName");
+            editor.TextBox("Last Name", "lastName");
+            editor.TextBox("Address line 1", "streetName");
+            editor.TextBox("Address line 2", "houseNumber");
             editor.TextBox("Zip Code", "zipCode");
             editor.TextBox("City", "city");
             editor.TextBox("Country", "country");
-            editor.SelectBox("Currency", "currency");
-            editor.AddOption("Currency", "USD", "USD");
-            editor.AddOption("Currency", "DKK", "DKK");
-            editor.AddOption("Currency", "EUR", "EUR");
-            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Phone number", "phoneNumber");
             editor.TextBox("Email", "email");
-            editor.Edit(order);
+            editor.Edit(newCustomer);
 
             Database database = new Database();
-            database.InsertOrder(order);
+            database.InsertOrder(newCustomer);
             Clear();
-            listSales.Add(order);
+            listSales.Add(newCustomer);
         }
 
 

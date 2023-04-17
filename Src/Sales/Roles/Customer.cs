@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace App
 {
     public class Customer : Sales
@@ -8,6 +10,7 @@ namespace App
                              int customerId,
                              State state,
                              string firstName,
+                             string lastName,
                              uint totalOrderPrice)
                              : base(
                              creationTimestamp,
@@ -16,10 +19,10 @@ namespace App
                              state,
                              totalOrderPrice)
         {
-            this.name = name;
+            var fullName = firstName + " " + lastName;
         }
 
-        protected string _name = null!;
+        protected string _firstName = null!;
         public string firstName
         {
             set { _firstName = value; }
