@@ -164,24 +164,32 @@ namespace App
             this.orderList = Olist;
         }
 
-        protected ListPage<Sales> _orderList = null!;
+        protected ListPage<ExtendedSales> _orderList = null!;
 
-        public ListPage<Sales> orderList
+        public ListPage<ExtendedSales> orderList
         {
             set { _orderList = value; }
             get { return _orderList; }
         }
 
-        public ListPage<Sales> listSales = new ListPage<Sales>();
+        public ListPage<ExtendedSales> listSales = new ListPage<ExtendedSales>();
 
         protected override void Draw()
         {
             Clear();
             Database database = new Database();
-            orderList = new ListPage<Sales>();
-            foreach (var company in database.GetOrder())
+            orderList = new ListPage<ExtendedSales>();
+            foreach (Sales order in database.GetOrder())
             {
-                listSales.Add(company);
+                ExtendedSales extSales = new ExtendedSales(order.creationTimestamp, order.doneTimestamp, order.customerId, order.state, name,
+                        uint totalOrderPrice)
+                    : base(
+                    creationTimestamp,
+                    doneTimestamp,
+                    customerId,
+                    state,
+                    totalOrderPrice));
+                listSales.Add(order);
             }
 
             Clear();
@@ -194,17 +202,18 @@ namespace App
             listSales.AddKey(ConsoleKey.F2, EditOrder);
             listSales.AddKey(ConsoleKey.F5, DeleteOrder);
 
-            Sales selected = listSales.Select();
-            Form<Sales> editor = new Form<Sales>();
+            ExtendedSales selected = listSales.Select();
+            Form<ExtendedSales> editor = new Form<ExtendedSales>();
             if (listSales.Select() != null)
             {
                 ShowOrder(selected);
             }
         }
 
-        public void NewSaleOrder(Sales order)
+        public void NewSaleOrder(ExtendedSales order)
         {
-            Form<Company> editor = new Form<Company>();
+            // Fornavn, Efternavn, Vej, Husnummer, Postnummer, By, Telefonnummer, Email,
+            Form<ExtendedSales> editor = new Form<ExtendedSales>();
             editor.TextBox("Company Name", "name");
             editor.TextBox("Road", "road");
             editor.TextBox("House Nr.", "houseNumber");
@@ -220,7 +229,7 @@ namespace App
             editor.Edit(order);
 
             Database database = new Database();
-            database.InsertCompany(order);
+            database.InsertOrder(order);
             Clear();
             listSales.Add(order);
         }
