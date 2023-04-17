@@ -22,11 +22,11 @@ namespace App
 
         public Product() {}
 
-        protected int _Id;
-        public int Id
+        protected int _id;
+        public int id
         {
-            set { _Id = value; }
-            get { return _Id; }
+            set { _id = value; }
+            get { return _id; }
         }
 
         protected string _name;

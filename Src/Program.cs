@@ -12,13 +12,7 @@ namespace App
             var product = new Product("product", "test", 10, 100, "DK", 2, Unit.meters);
             list.Add(product);
 
-            var selected = new ListPage<Product> {};
-
-            var form = new Form<Product> {};
-
-            form.TextBox("Name", "name");
-
-            var screen = new ProductInterface ("Product list", list, selected, form);
+            var screen = new ProductInterface ("Product list", list);
             screen.Show();
         }
     }

@@ -55,7 +55,7 @@ namespace App
 
         public void UpdateProduct(Product product)
         {
-            string queryString = $"UPDATE dbo.Products SET (Name='{product.name}', PurchasePrice='{product.purchasePrice}', SalesPrice='{product.salesPrice}', Location='{product.location}', AmountInStock='{product.amountInStock}', Unit='{product.unit}') WHERE ProdictId = {product.Id}";
+            string queryString = $"UPDATE dbo.Products SET (Name='{product.name}', PurchasePrice='{product.purchasePrice}', SalesPrice='{product.salesPrice}', Location='{product.location}', AmountInStock='{product.amountInStock}', Unit='{product.unit}') WHERE ProdictId = {product.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
@@ -64,7 +64,7 @@ namespace App
 
         public void DeleteProduct(Product product)
         {
-            string queryString = $"DELETE FROM dbo.Products WHERE ProductId={product.Id}";
+            string queryString = $"DELETE FROM dbo.Products WHERE ProductId={product.id}";
 
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
