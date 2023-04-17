@@ -30,6 +30,8 @@
             this._fullName = GetFullName();
         }
 
+        public Person()
+        {}
         //Id
         protected int _id;
         public int id
