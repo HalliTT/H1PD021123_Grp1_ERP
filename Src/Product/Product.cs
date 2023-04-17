@@ -16,15 +16,17 @@ namespace App
             this.amountInStock = amountInStock;
             this.unit = unit;
 
-            this._profit = calcProfit();
-            this._percentageProfit = calcPercentageProfit();
+            this._profit = CalcProfit();
+            this._percentageProfit = CalcPercentageProfit();
         }
 
-        protected int _Id;
-        public int Id
+        public Product() {}
+
+        protected int _id;
+        public int id
         {
-            set { _Id = value; }
-            get { return _Id; }
+            set { _id = value; }
+            get { return _id; }
         }
 
         protected string _name;
@@ -87,12 +89,12 @@ namespace App
             get { return _description; }
         }
 
-        public string calcProfit()
+        public string CalcProfit()
         {
             return Convert.ToString(this.salesPrice - this.purchasePrice) + " kr";
         }
 
-        public string calcPercentageProfit()
+        public string CalcPercentageProfit()
         {
             var profit = (this.salesPrice - this.purchasePrice) / this.salesPrice * 100;
             return profit.ToString() + " %";

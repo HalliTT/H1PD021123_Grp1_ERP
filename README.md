@@ -4,7 +4,7 @@
 
 - H1PD021123
 - Group 1
-- Marcus, Niclas, Haraldur, Sebastian
+- Marcus, Niclas, Haraldur
 
 ## **Table of contents**
 
@@ -12,7 +12,8 @@
 - [Technologies](#technologies)
 - [Setup](#setup)
 - [License](#license)
-- [Docs](#license)
+- [Docs](#Docs)
+- [SqlQuery](#SqlQuery)
 
 ## **General info**
 
@@ -22,7 +23,7 @@ This project is written in **C#** and has a Database wich utilies **MS SQL** to 
 
 This project is using **TECHCOOL** to create screen and dispaly in console.
 
-`Additional: Too See how the code is structured:` [Database](./Docs/Aftale.docx) // [Classes](./Docs/Aftale.docx) `opdatere den her med link til class og database structure`
+`Additional: Too See how the code is structured:` [Database](./Docs/DatabaseDiagram.pdf) // [Classes](./Docs/Aftale.docx) `opdatere den her med link til class og database structure`
 
 ## **Technologies**
 
@@ -53,6 +54,17 @@ $ dotnet run
 
 ## **Docs**
 
-- [Agreements](./Docs/Aftale.docx)
+- [Agreements](./Docs/Aftale.pdf)
 - [Burn Down](./Docs/BurnDown.xlsx)
 - [Requirement specification](./Docs/Kravspecifikation.pdf)
+- [Screen diagram](./Docs/ScreenDiagram.pdf)
+- [Database diagram](./Docs/DatabaseDiagram.pdf)
+- [Class diagram](./Docs/ClassDiagram.pdf)
+
+## **SqlQuery**
+
+- [Companies](./SqlQuery/CreateCompaniesTable.sql)
+- [OrdersList](./SqlQuery/CreateOrdersListTable.sql)
+- [orders](./SqlQuery/CreateOrdersTable.sql)
+- [Person](./SqlQuery/CreatePersonTable.sql)
+- [Product](./SqlQuery/CreateProductTable.sql)

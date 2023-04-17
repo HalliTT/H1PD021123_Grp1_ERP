@@ -76,11 +76,10 @@ namespace App
             }
             return order;
         }
-
         public void InsertOrder(Sales order)
         {
             string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
-
+            // Order.
             SqlCommand command = new SqlCommand(queryString, this.connection);
 
             command.ExecuteNonQuery();

@@ -149,7 +149,136 @@ namespace App
             listCompany.Remove(company);
         }
     }
+    ////////////////SALE ORDERS////////////////////
 
+    public class SalesList : Screen
+    {
+
+        public override string Title { get; set; } = "List of sale orders";
+
+        public void SaleOrdersList(ListPage<Sales> SOlist)
+        {
+            this.orderList = SOlist;
+        }
+
+        protected ListPage<Sales> _orderList = null!;
+
+        public ListPage<Sales> orderList
+        {
+            set { _orderList = value; }
+            get { return _orderList; }
+        }
+
+        public ListPage<Sales> SalesOrderDetails = new ListPage<Sales>();
+
+        protected override void Draw()
+        {
+            Clear();
+            Database database = new Database();
+            orderList = new ListPage<Sales>();
+            foreach (Sales order in database.GetOrder())
+            {
+                Sales extSales = new Sales(string, creationTimestamp, string, int, State, uint)
+                SalesOrderDetails.Add(order);
+            }
+
+            foreach (Person listcustomer in database.GetPerson())
+            {
+
+            }
+
+            Clear();
+            SalesOrderDetails.AddColumn("Order Id", "orderId", 40);
+            SalesOrderDetails.AddColumn("Creation", "creationTimestamp", 25);
+            SalesOrderDetails.AddColumn("Done", "doneTimestamp", 25);
+            SalesOrderDetails.AddColumn("Customer Id", "customerId", 40);
+            SalesOrderDetails.AddColumn("Name", "name", 20);
+            SalesOrderDetails.AddKey(ConsoleKey.F1, NewSaleOrder);
+            SalesOrderDetails.AddKey(ConsoleKey.F2, EditOrder);
+            SalesOrderDetails.AddKey(ConsoleKey.F5, DeleteOrder);
+
+            Sales selected = listSales.Select();
+            Form<Sales> editor = new Form<Sales>();
+            if (listSales.Select() != null)
+            {
+                ShowOrder(selected);
+            }
+        }
+
+        public void NewSaleOrder(Sales order)
+        {
+            // Fornavn, Efternavn, Vej, Husnummer, Postnummer, By, Telefonnummer, Email,
+            Form<Sales> editor = new Form<Sales>();
+            editor.TextBox("Company Name", "name");
+            editor.TextBox("Road", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(order);
+
+            Database database = new Database();
+            database.InsertOrder(order);
+            Clear();
+            listSales.Add(order);
+        }
+
+
+        public void ShowOrder(Sales order)
+        {
+            Console.Clear();
+            Console.WriteLine($"FirstName: {order.customerId}");
+            Console.WriteLine($"Last Name: {order.doneTimestamp}");
+            Console.WriteLine($"Address Line 1 (road): {order.houseNumber}");
+            Console.WriteLine($"Address Line 2 (number): {order.zipCode}");
+            Console.WriteLine($"City: {company.city}");
+            Console.WriteLine($"Country: {company.country}");
+            Console.WriteLine($"Currency: {company.currency}");
+            Console.WriteLine($"CVR: {company.cvr}");
+            Console.WriteLine($"Email: {company.email}");
+        }
+
+        public void EditOrder(Sales order)
+        {
+            Form<Sales> editor = new Form<Sales>();
+
+            //Add a textbox
+            Console.Clear();
+            editor.TextBox("First Name", "first");
+            editor.TextBox("Last Name", "road");
+            editor.TextBox("House Nr.", "houseNumber");
+            editor.TextBox("Zip Code", "zipCode");
+            editor.TextBox("City", "city");
+            editor.TextBox("Country", "country");
+            editor.SelectBox("Currency", "currency");
+            editor.AddOption("Currency", "USD", "USD");
+            editor.AddOption("Currency", "DKK", "DKK");
+            editor.AddOption("Currency", "EUR", "EUR");
+            editor.TextBox("CVR", "cvr");
+            editor.TextBox("Email", "email");
+            editor.Edit(order);
+
+            // send inputs as new Query
+            Database database = new Database();
+            database.UpdateOrder(order);
+            Clear();
+
+        }
+
+        public void DeleteOrder(Sales order)
+        {
+            Form<Company> editor = new Form<Company>();
+            Database database = new Database();
+            database.DeleteOrder(order);
+            listSales.Remove(order);
+        }
+    }
     ////////////////////////////////////
 
     public class SalesFullListScreen : Screen
@@ -172,12 +301,7 @@ namespace App
         protected override void Draw()
         {
             Clear();
-            salesList.AddColumn("Order Id", "orderId", 40);
-            salesList.AddColumn("Creation", "creationTimestamp", 25);
-            salesList.AddColumn("Done", "doneTimestamp", 25);
-            salesList.AddColumn("Customer Id", "customerId", 40);
-            salesList.AddColumn("Name", "name", 20);
-            salesList.AddColumn("Price", "totalOrderPrice", 20);
+
 
             Sales selected = salesList.Select();
             if (selected != null)
@@ -342,81 +466,4 @@ namespace App
         }
     }
 
-    public class ProductShortList : Screen
-    {
-        public override string Title { get; set; } = "Customer - Full List";
-
-        public ProductShortList(ListPage<Product> list)
-        {
-            this.list = list;
-        }
-
-        protected ListPage<Product> _list = null!;
-
-        public ListPage<Product> list
-        {
-            set { _list = value; }
-            get { return _list; }
-        }
-
-        protected override void Draw()
-        {
-            Clear(this);
-
-            list.AddColumn("Id", "Id");
-            list.AddColumn("Name", "name");
-            list.AddColumn("Amount", "amountInStock");
-            list.AddColumn("Purchase price", "purchasePrice");
-            list.AddColumn("Sales price", "salesPrice");
-            list.AddColumn("Profit", "profit");
-
-            var selected = list.Select();
-
-            if (selected != null)
-            {
-                Screen.Display(new ProductFull(selected));
-            }
-            else
-            {
-                Quit();
-                return;
-            }
-        }
-    }
-
-    public class ProductFull : Screen
-    {
-        public override string Title { get; set; } = "Customer - Full List";
-
-        public ProductFull(Product product)
-        {
-            this.list.Add(product);
-        }
-
-        public ListPage<Product> _list = new ListPage<Product> { };
-
-        public ListPage<Product> list
-        {
-            set { _list = value; }
-            get { return _list; }
-        }
-
-        protected override void Draw()
-        {
-            Clear(this);
-
-            list.AddColumn("Id", "Id");
-            list.AddColumn("Name", "name");
-            list.AddColumn("Description", "description");
-            list.AddColumn("Sales price", "salesPrice");
-            list.AddColumn("Purchase price", "purchasePrice");
-            list.AddColumn("Location", "location");
-            list.AddColumn("Amount", "amountInStock");
-            list.AddColumn("Unit", "unit");
-            list.AddColumn("Profit", "percentageProfit");
-            list.AddColumn("Profit", "profit");
-
-            list.Draw();
-        }
-    }
 }
