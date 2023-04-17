@@ -42,7 +42,7 @@ namespace App
             get { return _editor; }
         }
 
-        public void Show()
+        public Screen Show()
         {
             // Preview list interface
             this._list.AddColumn("Id", "id");
@@ -52,7 +52,7 @@ namespace App
 
             // Selected element interface
             this._list_selected.AddColumn("Name", "fullName");
-            this._list_selected.AddColumn("Address", "address");
+            this._list_selected.AddColumn("Address", "addressAsStr");
             this._list_selected.AddColumn("Last purchase", "lastPurchase");
             
             // Editor interface
@@ -65,8 +65,7 @@ namespace App
             this._editor.IntBox("Phone", "phone");
             this._editor.TextBox("Email", "email");
 
-            Screen.Display(this._intrface);
-
+            return this._intrface;
         } 
     }
 }

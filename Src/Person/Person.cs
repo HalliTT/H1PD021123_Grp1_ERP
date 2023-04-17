@@ -83,6 +83,11 @@
 
         }
 
+        public string addressAsStr
+        {
+            get { return address.ToString(); }
+        }
+
         public string addressRoadName
         {
             get { return address.roadName; }

@@ -42,7 +42,7 @@ namespace App
             get { return _editor; }
         }
 
-        public void Show()
+        public Screen Show()
         {
             // Preview list interface
             this._list.AddColumn("Id", "id");
@@ -59,8 +59,7 @@ namespace App
             
             // Editor interface
 
-            Screen.Display(this._intrface);
-
+            return this._intrface;
         } 
     }
 }

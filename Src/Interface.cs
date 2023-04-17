@@ -2,6 +2,56 @@ using TECHCOOL.UI;
 
 namespace App
 {
+    public class MenuInterface : Screen
+    {
+        public override string Title { get; set; } = "Menu"; 
+
+        public MenuInterface(Screen company, Screen person, Screen product, Screen sales)
+        {
+            this._company = company;
+            this._person = person;
+            this._product = product;
+            this._sales = sales;
+
+            this.menu = new Menu();
+            this.menu.Add(company);
+            this.menu.Add(person);
+            this.menu.Add(product);
+            this.menu.Add(sales);
+        }
+
+        protected Menu menu;
+
+        protected Screen _company;
+        public Screen company
+        {
+            get { return _company; }
+        }
+
+        protected Screen _person;
+        public Screen person
+        {
+            get { return _person; }
+        }
+
+        protected Screen _product;
+        public Screen product
+        {
+            get { return _product; }
+        }
+
+        protected Screen _sales;
+        public Screen sales
+        {
+            get { return _sales; }
+        }
+
+        protected override void Draw()
+        {
+            menu.Start(this);
+        }
+    }
+
     public class Interface<T> : Screen
     {
         public Interface(string title,

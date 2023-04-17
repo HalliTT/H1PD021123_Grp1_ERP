@@ -63,13 +63,14 @@ namespace App
         {
             get {
                 var db = new Database();
-                
+                /*
                 var person = db.GetPerson(this._customerId);
 
                 if (person.Capacity > 0)
                 {
                     return person[0].fullName;
                 }
+                */
 
                 return "Unknown";
             }
