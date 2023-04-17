@@ -52,7 +52,7 @@ namespace App
         }
     }
 
-    public class Interface<T> : Screen
+    public class Interface<T> : Screen where T : class 
     {
         public Interface(string title,
                          ListPage<T> list, 
@@ -104,9 +104,9 @@ namespace App
         {
             Clear(this);
 
-            // this._list.AddKey(ConsoleKey.F1, (Action<T>)(object) Create);
-            // this._list.AddKey(ConsoleKey.F2, (Action<T>)(object) Edit);
-            // this._list.AddKey(ConsoleKey.F5, (Action<T>)(object) Delete);
+            this._list.AddKey(ConsoleKey.F1, Create);
+            this._list.AddKey(ConsoleKey.F2, Edit);
+            this._list.AddKey(ConsoleKey.F5, Delete);
 
             this._selected = this._list.Select();
 
@@ -126,7 +126,7 @@ namespace App
             }
         }
 
-        public void Create()
+        public void Create(T obj)
         {
             Console.Clear();
 
@@ -156,7 +156,7 @@ namespace App
             this._list.Add(this._selected);
         }
 
-        public void Edit()
+        public void Edit(T obj)
         {
             Console.Clear();
 
@@ -186,7 +186,7 @@ namespace App
             this._list.Add(this._selected);
         }
 
-        public void Delete()
+        public void Delete(T obj)
         {
             Console.Clear();
             
