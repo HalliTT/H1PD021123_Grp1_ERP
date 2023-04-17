@@ -42,7 +42,7 @@ namespace App
             get { return _editor; }
         }
 
-        public void Show()
+        public Screen Show()
         {
             // Preview list interface
             this._list.AddColumn("Id", "id");
@@ -77,8 +77,7 @@ namespace App
             this._editor.AddOption("Unit", "Meters", "meters");
             this._editor.AddOption("Unit", "Hours", "hours");
 
-            Screen.Display(this._intrface);
+            return this._intrface;
         } 
-
     }
 }

@@ -16,7 +16,13 @@ namespace App
             this.roadName = roadName;
             this.doorNumber = doorNumber;
         }
-        
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            return sb.AppendFormat($"{this._roadName}, {this._doorNumber}, {this._zipCode}, {this._city}").ToString();
+        }
+
         //Country
         protected string _country;
         public string country
