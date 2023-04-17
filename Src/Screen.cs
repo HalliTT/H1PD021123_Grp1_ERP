@@ -1,6 +1,7 @@
 using System.Drawing;
 using Org.BouncyCastle.Bcpg;
 using System.Security.Cryptography;
+using Org.BouncyCastle.Bcpg.Sig;
 using TECHCOOL.UI;
 
 namespace App
@@ -159,61 +160,59 @@ namespace App
 
         public override string Title { get; set; } = "List of sale orders";
 
-        public void SaleOrdersList(ListPage<Sales> Olist)
+        public void SaleOrdersList(ListPage<Sales> SOlist)
         {
-            this.orderList = Olist;
+            this.orderList = SOlist;
         }
 
-        protected ListPage<ExtendedSales> _orderList = null!;
+        protected ListPage<Sales> _orderList = null!;
 
-        public ListPage<ExtendedSales> orderList
+        public ListPage<Sales> orderList
         {
             set { _orderList = value; }
             get { return _orderList; }
         }
 
-        public ListPage<ExtendedSales> listSales = new ListPage<ExtendedSales>();
+        public ListPage<Sales> SalesOrderDetails = new ListPage<Sales>();
 
         protected override void Draw()
         {
             Clear();
             Database database = new Database();
-            orderList = new ListPage<ExtendedSales>();
+            orderList = new ListPage<Sales>();
             foreach (Sales order in database.GetOrder())
             {
-                ExtendedSales extSales = new ExtendedSales(order.creationTimestamp, order.doneTimestamp, order.customerId, order.state, name,
-                        uint totalOrderPrice)
-                    : base(
-                    creationTimestamp,
-                    doneTimestamp,
-                    customerId,
-                    state,
-                    totalOrderPrice));
-                listSales.Add(order);
+                Sales extSales = new Sales(string , creationTimestamp, string, int, State, uint)
+                SalesOrderDetails.Add(order);
+            }
+
+            foreach (Person listcustomer in database.GetPerson())
+            {
+                
             }
 
             Clear();
-            listSales.AddColumn("Order Id", "orderId", 40);
-            listSales.AddColumn("Creation", "creationTimestamp", 25);
-            listSales.AddColumn("Done", "doneTimestamp", 25);
-            listSales.AddColumn("Customer Id", "customerId", 40);
-            listSales.AddColumn("Name", "name", 20);
-            listSales.AddKey(ConsoleKey.F1, NewSaleOrder);
-            listSales.AddKey(ConsoleKey.F2, EditOrder);
-            listSales.AddKey(ConsoleKey.F5, DeleteOrder);
+            SalesOrderDetails.AddColumn("Order Id", "orderId", 40);
+            SalesOrderDetails.AddColumn("Creation", "creationTimestamp", 25);
+            SalesOrderDetails.AddColumn("Done", "doneTimestamp", 25);
+            SalesOrderDetails.AddColumn("Customer Id", "customerId", 40);
+            SalesOrderDetails.AddColumn("Name", "name", 20);
+            SalesOrderDetails.AddKey(ConsoleKey.F1, NewSaleOrder);
+            SalesOrderDetails.AddKey(ConsoleKey.F2, EditOrder);
+            SalesOrderDetails.AddKey(ConsoleKey.F5, DeleteOrder);
 
-            ExtendedSales selected = listSales.Select();
-            Form<ExtendedSales> editor = new Form<ExtendedSales>();
+            Sales selected = listSales.Select();
+            Form<Sales> editor = new Form<Sales>();
             if (listSales.Select() != null)
             {
                 ShowOrder(selected);
             }
         }
 
-        public void NewSaleOrder(ExtendedSales order)
+        public void NewSaleOrder(Sales order)
         {
             // Fornavn, Efternavn, Vej, Husnummer, Postnummer, By, Telefonnummer, Email,
-            Form<ExtendedSales> editor = new Form<ExtendedSales>();
+            Form<Sales> editor = new Form<Sales>();
             editor.TextBox("Company Name", "name");
             editor.TextBox("Road", "road");
             editor.TextBox("House Nr.", "houseNumber");
@@ -235,13 +234,13 @@ namespace App
         }
 
 
-        public void ShowOrder(ExtendedSales order)
+        public void ShowOrder(Sales order)
         {
             Console.Clear();
             Console.WriteLine($"FirstName: {order.customerId}");
             Console.WriteLine($"Last Name: {order.doneTimestamp}");
-            Console.WriteLine($"Address Line 1 (road): {company.houseNumber}");
-            Console.WriteLine($"Address Line 2 (number): {company.zipCode}");
+            Console.WriteLine($"Address Line 1 (road): {order.houseNumber}");
+            Console.WriteLine($"Address Line 2 (number): {order.zipCode}");
             Console.WriteLine($"City: {company.city}");
             Console.WriteLine($"Country: {company.country}");
             Console.WriteLine($"Currency: {company.currency}");
