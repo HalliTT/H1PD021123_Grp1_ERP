@@ -6,21 +6,20 @@ namespace App
     {
         public override string Title { get; set; } = "Menu"; 
 
-        public MenuInterface(Screen company, Screen person, Screen product, Screen sales)
+        public MenuInterface(Screen[] screens)
         {
-            this._company = company;
-            this._person = person;
-            this._product = product;
-            this._sales = sales;
+            _company = company;
+            _person = person;
+            _product = product;
+            _sales = sales;
 
-            this.menu = new Menu();
-            this.menu.Add(company);
-            this.menu.Add(person);
-            this.menu.Add(product);
-            this.menu.Add(sales);
+            _menu = new Menu();
+
+            foreach (var screen in screens)
+                _menu.Add(screen);
         }
 
-        protected Menu menu;
+        protected Menu _menu;
 
         protected Screen _company;
         public Screen company
@@ -48,35 +47,33 @@ namespace App
 
         protected override void Draw()
         {
-            menu.Start(this);
+            _menu.Start(this);
         }
     }
 
-    public class Interface<T> : Screen where T : class 
+    public class Interface<T> : Screen
     {
         public Interface(string title,
                          ListPage<T> list, 
                          ListPage<T> list_selected,
                          Form<T> editor)
         {
-            this.Title = title;
-            this._list = list;
-            this._list_selected = list_selected;
-            this._editor = editor;
+            Title = title;
+            _list = list;
+            _list_selected = list_selected;
+            _editor = editor;
 
-            this._db = new Database();
+            _db = new Database();
         }
         public override string Title { get; set; }
 
         protected ListPage<T> _list = null!;
-
         public ListPage<T> list
         {
             get { return _list; }
         }
 
         protected ListPage<T> _list_selected = null!;
-
         public ListPage<T> list_selected
         {
             get { return _list_selected; }
@@ -88,8 +85,8 @@ namespace App
             get { return _editor; }
         }
 
-        protected T _selected;
-        public T selected
+        protected T? _selected;
+        public T? selected
         {
             get { return _selected; }
         }
@@ -104,20 +101,20 @@ namespace App
         {
             Clear(this);
 
-            this._list.AddKey(ConsoleKey.F1, Create);
-            this._list.AddKey(ConsoleKey.F2, Edit);
-            this._list.AddKey(ConsoleKey.F5, Delete);
+            _list.AddKey(ConsoleKey.F1, Create);
+            _list.AddKey(ConsoleKey.F2, Edit);
+            _list.AddKey(ConsoleKey.F5, Delete);
 
-            this._selected = this._list.Select();
+            _selected = _list.Select();
 
-            if (this._selected != null)
+            if (_selected != null)
             {
                 Clear(this);
 
-                this._list_selected.Add(this._selected);
-                this._list_selected.Draw();
+                _list_selected.Add(_selected);
+                _list_selected.Draw();
 
-                this._list_selected.Remove(this._selected);
+                _list_selected.Remove(_selected);
             }
             else
             {
@@ -130,88 +127,97 @@ namespace App
         {
             Console.Clear();
 
-            this._editor.Edit(this._selected);
+            if (_selected != null)
+            {
+                _editor.Edit(_selected);
 
-            if (typeof(T) == typeof(Company))
-            {
-                this._db.InsertCompany((Company)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Person))
-            {
-                this._db.InsertPerson((Person)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Product))
-            {
-                this._db.InsertProduct((Product)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Sales))
-            {
-                this._db.InsertOrder((Sales)(object) this._selected);
-            }
-            else
-            {
-                return;
-            }
+                if (typeof(T) == typeof(Company))
+                {
+                    _db.InsertCompany((Company)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Person))
+                {
+                    _db.InsertPerson((Person)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Product))
+                {
+                    _db.InsertProduct((Product)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Sales))
+                {
+                    _db.InsertOrder((Sales)(object) _selected);
+                }
+                else
+                {
+                    return;
+                }
 
-            this._list.Add(this._selected);
+                _list.Add(_selected);
+            }
         }
 
         public void Edit(T obj)
         {
             Console.Clear();
 
-            this._editor.Edit(this._selected);
+            if (_selected != null)
+            {
+                _editor.Edit(_selected);
 
-            if (typeof(T) == typeof(Company))
-            {
-                this._db.UpdateCompany((Company)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Person))
-            {
-                this._db.UpdatePerson((Person)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Product))
-            {
-                this._db.UpdateProduct((Product)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Sales))
-            {
-                this._db.UpdateOrder((Sales)(object) this._selected);
-            }
-            else
-            {
-                return;
-            }
+                if (typeof(T) == typeof(Company))
+                {
+                    _db.UpdateCompany((Company)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Person))
+                {
+                    _db.UpdatePerson((Person)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Product))
+                {
+                    _db.UpdateProduct((Product)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Sales))
+                {
+                    _db.UpdateOrder((Sales)(object) _selected);
+                }
+                else
+                {
+                    return;
+                }
 
-            this._list.Add(this._selected);
+                _list.Add(_selected);
+            }
         }
 
         public void Delete(T obj)
         {
             Console.Clear();
             
-            if (typeof(T) == typeof(Company))
+            if (_selected != null)
             {
-                this._db.DeleteCompany((Company)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Person))
-            {
-                this._db.DeletePerson((Person)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Product))
-            {
-                this._db.DeleteProduct((Product)(object) this._selected);
-            }
-            else if (typeof(T) == typeof(Sales))
-            {
-                this._db.DeleteOrder((Sales)(object) this._selected);
-            }
-            else
-            {
-                return;
-            }
+                if (typeof(T) == typeof(Company))
+                {
+                    _db.DeleteCompany((Company)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Person))
+                {
+                    _db.DeletePerson((Person)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Product))
+                {
+                    _db.DeleteProduct((Product)(object) _selected);
+                }
+                else if (typeof(T) == typeof(Sales))
+                {
+                    _db.DeleteOrder((Sales)(object) _selected);
+                }
+                else
+                {
+                    return;
+                }
 
-            this._list.Remove(this._selected);
+                _list.Remove(_selected);
+            }
         }
     }
 }

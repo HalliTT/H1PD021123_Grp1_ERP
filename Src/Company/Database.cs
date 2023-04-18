@@ -59,7 +59,7 @@ namespace App
             string queryString =
                 $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{company.currency.ToString()}', '{company.cvr}', '{company.email}')";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -70,7 +70,7 @@ namespace App
             string queryString =
                 $"UPDATE dbo.Companies SET Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{company.currency.ToString()}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -80,7 +80,7 @@ namespace App
         {
             string queryString = $"DELETE FROM dbo.Companies WHERE Id={company.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

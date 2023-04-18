@@ -16,21 +16,20 @@ namespace App
             sqlBuilder.TrustServerCertificate = true;
             sqlBuilder.IntegratedSecurity = false;
 
-            this.connection = new SqlConnection(sqlBuilder.ToString());
-            connection.Open();
+            _connection = new SqlConnection(sqlBuilder.ToString());
+            _connection.Open();
 
         }
 
         // Destructor
         ~Database() 
         { 
-            this.connection.Close(); 
+            _connection.Close(); 
         }
 
         protected SqlConnection _connection = null!;
         public SqlConnection connection
         {
-            set { _connection = value; }
             get { return _connection; }
         }
     }

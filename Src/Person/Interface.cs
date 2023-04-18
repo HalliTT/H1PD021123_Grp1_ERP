@@ -6,15 +6,15 @@ namespace App
     {
         public PersonInterface(string title, ListPage<Person> list)
         {
-            this._title = title;
-            this._list = list;
-            this._list_selected = new ListPage<Person> {};
-            this._editor = new Form<Person> {};
+            _title = title;
+            _list = list;
+            _list_selected = new ListPage<Person> {};
+            _editor = new Form<Person> {};
 
-            this._intrface = new Interface<Person> (this._title, 
-                                                     this._list, 
-                                                     this._list_selected, 
-                                                     this._editor);
+            _intrface = new Interface<Person> (_title, 
+                                               _list, 
+                                               _list_selected, 
+                                               _editor);
         }
 
         protected Interface<Person> _intrface;
@@ -45,27 +45,27 @@ namespace App
         public Screen Show()
         {
             // Preview list interface
-            this._list.AddColumn("Id", "id");
-            this._list.AddColumn("Name", "fullName");
-            this._list.AddColumn("Phone", "phone");
-            this._list.AddColumn("Email", "email");
+            _list.AddColumn("Id", "id");
+            _list.AddColumn("Name", "fullName");
+            _list.AddColumn("Phone", "phone");
+            _list.AddColumn("Email", "email");
 
             // Selected element interface
-            this._list_selected.AddColumn("Name", "fullName");
-            this._list_selected.AddColumn("Address", "addressAsStr");
-            this._list_selected.AddColumn("Last purchase", "lastPurchase");
+            _list_selected.AddColumn("Name", "fullName");
+            _list_selected.AddColumn("Address", "addressAsStr");
+            _list_selected.AddColumn("Last purchase", "lastPurchase");
             
             // Editor interface
-            this._editor.TextBox("Fistname", "firstName");
-            this._editor.TextBox("Lastname", "lastName");
-            this._editor.TextBox("Road", "addressRoadName");
-            this._editor.TextBox("Door number", "addressDoorNumber");
-            this._editor.TextBox("Zipcode", "addressZipCode");
-            this._editor.TextBox("City", "addressCity");
-            this._editor.IntBox("Phone", "phone");
-            this._editor.TextBox("Email", "email");
+            _editor.TextBox("Fistname", "firstName");
+            _editor.TextBox("Lastname", "lastName");
+            _editor.TextBox("Road", "addressRoadName");
+            _editor.TextBox("Door number", "addressDoorNumber");
+            _editor.TextBox("Zipcode", "addressZipCode");
+            _editor.TextBox("City", "addressCity");
+            _editor.IntBox("Phone", "phone");
+            _editor.TextBox("Email", "email");
 
-            return this._intrface;
+            return _intrface;
         } 
     }
 }

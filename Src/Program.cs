@@ -47,7 +47,9 @@ namespace App
             var salesScreen = sales.Show();
 
             // Menu
-            var menu = new MenuInterface(companyScreen, personScreen, productScreen, salesScreen);
+            Screen[] screens = {companyScreen, personScreen, productScreen, salesScreen};
+            
+            var menu = new MenuInterface(screens);
             Screen.Display(menu);
         }
     }

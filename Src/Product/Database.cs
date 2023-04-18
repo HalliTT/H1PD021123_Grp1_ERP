@@ -17,7 +17,7 @@ namespace App
                 queryString = $"SELECT * FROM dbo.Products";
             }
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
 
@@ -48,7 +48,7 @@ namespace App
         {
             string queryString = $"INSERT INTO dbo.Products VALUES ('{product.name}', '{product.purchasePrice}', '{product.salesPrice}', '{product.location}', '{product.amountInStock}', '{product.unit}')";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -57,7 +57,7 @@ namespace App
         {
             string queryString = $"UPDATE dbo.Products SET (Name='{product.name}', PurchasePrice='{product.purchasePrice}', SalesPrice='{product.salesPrice}', Location='{product.location}', AmountInStock='{product.amountInStock}', Unit='{product.unit}') WHERE ProdictId = {product.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -66,7 +66,7 @@ namespace App
         {
             string queryString = $"DELETE FROM dbo.Products WHERE ProductId={product.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

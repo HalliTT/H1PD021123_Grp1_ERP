@@ -10,57 +10,52 @@ namespace App
         //Constructor
         public Address(string country, string zipCode, string city, string roadName, string doorNumber)
         {
-            this.country = country;
-            this.zipCode = zipCode;
-            this.city = city;
-            this.roadName = roadName;
-            this.doorNumber = doorNumber;
+            _country = country;
+            _zipCode = zipCode;
+            _city = city;
+            _roadName = roadName;
+            _doorNumber = doorNumber;
         }
 
         public override string ToString()
         {
             var sb = new StringBuilder();
-            return sb.AppendFormat($"{this._roadName}, {this._doorNumber}, {this._zipCode}, {this._city}").ToString();
+            return sb.AppendFormat($"{_roadName}, {_doorNumber}, {_zipCode}, {_city}").ToString();
         }
 
         //Country
-        protected string _country;
+        protected string _country = null!;
         public string country
         {
             get { return _country; }
-            set { _country = value; }
         }
 
         //Zip
-        protected string _zipCode;
+        protected string _zipCode = null!;
         public string zipCode
         {
             get { return _zipCode; }
-            set { _zipCode = value; }
         }
 
         //City
-        protected string _city;
+        protected string _city = null!;
         public string city
         {
             get { return _city; }
-            set { _city = value; }
         }
 
         //Road
-        protected string _roadName;
+        protected string _roadName = null!;
         public string roadName
         {
             get { return _roadName; }
-            set { _roadName = value; }
         }
 
         //Door
-        protected string _doorNumber;
+        protected string _doorNumber = null!;
         public string doorNumber
         {
             get { return _doorNumber; }
-            set { _doorNumber = value; }
         }
     }
 }

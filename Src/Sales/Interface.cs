@@ -6,15 +6,15 @@ namespace App
     {
         public SalesInterface(string title, ListPage<Sales> list)
         {
-            this._title = title;
-            this._list = list;
-            this._list_selected = new ListPage<Sales> {};
-            this._editor = new Form<Sales> {};
+            _title = title;
+            _list = list;
+            _list_selected = new ListPage<Sales> {};
+            _editor = new Form<Sales> {};
 
-            this._intrface = new Interface<Sales> (this._title, 
-                                                     this._list, 
-                                                     this._list_selected, 
-                                                     this._editor);
+            _intrface = new Interface<Sales> (_title, 
+                                                   _list, 
+                                                   _list_selected, 
+                                                   _editor);
         }
 
         protected Interface<Sales> _intrface;
@@ -45,21 +45,21 @@ namespace App
         public Screen Show()
         {
             // Preview list interface
-            this._list.AddColumn("Id", "id");
-            this._list.AddColumn("Creation", "creationTimestamp");
-            this._list.AddColumn("Customer Id", "customerId");
-            this._list.AddColumn("Name", "fullName");
-            this._list.AddColumn("Total", "totalOrderPrice");
+            _list.AddColumn("Id", "id");
+            _list.AddColumn("Creation", "creationTimestamp");
+            _list.AddColumn("Customer Id", "customerId");
+            _list.AddColumn("Name", "fullName");
+            _list.AddColumn("Total", "totalOrderPrice");
 
             // Selected element interface
-            this._list_selected.AddColumn("Id", "id");
-            this._list_selected.AddColumn("Date", "creationTimestamp");
-            this._list_selected.AddColumn("Customer Id", "customerId");
-            this._list_selected.AddColumn("Name", "fullName");
+            _list_selected.AddColumn("Id", "id");
+            _list_selected.AddColumn("Date", "creationTimestamp");
+            _list_selected.AddColumn("Customer Id", "customerId");
+            _list_selected.AddColumn("Name", "fullName");
             
             // Editor interface
             
-            return this._intrface;
+            return _intrface;
         } 
     }
 }

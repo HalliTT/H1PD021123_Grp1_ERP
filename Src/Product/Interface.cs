@@ -6,15 +6,15 @@ namespace App
     {
         public ProductInterface(string title, ListPage<Product> list)
         {
-            this._title = title;
-            this._list = list;
-            this._list_selected = new ListPage<Product> {};
-            this._editor = new Form<Product> {};
+            _title = title;
+            _list = list;
+            _list_selected = new ListPage<Product> {};
+            _editor = new Form<Product> {};
 
-            this._intrface = new Interface<Product> (this._title, 
-                                                     this._list, 
-                                                     this._list_selected, 
-                                                     this._editor);
+            _intrface = new Interface<Product> (_title, 
+                                                _list, 
+                                                _list_selected, 
+                                                _editor);
         }
 
         protected Interface<Product> _intrface;
@@ -45,39 +45,39 @@ namespace App
         public Screen Show()
         {
             // Preview list interface
-            this._list.AddColumn("Id", "id");
-            this._list.AddColumn("Name", "name");
-            this._list.AddColumn("Amount", "amountInStock");
-            this._list.AddColumn("Purchase price", "purchasePrice");
-            this._list.AddColumn("Sales price", "salesPrice");
-            this._list.AddColumn("Profit", "profit");
+            _list.AddColumn("Id", "id");
+            _list.AddColumn("Name", "name");
+            _list.AddColumn("Amount", "amountInStock");
+            _list.AddColumn("Purchase price", "purchasePrice");
+            _list.AddColumn("Sales price", "salesPrice");
+            _list.AddColumn("Profit", "profit");
 
             // Selected element interface
-            this._list_selected.AddColumn("Id", "id");
-            this._list_selected.AddColumn("Name", "name");
-            this._list_selected.AddColumn("Description", "description");
-            this._list_selected.AddColumn("Sales price", "salesPrice");
-            this._list_selected.AddColumn("Purchase price", "purchasePrice");
-            this._list_selected.AddColumn("Location", "location");
-            this._list_selected.AddColumn("Amount", "amountInStock");
-            this._list_selected.AddColumn("Unit", "unit");
-            this._list_selected.AddColumn("Profit", "percentageProfit");
-            this._list_selected.AddColumn("Profit", "profit");
+            _list_selected.AddColumn("Id", "id");
+            _list_selected.AddColumn("Name", "name");
+            _list_selected.AddColumn("Description", "description");
+            _list_selected.AddColumn("Sales price", "salesPrice");
+            _list_selected.AddColumn("Purchase price", "purchasePrice");
+            _list_selected.AddColumn("Location", "location");
+            _list_selected.AddColumn("Amount", "amountInStock");
+            _list_selected.AddColumn("Unit", "unit");
+            _list_selected.AddColumn("Profit", "percentageProfit");
+            _list_selected.AddColumn("Profit", "profit");
 
             // Editor interface
-            this._editor.TextBox("Id", "id");
-            this._editor.TextBox("Name", "name");
-            this._editor.TextBox("Description", "description");
-            this._editor.IntBox("Sales price", "salesPrice");
-            this._editor.IntBox("Purchase price", "purchasePrice");
-            this._editor.TextBox("Location", "location");
-            this._editor.IntBox("Amount", "amountInStock");
-            this._editor.SelectBox("Unit", "unit");
-            this._editor.AddOption("Unit", "Pieces", "pieces");
-            this._editor.AddOption("Unit", "Meters", "meters");
-            this._editor.AddOption("Unit", "Hours", "hours");
+            _editor.TextBox("Id", "id");
+            _editor.TextBox("Name", "name");
+            _editor.TextBox("Description", "description");
+            _editor.IntBox("Sales price", "salesPrice");
+            _editor.IntBox("Purchase price", "purchasePrice");
+            _editor.TextBox("Location", "location");
+            _editor.IntBox("Amount", "amountInStock");
+            _editor.SelectBox("Unit", "unit");
+            _editor.AddOption("Unit", "Pieces", "pieces");
+            _editor.AddOption("Unit", "Meters", "meters");
+            _editor.AddOption("Unit", "Hours", "hours");
 
-            return this._intrface;
+            return _intrface;
         } 
     }
 }

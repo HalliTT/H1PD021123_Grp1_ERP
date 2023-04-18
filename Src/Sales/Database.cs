@@ -80,13 +80,13 @@ namespace App
         {
             string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
             // Order.
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
 
             queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
 
-            command = new SqlCommand(queryString, this.connection);
+            command = new SqlCommand(queryString, _connection);
 
             int IdScope = -1;
 
@@ -104,7 +104,7 @@ namespace App
         {
             string queryString = $"INSERT INTO dbo.OrdersList VALUES ({line.ordersId}, {line.productId}, {line.amount})";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
 
@@ -130,7 +130,7 @@ namespace App
         {
             string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -139,7 +139,7 @@ namespace App
         {
             string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

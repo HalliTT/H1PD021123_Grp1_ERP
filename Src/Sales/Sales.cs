@@ -17,11 +17,11 @@ namespace App
                      State state,
                      uint totalOrderPrice)
         {
-            this.creationTimestamp = creationTimestamp;
-            this.doneTimestamp = doneTimestamp;
-            this.customerId = customerId;
-            this.state = state;
-            this.totalOrderPrice = totalOrderPrice;
+            _creationTimestamp = creationTimestamp;
+            _doneTimestamp = doneTimestamp;
+            _customerId = customerId;
+            _state = state;
+            _totalOrderPrice = totalOrderPrice;
         }
 
         protected int _id;
@@ -34,28 +34,24 @@ namespace App
         protected string _creationTimestamp = null!;
         public string creationTimestamp
         {
-            set { _creationTimestamp = value; }
             get { return _creationTimestamp; }
         }
 
         protected string _doneTimestamp = null!;
         public string doneTimestamp
         {
-            set { _doneTimestamp = value; }
             get { return _doneTimestamp; }
         }
 
         protected int _customerId;
         public int customerId
         {
-            set { _customerId = value; }
             get { return _customerId; }
         }
 
         protected State _state;
         public State state
         {
-            set { _state = value; }
             get { return _state; }
         }
 
@@ -63,14 +59,13 @@ namespace App
         {
             get {
                 var db = new Database();
-                /*
-                var person = db.GetPerson(this._customerId);
+
+                var person = db.GetPerson(_customerId);
 
                 if (person.Capacity > 0)
                 {
                     return person[0].fullName;
                 }
-                */
 
                 return "Unknown";
             }
@@ -79,7 +74,6 @@ namespace App
         protected uint _totalOrderPrice;
         public uint totalOrderPrice
         {
-            set { _totalOrderPrice = value; }
             get { return _totalOrderPrice; }
         }
     }

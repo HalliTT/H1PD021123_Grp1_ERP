@@ -17,25 +17,25 @@
                       Address address,
                       Role role)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.phone = phone;
-            this.email = email;
-            this.address = address;
-            this.role = role;
+            _firstName = firstName;
+            _lastName = lastName;
+            _phone = phone;
+            _email = email;
+            _address = address;
+            _role = role;
 
             // Creation timestamp is equal to GetLastPurchase(), 
             // since user will created when purchase has been made.
             if (role == Role.Customer)
             {
-                this._creationTimeStamp = GetLastPurchase();
+                _creationTimeStamp = GetLastPurchase();
             }
             else
             {
-                this._creationTimeStamp = DateTime.Now.ToString();
+                _creationTimeStamp = DateTime.Now.ToString();
             }
 
-            this._fullName = GetFullName();
+            _fullName = GetFullName();
         }
 
         public Person() {}
@@ -47,40 +47,34 @@
             set { _id = value; }
         }
 
-        protected string _firstName;
+        protected string _firstName = null!;
         public string firstName
         {
             get { return _firstName; }
-            set { _firstName = value; }
         }
 
-        protected string _lastName;
+        protected string _lastName = null!;
         public string lastName
         {
             get { return _lastName; }
-            set { _lastName = value; }
         }
 
-        protected string _phone;
+        protected string _phone = null!;
         public string phone
         {
             get { return _phone; }
-            set { _phone = value; }
         }
 
-        protected string _email;
+        protected string _email = null!;
         public string email
         {
             get { return _email; }
-            set { _email = value; }
         }
 
-        protected Address _address;
+        protected Address _address = null!;
         public Address address
         {
             get { return _address; }
-            set { _address = value; }
-
         }
 
         public string addressAsStr
@@ -112,10 +106,9 @@
         public Role role
         {
             get { return _role; }
-            set { _role = value; }
         }
 
-        protected string _creationTimeStamp;
+        protected string _creationTimeStamp = null!;
         public string creationTimeStamp
         {
             get { return _creationTimeStamp; }
@@ -127,7 +120,7 @@
             get { return GetLastPurchase(); }
         }
 
-        protected string _fullName;
+        protected string _fullName = null!;
 
         public string fullName
         {
@@ -136,7 +129,7 @@
 
         public string GetFullName()
         {
-            return this.firstName + " " + this.lastName;
+            return _firstName + " " + _lastName;
         }
 
         public string GetLastPurchase()
@@ -144,13 +137,13 @@
             var db = new Database();
             var orders = db.GetOrder();
 
-            var lastPurchase = this.creationTimeStamp;
+            var lastPurchase = _creationTimeStamp;
 
             foreach (var order in orders)
             {
-                if (order.customerId == this.id)
+                if (order.customerId == _id)
                 {
-                    creationTimeStamp = order.creationTimestamp;
+                    _creationTimeStamp = order.creationTimestamp;
                 }
             }
 

@@ -6,15 +6,15 @@ namespace App
     {
         public CompanyInterface(string title, ListPage<Company> list)
         {
-            this._title = title;
-            this._list = list;
-            this._list_selected = new ListPage<Company> {};
-            this._editor = new Form<Company> {};
+            _title = title;
+            _list = list;
+            _list_selected = new ListPage<Company> {};
+            _editor = new Form<Company> {};
 
-            this._intrface = new Interface<Company> (this._title, 
-                                                     this._list, 
-                                                     this._list_selected, 
-                                                     this._editor);
+            _intrface = new Interface<Company> (_title, 
+                                                     _list, 
+                                                     _list_selected, 
+                                                     _editor);
         }
 
         protected Interface<Company> _intrface;
@@ -45,36 +45,36 @@ namespace App
         public Screen Show()
         {
             // Preview list interface
-            this._list.AddColumn("Name", "name");
-            this._list.AddColumn("Country", "country");
-            this._list.AddColumn("Currency", "currency");
+            _list.AddColumn("Name", "name");
+            _list.AddColumn("Country", "country");
+            _list.AddColumn("Currency", "currency");
 
             // Selected element interface
-            this._list_selected.AddColumn("Name", "name");
-            this._list_selected.AddColumn("Road", "road");
-            this._list_selected.AddColumn("House number", "houseNumber");
-            this._list_selected.AddColumn("Zipcode", "zipCode");
-            this._list_selected.AddColumn("City", "city");
-            this._list_selected.AddColumn("Country", "country");
-            this._list_selected.AddColumn("Currency", "currency");
-            this._list_selected.AddColumn("CVR", "cvr");
-            this._list_selected.AddColumn("Email", "email");
+            _list_selected.AddColumn("Name", "name");
+            _list_selected.AddColumn("Road", "road");
+            _list_selected.AddColumn("House number", "houseNumber");
+            _list_selected.AddColumn("Zipcode", "zipCode");
+            _list_selected.AddColumn("City", "city");
+            _list_selected.AddColumn("Country", "country");
+            _list_selected.AddColumn("Currency", "currency");
+            _list_selected.AddColumn("CVR", "cvr");
+            _list_selected.AddColumn("Email", "email");
 
             // Editor interface
-            this._editor.TextBox("Name", "name");
-            this._editor.TextBox("Road", "road");
-            this._editor.TextBox("House Nr.", "houseNumber");
-            this._editor.TextBox("Zip Code", "zipCode");
-            this._editor.TextBox("City", "city");
-            this._editor.TextBox("Country", "country");
-            this._editor.SelectBox("Currency", "currency");
-            this._editor.AddOption("Currency", "USD", "USD");
-            this._editor.AddOption("Currency", "DKK", "DKK");
-            this._editor.AddOption("Currency", "EUR", "EUR");
-            this._editor.TextBox("CVR", "cvr");
-            this._editor.TextBox("Email", "email");
+            _editor.TextBox("Name", "name");
+            _editor.TextBox("Road", "road");
+            _editor.TextBox("House Nr.", "houseNumber");
+            _editor.TextBox("Zip Code", "zipCode");
+            _editor.TextBox("City", "city");
+            _editor.TextBox("Country", "country");
+            _editor.SelectBox("Currency", "currency");
+            _editor.AddOption("Currency", "USD", "USD");
+            _editor.AddOption("Currency", "DKK", "DKK");
+            _editor.AddOption("Currency", "EUR", "EUR");
+            _editor.TextBox("CVR", "cvr");
+            _editor.TextBox("Email", "email");
 
-            return this._intrface;
+            return _intrface;
         } 
 
     }
