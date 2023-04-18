@@ -2,9 +2,11 @@ using TECHCOOL.UI;
 
 namespace App
 {
+    //Understanding the original programmer's intent is the most difficult problem.
+    //- Fjelstad & Hamlen 1979
     public class MenuInterface : Screen
     {
-        public override string Title { get; set; } = "Menu"; 
+        public override string Title { get; set; } = "Menu";
 
         public MenuInterface(Screen[] screens)
         {
@@ -54,7 +56,7 @@ namespace App
     public class Interface<T> : Screen
     {
         public Interface(string title,
-                         ListPage<T> list, 
+                         ListPage<T> list,
                          ListPage<T> list_selected,
                          Form<T> editor)
         {
@@ -133,19 +135,19 @@ namespace App
 
                 if (typeof(T) == typeof(Company))
                 {
-                    _db.InsertCompany((Company)(object) _selected);
+                    _db.InsertCompany((Company)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Person))
                 {
-                    _db.InsertPerson((Person)(object) _selected);
+                    _db.InsertPerson((Person)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Product))
                 {
-                    _db.InsertProduct((Product)(object) _selected);
+                    _db.InsertProduct((Product)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.InsertOrder((Sales)(object) _selected);
+                    _db.InsertOrder((Sales)(object)_selected);
                 }
                 else
                 {
@@ -166,19 +168,19 @@ namespace App
 
                 if (typeof(T) == typeof(Company))
                 {
-                    _db.UpdateCompany((Company)(object) _selected);
+                    _db.UpdateCompany((Company)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Person))
                 {
-                    _db.UpdatePerson((Person)(object) _selected);
+                    _db.UpdatePerson((Person)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Product))
                 {
-                    _db.UpdateProduct((Product)(object) _selected);
+                    _db.UpdateProduct((Product)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.UpdateOrder((Sales)(object) _selected);
+                    _db.UpdateOrder((Sales)(object)_selected);
                 }
                 else
                 {
@@ -192,24 +194,24 @@ namespace App
         private void Delete(T obj)
         {
             Console.Clear();
-            
+
             if (_selected != null)
             {
                 if (typeof(T) == typeof(Company))
                 {
-                    _db.DeleteCompany((Company)(object) _selected);
+                    _db.DeleteCompany((Company)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Person))
                 {
-                    _db.DeletePerson((Person)(object) _selected);
+                    _db.DeletePerson((Person)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Product))
                 {
-                    _db.DeleteProduct((Product)(object) _selected);
+                    _db.DeleteProduct((Product)(object)_selected);
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.DeleteOrder((Sales)(object) _selected);
+                    _db.DeleteOrder((Sales)(object)_selected);
                 }
                 else
                 {
