@@ -10,11 +10,6 @@ namespace App
 
         public MenuInterface(Screen[] screens)
         {
-            _company = company;
-            _person = person;
-            _product = product;
-            _sales = sales;
-
             _menu = new Menu();
 
             foreach (var screen in screens)
@@ -22,30 +17,6 @@ namespace App
         }
 
         protected Menu _menu;
-
-        protected Screen _company;
-        public Screen company
-        {
-            get { return _company; }
-        }
-
-        protected Screen _person;
-        public Screen person
-        {
-            get { return _person; }
-        }
-
-        protected Screen _product;
-        public Screen product
-        {
-            get { return _product; }
-        }
-
-        protected Screen _sales;
-        public Screen sales
-        {
-            get { return _sales; }
-        }
 
         protected override void Draw()
         {
