@@ -12,7 +12,7 @@ namespace App
             var companyObj = new Company("Virk", "vej", "2", "9000", "Aalborg", "DK", Currency.DKK, "123", "test@test.dk");
             companyList.Add(companyObj);
 
-            var company = new CompanyInterface("Company", companyList);
+            var company = new SetupCompanyInterface("Company", companyList);
 
             var companyScreen = company.Show();
 
@@ -22,7 +22,7 @@ namespace App
             var personObj = new Person("for", "efter", "1234567", "test@test.dk", new Address("DK", "9000", "DK", "Vej", "200"), Role.Customer);
             personList.Add(personObj);
 
-            var person = new PersonInterface("Person", personList);
+            var person = new SetupPersonInterface("Person", personList);
 
             var personScreen = person.Show();
 
@@ -32,7 +32,7 @@ namespace App
             var productObj = new Product("Produkt", "desc", 200, 10020, "DK", 200, Unit.hours);
             productList.Add(productObj);
 
-            var product = new ProductInterface("Product", productList);
+            var product = new SetupProductInterface("Product", productList);
 
             var productScreen = product.Show();
 
@@ -42,7 +42,7 @@ namespace App
             var salesObj = new Sales(DateTime.Now.ToString(), DateTime.Now.ToString(), 2, State.Created, 2000);
             salesList.Add(salesObj);
 
-            var sales = new SalesInterface("Sales", salesList);
+            var sales = new SetupSalesInterface("Sales", salesList);
 
             var salesScreen = sales.Show();
 

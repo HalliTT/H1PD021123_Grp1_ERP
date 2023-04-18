@@ -63,8 +63,8 @@ namespace App
                 while (reader.Read())
                 {
                     // Trying to parse string to enum<State>
-                    App.State state;
-                    Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
+                    State state;
+                    Enum.TryParse<State>(Convert.ToString(reader[4]), out state);
 
                     order.Add(new Sales(
                                     Convert.ToString(reader[1]),

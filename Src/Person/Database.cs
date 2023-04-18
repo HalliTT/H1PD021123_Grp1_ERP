@@ -34,9 +34,9 @@ namespace App
             {
                 while (reader.Read())
                 {
-                    // Trying to parse string to enum<State>
-                    App.Role role;
-                    Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
+                    // Trying to parse string to enum<Role>
+                    Role role;
+                    Enum.TryParse<Role>(Convert.ToString(reader[6]), out role);
 
                     var obj = new Person(
                         Convert.ToString(reader[1]),

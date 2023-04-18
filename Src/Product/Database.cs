@@ -28,8 +28,8 @@ namespace App
                 while (reader.Read())
                 {
 
-                    App.Unit unit;
-                    Enum.TryParse<App.Unit>(Convert.ToString(reader[6]), out unit);
+                    Unit unit;
+                    Enum.TryParse<Unit>(Convert.ToString(reader[6]), out unit);
 
                     products.Add(new Product(
                                     Convert.ToString(reader[1]),

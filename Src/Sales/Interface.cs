@@ -2,9 +2,9 @@ using TECHCOOL.UI;
 
 namespace App
 {
-    public class SalesInterface
+    public class SetupSalesInterface
     {
-        public SalesInterface(string title, ListPage<Sales> list)
+        public SetupSalesInterface(string title, ListPage<Sales> list)
         {
             _title = title;
             _list = list;

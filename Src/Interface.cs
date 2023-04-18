@@ -123,7 +123,7 @@ namespace App
             }
         }
 
-        public void Create(T obj)
+        private void Create(T obj)
         {
             Console.Clear();
 
@@ -156,7 +156,7 @@ namespace App
             }
         }
 
-        public void Edit(T obj)
+        private void Edit(T obj)
         {
             Console.Clear();
 
@@ -189,7 +189,7 @@ namespace App
             }
         }
 
-        public void Delete(T obj)
+        private void Delete(T obj)
         {
             Console.Clear();
             

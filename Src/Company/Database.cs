@@ -28,9 +28,9 @@ namespace App
             {
                 while (reader.Read())
                 {
-                    // Trying to parse string to enum<currency>
-                    App.Currency currency;
-                    Enum.TryParse<App.Currency>(Convert.ToString(reader[7]), out currency);
+                    // Trying to parse string to enum<Currency>
+                    Currency currency;
+                    Enum.TryParse<Currency>(Convert.ToString(reader[7]), out currency);
 
                     var obj = new Company(
                         Convert.ToString(reader[1]),

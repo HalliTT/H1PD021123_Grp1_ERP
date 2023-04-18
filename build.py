@@ -1,4 +1,3 @@
-from sys import platform
 from subprocess import run
 from pathlib import Path
 from os import path, makedirs, getcwd
