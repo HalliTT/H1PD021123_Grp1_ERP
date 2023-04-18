@@ -6,43 +6,45 @@ namespace App
     {
         public static void Main(string[] args)
         {
+            var db = new Database();
+            
             // Company
-            var companyList = new ListPage<Company> {};
+            var companyList = db.GetCompany();
+            var companyListPage = new ListPage<Company> {};
 
-            var companyObj = new Company("Virk", "vej", "2", "9000", "Aalborg", "DK", Currency.DKK, "123", "test@test.dk");
-            companyList.Add(companyObj);
+            companyListPage.Add(companyList);
 
-            var company = new SetupCompanyInterface("Company", companyList);
+            var company = new SetupCompanyInterface("Company", companyListPage);
 
             var companyScreen = company.Show();
 
             // Person
-            var personList = new ListPage<Person> {};
+            var personList = db.GetPerson();
+            var personListPage = new ListPage<Person> {};
 
-            var personObj = new Person("for", "efter", "1234567", "test@test.dk", new Address("DK", "9000", "DK", "Vej", "200"), Role.Customer);
-            personList.Add(personObj);
+            personListPage.Add(personList); 
 
-            var person = new SetupPersonInterface("Person", personList);
+            var person = new SetupPersonInterface("Person", personListPage);
 
             var personScreen = person.Show();
 
             // Product
-            var productList = new ListPage<Product> {};
+            var productList = db.GetProducts();
+            var productListPage = new ListPage<Product> {};
 
-            var productObj = new Product("Produkt", "desc", 200, 10020, "DK", 200, Unit.hours);
-            productList.Add(productObj);
+            productListPage.Add(productList);
 
-            var product = new SetupProductInterface("Product", productList);
+            var product = new SetupProductInterface("Product", productListPage);
 
             var productScreen = product.Show();
 
             // Sales
-            var salesList = new ListPage<Sales> { };
+            var salesList = db.GetOrder();
+            var salesListPage = new ListPage<Sales> {};
+            
+            salesListPage.Add(salesList);
 
-            var salesObj = new Sales(DateTime.Now.ToString(), DateTime.Now.ToString(), 2, State.Created, 2000);
-            salesList.Add(salesObj);
-
-            var sales = new SetupSalesInterface("Sales", salesList);
+            var sales = new SetupSalesInterface("Sales", salesListPage);
 
             var salesScreen = sales.Show();
 

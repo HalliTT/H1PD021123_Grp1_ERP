@@ -4,16 +4,16 @@ namespace App
 {
     public partial class Database
     {
-        public List<OrderLine> GetOrderList(int orderId = 0, int productId = 0)
+        public List<OrderLine> GetOrderListPage(int orderId = 0, int productId = 0)
         {
             string queryString = "";
             if (orderId > 0 && productId <= 0)
             {
-                queryString = $"SELECT * FROM dbo.OrdersList WHERE ordersId IS '{orderId}'";
+                queryString = $"SELECT * FROM dbo.OrdersListPage WHERE ordersId IS '{orderId}'";
             }
             else if (productId > 0 && orderId <= 0)
             {
-                queryString = $"SELECT * FROM dbo.OrdersList WHERE ProductId IS '{productId}'";
+                queryString = $"SELECT * FROM dbo.OrdersListPage WHERE ProductId IS '{productId}'";
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -100,15 +100,15 @@ namespace App
             order.id = IdScope;
         }
 
-        public int InsertOrdersList(OrderLine line)
+        public int InsertOrdersListPage(OrderLine line)
         {
-            string queryString = $"INSERT INTO dbo.OrdersList VALUES ({line.ordersId}, {line.productId}, {line.amount})";
+            string queryString = $"INSERT INTO dbo.OrdersListPage VALUES ({line.ordersId}, {line.productId}, {line.amount})";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
 
-            queryString = $"SELECT Id FROM dbo.OrdersList WHERE ordersId = {line.ordersId} AND productId = {line.ordersId}";
+            queryString = $"SELECT Id FROM dbo.OrdersListPage WHERE ordersId = {line.ordersId} AND productId = {line.ordersId}";
 
             command = new SqlCommand(queryString, connection);
 
