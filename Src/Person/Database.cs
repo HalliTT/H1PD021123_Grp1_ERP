@@ -39,6 +39,7 @@ namespace App
                     Enum.TryParse<Role>(Convert.ToString(reader[6]), out role);
 
                     var obj = new Person(
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),

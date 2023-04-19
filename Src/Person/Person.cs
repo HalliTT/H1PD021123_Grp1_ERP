@@ -39,6 +39,7 @@
         }
 
         public Person(
+                      int id,
                       string firstName,
                       string lastName,
                       string phone,
@@ -47,6 +48,7 @@
                       Role role,
                       string creationTimeStamp)
         {
+            _id = id;
             _firstName = firstName;
             _lastName = lastName;
             _phone = phone;
