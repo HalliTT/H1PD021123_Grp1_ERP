@@ -20,10 +20,10 @@ namespace App
 
         protected override void Draw()
         {
+            Console.Clear();
             _menu.Start(this);
         }
     }
-
     public class Interface<T> : Screen
     {
         public Interface(string title,
