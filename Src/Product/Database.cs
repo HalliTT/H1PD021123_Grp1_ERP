@@ -6,7 +6,7 @@ namespace App
 {
     public partial class Database
     {
-        public List<Product> GetProducts(int productId = 0)
+        public List<Product> GetProduct(int productId = 0)
         {
             string queryString = "";
             if (productId > 0)
@@ -38,7 +38,7 @@ namespace App
                                     Convert.ToDouble(reader[3]),
                                     Convert.ToDouble(reader[4]),
                                     Convert.ToString(reader[5]),
-                                    Convert.ToInt32(reader[6]),
+                                    Convert.ToDouble(reader[6]),
                                     unit));
                 }
             }
@@ -47,7 +47,7 @@ namespace App
 
         public void InsertProduct(Product product)
         {
-            string queryString = $"INSERT INTO dbo.Products VALUES ('{product.name}', '{product.purchasePrice}', '{product.salesPrice}', '{product.location}', '{product.amountInStock}', '{product.unit}')";
+            string queryString = $"INSERT INTO dbo.Products VALUES ('{product.name}', '{product.description}', '{product.purchasePrice}', '{product.salesPrice}', '{product.location}', '{product.amountInStock}', '{product.unit}')";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

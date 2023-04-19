@@ -29,7 +29,7 @@ namespace App
             var personScreen = person.Show();
 
             // Product
-            var productList = db.GetProducts();
+            var productList = db.GetProduct();
             var productListPage = new ListPage<Product> {};
 
             productListPage.Add(productList);

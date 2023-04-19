@@ -6,7 +6,7 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string name, string description, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
+        public Product(string name, string description, double purchasePrice, double salesPrice, string location, double amountInStock, Unit unit)
         {
             _name = name;
             _description = description;

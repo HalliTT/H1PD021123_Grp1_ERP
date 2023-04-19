@@ -11,6 +11,7 @@
 *.sln.docstates
 *.sln
 .idea/
+Out/
 
 # User-specific files (Xunit - Unittest)
 Unittest/bin
