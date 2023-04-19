@@ -1,8 +1,8 @@
 use H1PD021123_Gruppe1;
 
 --ADD INTO PRODUCTS--
---INSERT INTO dbo.Products (Name, PurchasePrice, Location, AmountInStock, Unit, SalesPrice)
---VALUES ('Test 4', 200, 'Somewhere', 3, 'Meter', 300)
+--INSERT INTO dbo.Products (Name, Description, PurchasePrice, Location, AmountInStock, Unit, SalesPrice)
+--VALUES ('Test 4', 'desc', 200, 'Somewhere', 3, 'Meter', 300)
 ---------------------------------------------------------------------------------------------
 
 --ADD INTO PERSON--
