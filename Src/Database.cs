@@ -9,7 +9,6 @@ namespace App
         public Database()
         {
             SqlConnectionStringBuilder sqlBuilder = new();
-            // sqlBuilder.DataSource = "docker.data.techcollege.dk";
             sqlBuilder.DataSource = "192.168.1.70";
             sqlBuilder.InitialCatalog = "H1PD021123_Gruppe1";
             sqlBuilder.TrustServerCertificate = true;

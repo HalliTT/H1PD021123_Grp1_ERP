@@ -44,9 +44,8 @@ namespace App
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
                         JsonConvert.DeserializeObject<Address>(Convert.ToString(reader[5])), //Address personAddress
-                        role);
-                    
-                    obj.creationTimeStamp = Convert.ToString(reader[7]);
+                        role,
+                        Convert.ToString(reader[7]));
 
                     person.Add(obj);                    
                 }

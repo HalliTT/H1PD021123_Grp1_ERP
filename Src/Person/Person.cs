@@ -38,6 +38,37 @@
             _fullName = GetFullName();
         }
 
+        public Person(
+                      string firstName,
+                      string lastName,
+                      string phone,
+                      string email,
+                      Address address,
+                      Role role,
+                      string creationTimeStamp)
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+            _phone = phone;
+            _email = email;
+            _address = address;
+            _role = role;
+            _creationTimeStamp = creationTimeStamp;
+
+            // Creation timestamp is equal to GetLastPurchase(), 
+            // since user will created when purchase has been made.
+            if (role == Role.Customer)
+            {
+                _creationTimeStamp = GetLastPurchase();
+            }
+            else
+            {
+                _creationTimeStamp = DateTime.Now.ToString();
+            }
+
+            _fullName = GetFullName();
+        }
+
         protected int _id;
         public int id
         {
