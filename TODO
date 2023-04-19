@@ -2,3 +2,7 @@ FORMAT:
 NUM - DESC : ASSIGNED DEV
  
 1. Fix Create() fcn in Interface : Marcus
+2. Fix Create() Order fcn add Person/order/orderlist/ : Marcus
+3. Add more dummy data : Marcus
+4. Get some coffe : Marcus
+5. Connecting to the database... : MARCUS
