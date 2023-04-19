@@ -54,6 +54,7 @@ namespace App
                     {
                         case "Y":
                             retry = true;
+                            Console.Clear();
                             break;
                         case "N":
                             retry = false;
@@ -64,6 +65,7 @@ namespace App
                         default:
                             Console.WriteLine("Invalid Output. Try again.");
                             retry = true;
+                            Console.Clear();
                             break;
                     }
                 }
