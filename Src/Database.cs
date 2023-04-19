@@ -18,7 +18,7 @@ namespace App
             sqlBuilder.TrustServerCertificate = true;
             sqlBuilder.IntegratedSecurity = false;
 
-            _connection = new SqlConnection(sqlBuilder.ToString());
+            
             
             bool retry = true;
 
@@ -26,20 +26,8 @@ namespace App
             {
                 try
                 {
-                    Console.WriteLine("Connecting to the database...");
-                    // Check the connection state
-                    using (SqlConnection connection = new SqlConnection(sqlBuilder.ToString()));
-                    {
-                        connection.Open();
-                        Console.WriteLine("Connection established successfully.");
-
-                        // Check the connection state
-                        if (connection.State == System.Data.ConnectionState.Open)
-                        {
-                            Console.WriteLine("Connection is open and available.");
-                        }
-                    }
-
+                    _connection = new SqlConnection(sqlBuilder.ToString());
+                    connection.Open();
                     retry = false;
                 }
                 catch (SqlException ex)
