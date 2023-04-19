@@ -38,8 +38,6 @@
             _fullName = GetFullName();
         }
 
-        public Person() {}
-
         protected int _id;
         public int id
         {

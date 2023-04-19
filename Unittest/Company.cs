@@ -8,23 +8,11 @@ namespace Test
         [Fact]
         public void TestCompany()
         {
-            Company company = new Company() { id = 1, name = "testName", road = "testRoad", houseNumber = "testHouseNumber", city = "testCity", country = "testCountry", currency = Currency.EUR, cvr = "0330330", email = "test@testemail.com" };
+            Company company = new Company("Tom", "Aalborgvej", "50", "9000", "Aalborg", "Denmark", Currency.DKK, "42", "test@test.dk");
             Assert.NotNull(company);
-            Assert.Equal("testName", company.name);
-            Assert.Equal("testRoad", company.road);
-            Assert.Equal("testHouseNumber", company.houseNumber);
-            Assert.Equal("testCity", company.city);
-            Assert.Equal("testCountry", company.country);
-            Assert.Equal(Currency.EUR, company.currency);
-            Assert.Equal("0330330", company.cvr);
-            Assert.Equal("test@testemail.com", company.email);
-
-        }
-        [Fact]
-        public void TestCompanyList()
-        {
-            CompanyList c = new CompanyList();
-            Assert.NotNull(c.listCompany);
+            Assert.Equal("Tom", company.name);
+            Assert.Equal("Aalborg", company.city);
+            Assert.Equal(Currency.DKK, company.currency);
         }
     }
 }

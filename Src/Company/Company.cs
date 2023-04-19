@@ -26,8 +26,7 @@ namespace App
             _cvr = cvr;
             _email = email;
         }
-        public Company() {}
-
+        
         //Id
         protected int _id;
         public int id

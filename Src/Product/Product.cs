@@ -20,8 +20,6 @@ namespace App
             _percentageProfit = CalcPercentageProfit();
         }
 
-        public Product() {}
-
         protected int _id;
         public int id
         {
