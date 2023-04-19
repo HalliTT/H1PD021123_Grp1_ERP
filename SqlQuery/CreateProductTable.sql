@@ -6,8 +6,8 @@ create table Products
 	Name TEXT NOT NULL,
 	Description TEXT NOT NULL,
 	PurchasePrice MONEY NOT NULL,
+	SalesPrice MONEY NOT NULL,
 	Location TEXT NOT NULL,
 	AmountInStock FLOAT NOT NULL,
 	Unit TEXT NOT NULL,
-	SalesPrice MONEY NOT NULL
 )
