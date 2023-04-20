@@ -74,9 +74,12 @@ namespace App
         {
             Console.Clear();
 
+
             _list.AddKey(ConsoleKey.F1, Create);
             _list.AddKey(ConsoleKey.F2, Edit);
             _list.AddKey(ConsoleKey.F5, Delete);
+            _list.AddKey(ConsoleKey.F3, What);
+
 
             _selected = _list.Select();
 
@@ -191,6 +194,92 @@ namespace App
 
                 _list.Remove(_selected);
             }
+        }
+
+        private void What(T obj)
+        {
+            Console.Clear();
+
+            int angle = 0;
+
+            while (!Console.KeyAvailable)
+            {
+                Console.Clear();
+
+                int x = (int)(Math.Cos(angle * Math.PI / 180) * 10) + 30;
+                int y = (int)(Math.Sin(angle * Math.PI / 180) * 4) + 8;
+
+                Console.SetCursorPosition(x, y);
+
+                Console.WriteLine("         /\\_/\\");
+                Console.SetCursorPosition(x, y + 1);
+                Console.WriteLine("        ( o o )");
+                Console.SetCursorPosition(x, y + 2);
+                Console.WriteLine("      C('')('')");
+
+                angle = (angle + 10) % 360;
+
+                System.Threading.Thread.Sleep(100);
+            }
+
+            //     int left = 10;
+            //     int top = 10;
+            //     int jumpHeight = 4;
+            //     int frame = 0;
+
+            //     while (!Console.KeyAvailable)
+            //     {
+            //         Console.SetCursorPosition(left, top);
+
+            //         if (frame % (jumpHeight * 2) < jumpHeight)
+            //         {
+            //             Console.Write(" /\\ ");
+            //             Console.SetCursorPosition(left, top + 1);
+            //             Console.Write("(oo)");
+            //             Console.SetCursorPosition(left, top + 2);
+            //             Console.Write(" II ");
+            //         }
+            //         else
+            //         {
+            //             Console.Write("    ");
+            //             Console.SetCursorPosition(left, top + 1);
+            //             Console.Write("    ");
+            //             Console.SetCursorPosition(left, top + 2);
+            //             Console.Write("    ");
+            //         }
+
+            //         System.Threading.Thread.Sleep(100);
+
+            //         Console.SetCursorPosition(left, top);
+
+            //         if (frame % (jumpHeight * 2) < jumpHeight)
+            //         {
+            //             Console.Write("    ");
+            //             Console.SetCursorPosition(left, top + 1);
+            //             Console.Write("    ");
+            //             Console.SetCursorPosition(left, top + 2);
+            //             Console.Write("    ");
+            //         }
+            //         else
+            //         {
+            //             Console.Write(" \\/ ");
+            //             Console.SetCursorPosition(left, top + 1);
+            //             Console.Write("(oo)");
+            //             Console.SetCursorPosition(left, top + 2);
+            //             Console.Write(" II ");
+            //         }
+
+            //         System.Threading.Thread.Sleep(100);
+
+            //         left++;
+
+            //         if (left > Console.BufferWidth - 10)
+            //         {
+            //             left = 10;
+            //         }
+
+            //         frame++;
+            //     }
         }
     }
 }

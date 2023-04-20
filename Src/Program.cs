@@ -6,11 +6,12 @@ namespace App
     {
         public static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             var db = new Database();
-            
+
             // Company
             var companyList = db.GetCompany();
-            var companyListPage = new ListPage<Company> {};
+            var companyListPage = new ListPage<Company> { };
 
             if (companyList.Capacity < 1)
                 companyList.Add(new Company("Unknown", "Unknown", "Unknown", "Unknown", "Unknown", "Unknown", Currency.DKK, "Unknown", "Unknown"));
@@ -23,9 +24,9 @@ namespace App
 
             // Person
             var personList = db.GetPerson();
-            var personListPage = new ListPage<Person> {};
+            var personListPage = new ListPage<Person> { };
 
-            personListPage.Add(personList); 
+            personListPage.Add(personList);
 
             var person = new SetupPersonInterface("Person", personListPage);
 
@@ -33,7 +34,7 @@ namespace App
 
             // Product
             var productList = db.GetProduct();
-            var productListPage = new ListPage<Product> {};
+            var productListPage = new ListPage<Product> { };
 
             productListPage.Add(productList);
 
@@ -43,8 +44,8 @@ namespace App
 
             // Sales
             var salesList = db.GetOrder();
-            var salesListPage = new ListPage<Sales> {};
-            
+            var salesListPage = new ListPage<Sales> { };
+
             salesListPage.Add(salesList);
 
             var sales = new SetupSalesInterface("Sales", salesListPage);
@@ -52,8 +53,8 @@ namespace App
             var salesScreen = sales.Show();
 
             // Menu
-            Screen[] screens = {companyScreen, personScreen, productScreen, salesScreen};
-            
+            Screen[] screens = { companyScreen, personScreen, productScreen, salesScreen };
+
             var menu = new MenuInterface(screens);
             Screen.Display(menu);
         }
