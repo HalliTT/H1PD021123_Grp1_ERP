@@ -138,6 +138,8 @@ namespace App
 
             if (_selected != null)
             {
+                _list.Remove(_selected);
+
                 _editor.Edit(_selected);
 
                 if (typeof(T) == typeof(Company))

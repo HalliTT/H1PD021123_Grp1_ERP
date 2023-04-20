@@ -65,7 +65,6 @@ namespace App
             _list_selected.AddColumn("Profit", "profit");
 
             // Editor interface
-            _editor.TextBox("Id", "id");
             _editor.TextBox("Name", "name");
             _editor.TextBox("Description", "description");
             _editor.IntBox("Sales price", "salesPrice");

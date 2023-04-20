@@ -7,6 +7,7 @@ namespace App
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
+
             var db = new Database();
 
             // Company

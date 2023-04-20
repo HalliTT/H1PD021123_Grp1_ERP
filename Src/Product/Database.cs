@@ -56,7 +56,7 @@ namespace App
 
         public void UpdateProduct(Product product)
         {
-            string queryString = $"UPDATE dbo.Products SET (Name='{product.name}', PurchasePrice='{product.purchasePrice}', SalesPrice='{product.salesPrice}', Location='{product.location}', AmountInStock='{product.amountInStock}', Unit='{product.unit}') WHERE ProdictId = {product.id}";
+            string queryString = $"UPDATE dbo.Products SET Name='{product.name}', PurchasePrice='{product.purchasePrice}', SalesPrice='{product.salesPrice}', Location='{product.location}', AmountInStock='{product.amountInStock}', Unit='{product.unit}' WHERE Id = {product.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

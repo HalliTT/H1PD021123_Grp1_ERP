@@ -78,17 +78,11 @@ namespace App
             return order;
         }
 
-        public void InserdOrderPerson(Person person, Sales order, OrderLine line)
-        {
-            InsertPerson(person);
-            InsertOrder(order, person.id);
-            InsertOrdersLine(line, order.id);
-        }
-
         public void InsertOrder(Sales order, int personId = 0)
         {
             string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {personId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
             // Order.
+
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
@@ -118,11 +112,10 @@ namespace App
             command.ExecuteNonQuery();
         }
 
-
-
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.id}";
+            //string queryString = $"UPDATE dbo.Orders SET DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}' WHERE Id={order.cachedCustomerId}";
+            string queryString = $"UPDATE dbo.Orders SET CustomerId={order.customerId} WHERE CustomerId={order.cachedCustomerId}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

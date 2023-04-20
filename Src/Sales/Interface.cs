@@ -58,7 +58,17 @@ namespace App
             _list_selected.AddColumn("Name", "fullName");
             
             // Editor interface
+            _editor.SelectBox("Customer", "customerId");
             
+            var db = new Database();
+            int i = 0;
+            
+            foreach (var customer in db.GetPerson())
+            {
+                _editor.AddOption("Customer", customer.fullName + " - " + customer.id.ToString(), $"{customer.id}");
+                i++;
+            }
+  
             return _intrface;
         } 
     }

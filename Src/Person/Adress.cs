@@ -27,6 +27,7 @@ namespace App
         protected string _country = null!;
         public string country
         {
+            set { _country = value; }
             get { return _country; }
         }
 
@@ -34,6 +35,7 @@ namespace App
         protected string _zipCode = null!;
         public string zipCode
         {
+            set { _zipCode = value; }
             get { return _zipCode; }
         }
 
@@ -41,6 +43,7 @@ namespace App
         protected string _city = null!;
         public string city
         {
+            set { _city = value; }
             get { return _city; }
         }
 
@@ -48,6 +51,7 @@ namespace App
         protected string _roadName = null!;
         public string roadName
         {
+            set { _roadName = value; }
             get { return _roadName; }
         }
 
@@ -55,6 +59,7 @@ namespace App
         protected string _doorNumber = null!;
         public string doorNumber
         {
+            set { _doorNumber = value; }
             get { return _doorNumber; }
         }
     }
