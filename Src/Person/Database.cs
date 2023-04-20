@@ -67,7 +67,9 @@ namespace App
         //Update Customer
         public void UpdatePerson(Person person)
         {
-            string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.email}', Addres='{JsonConvert.SerializeObject(person.address)}', WHERE Id={person.id}";
+            var address = new Address(person.addressCountry, person.addressZipCode, person.addressCity, person.addressRoadName, person.addressDoorNumber);
+
+            string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.email}', Address='{JsonConvert.SerializeObject(address)}' WHERE Id={person.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

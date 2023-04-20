@@ -120,22 +120,32 @@
 
         public string addressRoadName
         {
+            set { address.roadName = value; }
             get { return address.roadName; }
         }
 
         public string addressDoorNumber
         {
+            set { address.doorNumber = value; }
             get { return address.doorNumber; }
         }
 
         public string addressZipCode
         {
+            set { address.zipCode = value; }
             get { return address.zipCode; }
         }
 
         public string addressCity
         {
+            set { address.city = value; }
             get { return address.city; }
+        }
+
+        public string addressCountry
+        {
+            set { address.country = value; }
+            get { return address.country; }
         }
 
         protected Role _role;
