@@ -17,7 +17,7 @@ namespace App
             string queryString = "";
             if (customerId > 0)
             {
-                queryString = $"SELECT * FROM dbo.Persons WHERE Id IS '{customerId}'";
+                queryString = $"SELECT * FROM dbo.Persons WHERE Id LIKE {customerId}";
             }
             else
             {

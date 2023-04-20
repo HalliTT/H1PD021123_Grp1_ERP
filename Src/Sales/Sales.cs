@@ -22,6 +22,8 @@ namespace App
             _customerId = customerId;
             _state = state;
             _totalOrderPrice = totalOrderPrice;
+
+            _cachedCustomerId = _customerId;
         }
 
         protected int _id;
@@ -46,13 +48,27 @@ namespace App
         protected int _customerId;
         public int customerId
         {
+            set { _customerId = value; }
             get { return _customerId; }
+        }
+
+        protected int _cachedCustomerId;
+        public int cachedCustomerId
+        {
+            set { _cachedCustomerId = value; }
+            get { return _cachedCustomerId; }
         }
 
         protected State _state;
         public State state
         {
             get { return _state; }
+        }
+
+        protected uint _totalOrderPrice;
+        public uint totalOrderPrice
+        {
+            get { return _totalOrderPrice; }
         }
 
         public string fullName
@@ -69,12 +85,6 @@ namespace App
 
                 return "Unknown";
             }
-        }
-
-        protected uint _totalOrderPrice;
-        public uint totalOrderPrice
-        {
-            get { return _totalOrderPrice; }
         }
     }
 }

@@ -71,15 +71,15 @@ namespace App
                                     Convert.ToString(reader[2]),
                                     Convert.ToInt32(reader[3]),
                                     state,
-                                    Convert.ToUInt32(reader[5])));
+                                    Convert.ToUInt32(reader[5])));                    
                 }
             }
             return order;
         }
         public void InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
-            // Order.
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.customerId}')";
+
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
@@ -124,11 +124,10 @@ namespace App
             return Id;
         }
 
-
-
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.id}";
+            //string queryString = $"UPDATE dbo.Orders SET DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}' WHERE Id={order.cachedCustomerId}";
+            string queryString = $"UPDATE dbo.Orders SET CustomerId={order.customerId} WHERE CustomerId={order.cachedCustomerId}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

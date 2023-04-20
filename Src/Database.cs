@@ -59,12 +59,10 @@ namespace App
             }
         }
 
-
-
         // Destructor
         ~Database() 
         { 
-            _connection.Close(); 
+            //_connection.Close(); 
         }
 
         protected bool _status;
