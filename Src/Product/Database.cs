@@ -20,29 +20,34 @@ namespace App
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
-            command.ExecuteNonQuery();
-
-            List<Product> products = new List<Product>();
-
-            using (SqlDataReader reader = command.ExecuteReader())
+            connection.Open();
+            using (connection)
             {
-                while (reader.Read())
+                command.ExecuteNonQuery();
+
+                List<Product> products = new List<Product>();
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
+                    while (reader.Read())
+                    {
 
-                    Unit unit;
-                    Enum.TryParse<Unit>(Convert.ToString(reader[6]), out unit);
+                        Unit unit;
+                        Enum.TryParse<Unit>(Convert.ToString(reader[6]), out unit);
 
-                    products.Add(new Product(
-                                    Convert.ToString(reader[1]),
-                                    Convert.ToString(reader[2]),
-                                    Convert.ToDouble(reader[3]),
-                                    Convert.ToDouble(reader[4]),
-                                    Convert.ToString(reader[5]),
-                                    Convert.ToDouble(reader[6]),
-                                    unit));
+                        products.Add(new Product(
+                            Convert.ToString(reader[1]),
+                            Convert.ToString(reader[2]),
+                            Convert.ToDouble(reader[3]),
+                            Convert.ToDouble(reader[4]),
+                            Convert.ToString(reader[5]),
+                            Convert.ToDouble(reader[6]),
+                            unit));
+                    }
                 }
+
+                return products;
             }
-            return products;
         }
 
         public void InsertProduct(Product product)

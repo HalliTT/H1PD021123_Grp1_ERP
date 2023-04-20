@@ -19,37 +19,45 @@ namespace App
 
             SqlCommand command = new SqlCommand(queryString, connection);
 
-            command.ExecuteNonQuery();
-
-            List<Company> company = new List<Company> { };
-
-            using (SqlDataReader reader = command.ExecuteReader())
+            connection.Open();
+            using (connection)
             {
-                while (reader.Read())
+                command.ExecuteNonQuery();
+
+
+
+
+
+                List<Company> company = new List<Company> { };
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    // Trying to parse string to enum<Currency>
-                    Currency currency;
-                    Enum.TryParse<Currency>(Convert.ToString(reader[7]), out currency);
+                    while (reader.Read())
+                    {
+                        // Trying to parse string to enum<Currency>
+                        Currency currency;
+                        Enum.TryParse<Currency>(Convert.ToString(reader[7]), out currency);
 
-                    var obj = new Company(
-                        Convert.ToString(reader[1]),
-                        Convert.ToString(reader[2]),
-                        Convert.ToString(reader[3]),
-                        Convert.ToString(reader[4]),
-                        Convert.ToString(reader[5]),
-                        Convert.ToString(reader[6]),
-                        currency, //currency
-                        Convert.ToString(reader[8]),
-                        Convert.ToString(reader[9])
-                    );
+                        var obj = new Company(
+                            Convert.ToString(reader[1]),
+                            Convert.ToString(reader[2]),
+                            Convert.ToString(reader[3]),
+                            Convert.ToString(reader[4]),
+                            Convert.ToString(reader[5]),
+                            Convert.ToString(reader[6]),
+                            currency, //currency
+                            Convert.ToString(reader[8]),
+                            Convert.ToString(reader[9])
+                        );
 
-                    obj.id = Convert.ToInt32(reader[0]);
+                        obj.id = Convert.ToInt32(reader[0]);
 
-                    company.Add(obj);
+                        company.Add(obj);
+                    }
                 }
-            }
 
-            return company;
+                return company;
+            }
         }
 
         // add

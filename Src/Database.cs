@@ -6,7 +6,7 @@ namespace App
 {
     public partial class Database
     {
-        public Database()
+        static Database()
         {
             SqlConnectionStringBuilder sqlBuilder = new();
             sqlBuilder.DataSource = "192.168.1.70";
@@ -17,18 +17,27 @@ namespace App
             sqlBuilder.Password = "H1PD021123_Gruppe1";
             sqlBuilder.TrustServerCertificate = true;
             sqlBuilder.IntegratedSecurity = false;
-
             
             
-            bool retry = true;
-
-            while (retry)
+            while (_connection == null || _connection.State == System.Data.ConnectionState.Closed )
             {
                 try
                 {
                     _connection = new SqlConnection(sqlBuilder.ToString());
-                    connection.Open();
-                    retry = false;
+                    Console.WriteLine("Connection is closed. Retrying...");
+                    _connection.Open();
+                    Thread.Sleep(600);
+                    
+                        Console.WriteLine("Connection established successfully!");
+                        
+                        if (_connection.State == System.Data.ConnectionState.Open)
+                        {
+                            Thread.Sleep(60);
+                            Console.WriteLine("Connection is open and available.");
+                            Console.Clear();
+                        }
+                        _connection.Close();
+                    break;
                 }
                 catch (SqlException ex)
                 {
@@ -40,18 +49,15 @@ namespace App
                     switch (input)
                     {
                         case "Y":
-                            retry = true;
                             Console.Clear();
                             break;
                         case "N":
-                            retry = false;
                             Console.WriteLine("Quitting...");
                             Thread.Sleep(3000);
                             Environment.Exit(0);
                             break;
                         default:
                             Console.WriteLine("Invalid Output. Try again.");
-                            retry = true;
                             Console.Clear();
                             break;
                     }
@@ -73,7 +79,7 @@ namespace App
             get { return _status; }
         }
         
-        protected SqlConnection _connection = null!;
+        static protected SqlConnection _connection = null!;
         public SqlConnection connection
         {
             get { return _connection; }
