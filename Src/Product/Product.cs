@@ -16,8 +16,6 @@ namespace App
             _amountInStock = amountInStock;
             _unit = unit;
 
-            _profit = CalcProfit();
-            _percentageProfit = CalcPercentageProfit();
         }
 
         protected int _id;
@@ -30,53 +28,58 @@ namespace App
         protected string _name = null!;
         public string name
         {
+            set { _name = value; }
             get { return _name; }
         }
 
         protected double _purchasePrice;
         public double purchasePrice
         {
+            set { _purchasePrice = value; }
             get { return _purchasePrice; }
         }
 
         protected double _salesPrice;
         public double salesPrice
         {
+            set { _salesPrice = value; }
             get { return _salesPrice; }
         }
 
         protected string _location = null!;
         public string location
         {
+            set { _location = value; }
             get { return _location; }
         }
 
         protected double _amountInStock;
         public double amountInStock
         {
+            set { _amountInStock = value; }
             get { return _amountInStock; }
         }
 
         protected Unit _unit;
         public Unit unit
         {
+            set { _unit = value; }
             get { return _unit; }
         }
 
-        protected string _profit = null!;
         public string profit
         {
-            get { return _profit; }
+            get { return CalcProfit(); }
         }
 
-        protected string _percentageProfit = null!;
         public string percentageProfit
         {
-            get { return _percentageProfit; }
+            get { return CalcPercentageProfit(); }
         }
         protected string _description = null!;
         public string description
         {
+            set { _description = value; }
             get { return _description; }
         }
 

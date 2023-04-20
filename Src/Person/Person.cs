@@ -74,37 +74,42 @@
         protected int _id;
         public int id
         {
-            get { return _id; }
             set { _id = value; }
+            get { return _id; }
         }
 
         protected string _firstName = null!;
         public string firstName
         {
+            set { _firstName = value; }
             get { return _firstName; }
         }
 
         protected string _lastName = null!;
         public string lastName
         {
+            set { _lastName = value; }
             get { return _lastName; }
         }
 
         protected string _phone = null!;
         public string phone
         {
+            set { _phone = value; }
             get { return _phone; }
         }
 
         protected string _email = null!;
         public string email
         {
+            set { _email = value; }
             get { return _email; }
         }
 
         protected Address _address = null!;
         public Address address
         {
+            set { _address = value; }
             get { return _address; }
         }
 
