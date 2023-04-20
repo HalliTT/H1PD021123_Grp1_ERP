@@ -26,27 +26,9 @@ namespace App
             {
                 try
                 {
-                    Console.WriteLine("Connecting to the database...");
-                    // Check the connection state
-                    Thread.Sleep(180);
-                    using (_connection)
-                    {
-                        _connection.Open();
-                        Console.WriteLine("Connection established successfully.");
-
-                        // Check the connection state
-                        if (_connection.State == System.Data.ConnectionState.Open)
-                        {
-                            Console.WriteLine("Connection is open and available.");
-                            Thread.Sleep(5000);
-                            retry = false;
-                            break;
-                        }
-                        Console.WriteLine("Connection is closed.");
-
-                    }
-
-
+                    _connection = new SqlConnection(sqlBuilder.ToString());
+                    connection.Open();
+                    retry = false;
                 }
                 catch (SqlException ex)
                 {
