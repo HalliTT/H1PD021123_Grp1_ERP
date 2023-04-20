@@ -72,7 +72,7 @@ namespace App
 
         protected override void Draw()
         {
-            Clear(this);
+            Console.Clear();
 
             _list.AddKey(ConsoleKey.F1, Create);
             _list.AddKey(ConsoleKey.F2, Edit);
@@ -82,7 +82,7 @@ namespace App
 
             if (_selected != null)
             {
-                Clear(this);
+                Console.Clear();
 
                 _list_selected.Add(_selected);
                 _list_selected.Draw();
@@ -100,32 +100,32 @@ namespace App
         {
             Console.Clear();
 
-            if (_selected != null)
+            if (obj != null)
             {
-                _editor.Edit(_selected);
+                _editor.Edit(obj);
 
                 if (typeof(T) == typeof(Company))
                 {
-                    _db.InsertCompany((Company)(object)_selected);
+                    _db.InsertCompany((Company)(object)obj);
                 }
                 else if (typeof(T) == typeof(Person))
                 {
-                    _db.InsertPerson((Person)(object)_selected);
+                    _db.InsertPerson((Person)(object)obj);
                 }
                 else if (typeof(T) == typeof(Product))
                 {
-                    _db.InsertProduct((Product)(object)_selected);
+                    _db.InsertProduct((Product)(object)obj);
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.InserdOrderPerson((Person)(object)_selected, (Sales)(object)_selected, (OrderLine)(object)_selected);
+                    _db.InsertOrder((Sales)(object)obj);
                 }
                 else
                 {
                     return;
                 }
 
-                _list.Add(_selected);
+                _list.Add(obj);
             }
         }
 

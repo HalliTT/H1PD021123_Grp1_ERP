@@ -12,6 +12,9 @@ namespace App
             var companyList = db.GetCompany();
             var companyListPage = new ListPage<Company> {};
 
+            if (companyList.Capacity < 1)
+                companyList.Add(new Company("Unknown", "Unknown", "Unknown", "Unknown", "Unknown", "Unknown", Currency.DKK, "Unknown", "Unknown"));
+
             companyListPage.Add(companyList);
 
             var company = new SetupCompanyInterface("Company", companyListPage);
