@@ -118,7 +118,7 @@ namespace App
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.InsertOrder((Sales)(object)_selected);
+                    _db.InserdOrderPerson((Person)(object)_selected, (Sales)(object)_selected, (OrderLine)(object)_selected);
                 }
                 else
                 {

@@ -57,7 +57,8 @@ namespace App
 
         public string fullName
         {
-            get {
+            get
+            {
                 var db = new Database();
 
                 var person = db.GetPerson(_customerId);
@@ -66,7 +67,6 @@ namespace App
                 {
                     return person[0].fullName;
                 }
-
                 return "Unknown";
             }
         }

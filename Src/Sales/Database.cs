@@ -50,6 +50,7 @@ namespace App
             else
             {
                 queryString = $"SELECT * FROM dbo.Orders";
+
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -76,9 +77,17 @@ namespace App
             }
             return order;
         }
-        public void InsertOrder(Sales order)
+
+        public void InserdOrderPerson(Person person, Sales order, OrderLine line)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
+            InsertPerson(person);
+            InsertOrder(order, person.id);
+            InsertOrdersLine(line, order.id);
+        }
+
+        public void InsertOrder(Sales order, int personId = 0)
+        {
+            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {personId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
             // Order.
             SqlCommand command = new SqlCommand(queryString, _connection);
 
@@ -100,28 +109,13 @@ namespace App
             order.id = IdScope;
         }
 
-        public int InsertOrdersListPage(OrderLine line)
+        public void InsertOrdersLine(OrderLine line, int orderId)
         {
-            string queryString = $"INSERT INTO dbo.OrdersListPage VALUES ({line.ordersId}, {line.productId}, {line.amount})";
+            string queryString = $"INSERT INTO dbo.OrdersListPage VALUES ({orderId}, {line.productId}, {line.amount})";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
-
-            queryString = $"SELECT Id FROM dbo.OrdersListPage WHERE ordersId = {line.ordersId} AND productId = {line.ordersId}";
-
-            command = new SqlCommand(queryString, connection);
-
-            int Id = -1;
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    Id = Convert.ToInt32(reader[0]);
-                }
-            }
-            return Id;
         }
 
 

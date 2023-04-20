@@ -19,7 +19,7 @@ namespace App
             sqlBuilder.IntegratedSecurity = false;
 
             _connection = new SqlConnection(sqlBuilder.ToString());
-            
+
             bool retry = true;
 
             while (retry)
@@ -46,7 +46,7 @@ namespace App
 
                     }
 
-                    
+
                 }
                 catch (SqlException ex)
                 {
@@ -80,9 +80,9 @@ namespace App
 
 
         // Destructor
-        ~Database() 
-        { 
-            _connection.Close(); 
+        ~Database()
+        {
+            _connection.Close();
         }
 
         protected bool _status;
@@ -90,7 +90,7 @@ namespace App
         {
             get { return _status; }
         }
-        
+
         protected SqlConnection _connection = null!;
         public SqlConnection connection
         {

@@ -17,7 +17,7 @@ namespace App
             string queryString = "";
             if (customerId > 0)
             {
-                queryString = $"SELECT * FROM dbo.Persons WHERE Id IS '{customerId}'";
+                queryString = $"SELECT * FROM dbo.Persons WHERE Id LIKE {customerId}";
             }
             else
             {
@@ -48,7 +48,7 @@ namespace App
                         role,
                         Convert.ToString(reader[7]));
 
-                    person.Add(obj);                    
+                    person.Add(obj);
                 }
             }
             return person;
@@ -62,6 +62,21 @@ namespace App
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
+
+            queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
+
+            command = new SqlCommand(queryString, _connection);
+
+            int IdScope = -1;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    IdScope = Convert.ToInt32(reader[0]);
+                }
+            }
+            person.id = IdScope;
         }
 
         //Update Customer
