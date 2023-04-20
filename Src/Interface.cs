@@ -121,7 +121,8 @@ namespace App
                 }
                 else if (typeof(T) == typeof(Sales))
                 {
-                    _db.InsertOrder((Sales)(object)obj);
+                    var orderId = _db.InsertOrder((Sales)(object)obj);
+                    _db.InsertOrdersLine(new OrderLine(orderId, 0, 0));
                 }
                 else
                 {

@@ -78,9 +78,9 @@ namespace App
             return order;
         }
 
-        public void InsertOrder(Sales order, int personId = 0)
+        public int InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {personId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
+            string queryString = $"INSERT INTO dbo.Orders (CustomerId, TotalOrderPrice, DoneTimeStamp, State) VALUES ({order.customerId}, 0, '{order.doneTimestamp}', '{order.state.ToString()}')";
             // Order.
 
             SqlCommand command = new SqlCommand(queryString, _connection);
@@ -101,11 +101,13 @@ namespace App
                 }
             }
             order.id = IdScope;
+            
+            return IdScope;
         }
 
-        public void InsertOrdersLine(OrderLine line, int orderId)
+        public void InsertOrdersLine(OrderLine line)
         {
-            string queryString = $"INSERT INTO dbo.OrdersListPage VALUES ({orderId}, {line.productId}, {line.amount})";
+            string queryString = $"INSERT INTO dbo.OrdersList (OrdersId) VALUES ({line.ordersId})";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
@@ -114,8 +116,7 @@ namespace App
 
         public void UpdateOrder(Sales order)
         {
-            //string queryString = $"UPDATE dbo.Orders SET DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}' WHERE Id={order.cachedCustomerId}";
-            string queryString = $"UPDATE dbo.Orders SET CustomerId={order.customerId} WHERE CustomerId={order.cachedCustomerId}";
+            string queryString = $"UPDATE dbo.Orders SET DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}' WHERE CustomerId={order.cachedCustomerId}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 

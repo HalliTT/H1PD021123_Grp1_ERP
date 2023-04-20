@@ -2,7 +2,6 @@ namespace App
 {
     public enum State
     {
-        None,
         Created,
         Approved,
         Packaged,
