@@ -38,7 +38,7 @@ namespace App
                         Convert.ToString(reader[4]),
                         Convert.ToString(reader[5]),
                         Convert.ToString(reader[6]),
-                        currency, //currency
+                        currency,
                         Convert.ToString(reader[8]),
                         Convert.ToString(reader[9])
                     );

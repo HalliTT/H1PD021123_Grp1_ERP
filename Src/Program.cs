@@ -58,6 +58,7 @@ namespace App
 
             var menu = new MenuInterface(screens);
             Screen.Display(menu);
+            Console.Clear();
         }
     }
 }
