@@ -21,9 +21,7 @@ namespace App
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             connection.Open();
-            using (connection)
-            {
-                command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
 
                 List<Product> products = new List<Product>();
 
@@ -45,10 +43,10 @@ namespace App
                             unit));
                     }
                 }
-
+                connection.Close();
                 return products;
             }
-        }
+        
 
         public void InsertProduct(Product product)
         {

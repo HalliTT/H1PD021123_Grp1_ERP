@@ -20,13 +20,7 @@ namespace App
             SqlCommand command = new SqlCommand(queryString, connection);
 
             connection.Open();
-            using (connection)
-            {
                 command.ExecuteNonQuery();
-
-
-
-
 
                 List<Company> company = new List<Company> { };
 
@@ -55,41 +49,51 @@ namespace App
                         company.Add(obj);
                     }
                 }
+                connection.Close();
 
                 return company;
-            }
+            
+            
         }
 
         // add
         public void InsertCompany(Company company)
         {
+            connection.Open();
             string queryString =
                 $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{company.currency.ToString()}', '{company.cvr}', '{company.email}')";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
 
         // update
         public void UpdateCompany(Company company)
         {
+            connection.Open();
             string queryString =
                 $"UPDATE dbo.Companies SET Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{company.currency.ToString()}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();            
+            connection.Close();
+
         }
 
         // delete
         public void DeleteCompany(Company company)
         {
+            connection.Open();
             string queryString = $"DELETE FROM dbo.Companies WHERE Id={company.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();            
+            connection.Close();
+
         }
     }
 }

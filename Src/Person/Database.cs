@@ -25,38 +25,37 @@ namespace App
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
-            connection.Open();
-            using (connection)
+            connection.Open(); //TODO: Instead make new connection with with connection string from database.
+            command.ExecuteNonQuery();
+
+            List<Person> person = new List<Person> { };
+
+            using (SqlDataReader reader = command.ExecuteReader())
             {
-                command.ExecuteNonQuery();
-
-                List<Person> person = new List<Person> { };
-
-                using (SqlDataReader reader = command.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        // Trying to parse string to enum<Role>
-                        Role role;
-                        Enum.TryParse<Role>(Convert.ToString(reader[6]), out role);
+                    // Trying to parse string to enum<Role>
+                    Role role;
+                    Enum.TryParse<Role>(Convert.ToString(reader[6]), out role);
 
-                        var obj = new Person(
-                            Convert.ToInt32(reader[0]),
-                            Convert.ToString(reader[1]),
-                            Convert.ToString(reader[2]),
-                            Convert.ToString(reader[3]),
-                            Convert.ToString(reader[4]),
-                            JsonConvert.DeserializeObject<Address>(Convert.ToString(reader[5])), //Address personAddress
-                            role,
-                            Convert.ToString(reader[7]));
+                    var obj = new Person(
+                        Convert.ToInt32(reader[0]),
+                        Convert.ToString(reader[1]),
+                        Convert.ToString(reader[2]),
+                        Convert.ToString(reader[3]),
+                        Convert.ToString(reader[4]),
+                        JsonConvert.DeserializeObject<Address>(Convert.ToString(reader[5])), //Address personAddress
+                        role,
+                        Convert.ToString(reader[7]));
 
-                        person.Add(obj);
-                    }
+                    person.Add(obj);
                 }
-
-                return person;
             }
+            connection.Close();
+            
+            return person;
         }
+        
 
         //Add Customer
         public void InsertPerson(Person person)
@@ -65,10 +64,8 @@ namespace App
             string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.email}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
-            using (connection)
-            {
-                command.ExecuteNonQuery();
-            }
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         //Update Customer
@@ -80,26 +77,18 @@ namespace App
             string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.email}', Address='{JsonConvert.SerializeObject(address)}' WHERE Id={person.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
-
-            using (connection)
-            {
-                command.ExecuteNonQuery();
-            }
+            command.ExecuteNonQuery();
+            connection.Close();
         }
-
+        
         //Delete Customer
         public void DeletePerson(Person person)
         {
             connection.Open();
-
             string queryString = $"DELETE FROM dbo.Persons WHERE Id={person.id}";
 
             SqlCommand command = new SqlCommand(queryString, _connection);
-
-            using (connection)
-            {
-                command.ExecuteNonQuery();
-            }
+            command.ExecuteNonQuery();
         }
     }
 }
