@@ -6,9 +6,6 @@ namespace App
     {
         public List<Company> GetCompany(int CompanyId = 0)
         {
-            var connection = new SqlConnection(ConnectionString);
-            using (connection)
-            {
                 string queryString = "";
                 if (CompanyId > 0)
                 {
@@ -21,12 +18,8 @@ namespace App
 
                 SqlCommand command = new SqlCommand(queryString, connection);
 
-                List<Company> company = new List<Company> { };
 
 
-
-                connection.Open();
-                command.ExecuteNonQuery();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -54,32 +47,21 @@ namespace App
 
                     return company;
                 }
-            }
-        }
 
         // add
         public void InsertCompany(Company company)
         {
-            var connection = new SqlConnection(ConnectionString);
-            using (connection)
-            {
-                connection.Open();
                 string queryString =
                     $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{company.currency.ToString()}', '{company.cvr}', '{company.email}')";
 
-                SqlCommand command = new SqlCommand(queryString, connection);
+            SqlCommand command = new SqlCommand(queryString, connection);
 
                 command.ExecuteNonQuery();
             }
-        }
 
         // update
         public void UpdateCompany(Company company)
         {
-            var connection = new SqlConnection(ConnectionString);
-            using (connection)
-            {
-            connection.Open();
             string queryString =
                 $"UPDATE dbo.Companies SET Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{company.currency.ToString()}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
 
@@ -88,22 +70,14 @@ namespace App
             command.ExecuteNonQuery();
             }
 
-        }
-
         // delete
         public void DeleteCompany(Company company)
         {
-            var connection = new SqlConnection(ConnectionString);
-            using (connection)
-            {
-                connection.Open();
                 string queryString = $"DELETE FROM dbo.Companies WHERE Id={company.id}";
 
-                SqlCommand command = new SqlCommand(queryString, connection);
+            SqlCommand command = new SqlCommand(queryString, connection);
 
                 command.ExecuteNonQuery();
-            }
-
         }
     }
 }

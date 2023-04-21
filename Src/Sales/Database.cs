@@ -6,38 +6,6 @@ namespace App
 {
     public partial class Database
     {
-        public void InsertOrder(Sales order)
-        {
-            string queryString =
-                $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
-            // Order.
-            var connection = new SqlConnection(ConnectionString);
-            SqlCommand command = new SqlCommand(queryString, connection);
-
-            using (connection)
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-    
-                queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
-    
-                command = new SqlCommand(queryString, connection);
-    
-                int IdScope = -1;
-    
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        IdScope = Convert.ToInt32(reader[0]);
-                    }
-                }
-    
-                order.id = IdScope;
-                            
-            }
-        }
-
         public List<OrderLine> GetOrderListPage(int orderId = 0, int productId = 0)
         {
             string queryString = "";
@@ -49,13 +17,11 @@ namespace App
             {
                 queryString = $"SELECT * FROM dbo.OrdersListPage WHERE ProductId IS '{productId}'";
             }
-            var connection = new SqlConnection(ConnectionString);
-            List<OrderLine> orderLines = new List<OrderLine> { };
-
+            var connection = new SqlConnection(ConnectionString)
             using (connection)
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
+                SqlCommand command = new SqlCommand(queryString, connection);
                 command.ExecuteNonQuery();
 
 
@@ -149,7 +115,6 @@ namespace App
                         Id = Convert.ToInt32(reader[0]);
                     }
 
-                    connection.Close();
                 }
 
                 return Id;
