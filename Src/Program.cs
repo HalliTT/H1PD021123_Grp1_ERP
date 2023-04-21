@@ -8,7 +8,7 @@ namespace App
         public static void Main(string[] args)
         {
             var db = new Database();
-            
+            db.TestConnection();
             // Company
             var companyList = db.GetCompany();
             var companyListPage = new ListPage<Company> {};

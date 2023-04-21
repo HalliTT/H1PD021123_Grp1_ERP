@@ -2,8 +2,6 @@ using TECHCOOL.UI;
 
 namespace App
 {
-    //Understanding the original programmer's intent is the most difficult problem.
-    //- Fjelstad & Hamlen 1979
     public class MenuInterface : Screen
     {
         public override string Title { get; set; } = "Menu";
@@ -24,6 +22,8 @@ namespace App
             _menu.Start(this);
         }
     }
+    //Understanding the original programmer's intent is the most difficult problem.
+    //- Fjelstad & Hamlen 1979
     public class Interface<T> : Screen
     {
         public Interface(string title,

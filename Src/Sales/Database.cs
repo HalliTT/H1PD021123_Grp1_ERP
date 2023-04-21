@@ -11,9 +11,9 @@ namespace App
             string queryString =
                 $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
             // Order.
-            SqlCommand command = new SqlCommand(queryString, _connection);
-
             var connection = new SqlConnection(ConnectionString);
+            SqlCommand command = new SqlCommand(queryString, connection);
+
             using (connection)
             {
                 connection.Open();
@@ -21,7 +21,7 @@ namespace App
     
                 queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
     
-                command = new SqlCommand(queryString, _connection);
+                command = new SqlCommand(queryString, connection);
     
                 int IdScope = -1;
     
@@ -117,9 +117,7 @@ namespace App
                             Convert.ToUInt32(reader[5])));
                     }
                 }
-            }   
-        
-
+            }
             return order;
         }
 

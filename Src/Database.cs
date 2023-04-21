@@ -7,28 +7,25 @@ namespace App
 {
     public partial class Database
     {
-        //TODO: Make proberty for SQL connection string
-        static Database()
-        {
-
+        private string connectionString = MakeConnectionString();
         public string ConnectionString
         {
-            get { return ConnectionString; }
+            get { return connectionString; }
+        }
 
-            set
-            {
-                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
-                sqlBuilder.DataSource = "";
-                sqlBuilder.IntegratedSecurity = false;
-                sqlBuilder.DataSource = "192.168.1.70";
-                sqlBuilder.InitialCatalog = "H1PD021123_Gruppe1";
-                sqlBuilder.TrustServerCertificate = true;
-                sqlBuilder.IntegratedSecurity = false;
-                sqlBuilder.UserID = "H1PD021123_Gruppe1";
-                sqlBuilder.Password = "H1PD021123_Gruppe1";
-                sqlBuilder.IntegratedSecurity = false;
-                ConnectionString = sqlBuilder.ConnectionString;
-            }
+        private static string MakeConnectionString()
+        {
+            SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+            sqlBuilder.DataSource = "";
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.DataSource = "192.168.1.70";
+            sqlBuilder.InitialCatalog = "H1PD021123_Gruppe1";
+            sqlBuilder.TrustServerCertificate = true;
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.UserID = "H1PD021123_Gruppe1";
+            sqlBuilder.Password = "H1PD021123_Gruppe1";
+            sqlBuilder.IntegratedSecurity = false;
+            return sqlBuilder.ConnectionString;
         }
 
         public void TestConnection()
@@ -44,10 +41,11 @@ namespace App
                         connection.Open();
                         Thread.Sleep(600);
                         Console.WriteLine("Connection established successfully!");
+                        Thread.Sleep(600);
 
                         if (connection.State == System.Data.ConnectionState.Open)
                         {
-                            Thread.Sleep(60);
+                            Thread.Sleep(180);
                             Console.WriteLine("Connection is open and available.");
                             Console.Clear();
                         }
@@ -77,27 +75,6 @@ namespace App
                     }
                 }
             }
-        }
-    }
-
-
-
-// Destructor
-        ~Database() 
-        { 
-            _connection.Close(); 
-        }
-
-        protected bool _status;
-        public bool status
-        {
-            get { return _status; }
-        }
-        
-        static protected SqlConnection _connection = null!;
-        public SqlConnection connection
-        {
-            get { return _connection; }
         }
     }
 }
