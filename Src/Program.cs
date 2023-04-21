@@ -9,6 +9,7 @@ namespace App
         {
             var db = new Database();
             db.TestConnection();
+            Console.Clear();
             // Company
             var companyList = db.GetCompany();
             var companyListPage = new ListPage<Company> {};

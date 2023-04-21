@@ -35,7 +35,7 @@ namespace App
             _list = list;
             _list_selected = list_selected;
             _editor = editor;
-
+            Console.Clear();
             _db = new Database();
         }
         public override string Title { get; set; }
@@ -73,7 +73,7 @@ namespace App
         protected override void Draw()
         {
             Console.Clear();
-
+            Clear();
 
             _list.AddKey(ConsoleKey.F1, Create);
             _list.AddKey(ConsoleKey.F2, Edit);
