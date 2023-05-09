@@ -6,28 +6,26 @@ namespace App
     public enum Unit { pieces, meters, hours }
     public class Product
     {
-        public Product(string name, string description, double purchasePrice, double salesPrice, string location, float amountInStock, Unit unit)
+        public Product(string name, string description, double purchasePrice, double salesPrice, string location, double amountInStock, Unit unit)
         {
-            this.name = name;
-            this.description = description;
-            this.purchasePrice = purchasePrice;
-            this.salesPrice = salesPrice;
-            this.location = location;
-            this.amountInStock = amountInStock;
-            this.unit = unit;
+            _name = name;
+            _description = description;
+            _purchasePrice = purchasePrice;
+            _salesPrice = salesPrice;
+            _location = location;
+            _amountInStock = amountInStock;
+            _unit = unit;
 
-            this._profit = calcProfit();
-            this._percentageProfit = calcPercentageProfit();
         }
 
-        protected int _Id;
-        public int Id
+        protected int _id;
+        public int id
         {
-            set { _Id = value; }
-            get { return _Id; }
+            set { _id = value; }
+            get { return _id; }
         }
 
-        protected string _name;
+        protected string _name = null!;
         public string name
         {
             set { _name = value; }
@@ -48,7 +46,7 @@ namespace App
             get { return _salesPrice; }
         }
 
-        protected string _location;
+        protected string _location = null!;
         public string location
         {
             set { _location = value; }
@@ -69,32 +67,30 @@ namespace App
             get { return _unit; }
         }
 
-        protected string _profit;
         public string profit
         {
-            get { return _profit; }
+            get { return CalcProfit(); }
         }
 
-        protected string _percentageProfit;
         public string percentageProfit
         {
-            get { return _percentageProfit; }
+            get { return CalcPercentageProfit(); }
         }
-        protected string _description;
+        protected string _description = null!;
         public string description
         {
             set { _description = value; }
             get { return _description; }
         }
 
-        public string calcProfit()
+        public string CalcProfit()
         {
-            return Convert.ToString(this.salesPrice - this.purchasePrice) + " kr";
+            return Convert.ToString(_salesPrice - _purchasePrice) + " kr";
         }
 
-        public string calcPercentageProfit()
+        public string CalcPercentageProfit()
         {
-            var profit = (this.salesPrice - this.purchasePrice) / this.salesPrice * 100;
+            var profit = (_salesPrice - _purchasePrice) / _salesPrice * 100;
             return profit.ToString() + " %";
         }
     }

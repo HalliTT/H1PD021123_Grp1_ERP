@@ -11,6 +11,11 @@
 *.sln.docstates
 *.sln
 .idea/
+Out/
+
+# User-specific files (Xunit - Unittest)
+Unittest/bin
+Unittest/obj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -6,9 +6,9 @@ namespace App
                          int productId,
                          int amount)
         {
-            this.ordersId = ordersId;
-            this.productId = productId;
-            this.amount = amount;
+            _ordersId = ordersId;
+            _productId = productId;
+            _amount = amount;
         }
 
         protected int _Id;
@@ -21,21 +21,18 @@ namespace App
         protected int _ordersId;
         public int ordersId
         {
-            set { _ordersId = value; }
             get { return _ordersId; }
         }
 
         protected int _productId;
         public int productId
         {
-            set { _productId = value; }
             get { return _productId; }
         }
 
         protected int _amount;
         public int amount
         {
-            set { _amount = value; }
             get { return _amount; }
         }
 

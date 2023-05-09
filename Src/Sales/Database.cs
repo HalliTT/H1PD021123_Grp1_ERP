@@ -4,16 +4,16 @@ namespace App
 {
     public partial class Database
     {
-        public List<OrderLine> GetOrderList(int orderId = 0, int productId = 0)
+        public List<OrderLine> GetOrderListPage(int orderId = 0, int productId = 0)
         {
             string queryString = "";
             if (orderId > 0 && productId <= 0)
             {
-                queryString = $"SELECT * FROM dbo.OrdersList WHERE ordersId IS '{orderId}'";
+                queryString = $"SELECT * FROM dbo.OrdersListPage WHERE ordersId IS '{orderId}'";
             }
             else if (productId > 0 && orderId <= 0)
             {
-                queryString = $"SELECT * FROM dbo.OrdersList WHERE ProductId IS '{productId}'";
+                queryString = $"SELECT * FROM dbo.OrdersListPage WHERE ProductId IS '{productId}'";
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -50,6 +50,7 @@ namespace App
             else
             {
                 queryString = $"SELECT * FROM dbo.Orders";
+
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -63,8 +64,8 @@ namespace App
                 while (reader.Read())
                 {
                     // Trying to parse string to enum<State>
-                    App.State state;
-                    Enum.TryParse<App.State>(Convert.ToString(reader[4]), out state);
+                    State state;
+                    Enum.TryParse<State>(Convert.ToString(reader[4]), out state);
 
                     order.Add(new Sales(
                                     Convert.ToString(reader[1]),
@@ -77,17 +78,18 @@ namespace App
             return order;
         }
 
-        public void InsertOrder(Sales order)
+        public int InsertOrder(Sales order)
         {
-            string queryString = $"INSERT INTO dbo.Orders VALUES ('{order.creationTimestamp}', '{order.doneTimestamp}', {order.customerId}, '{order.state.ToString()}', '{order.totalOrderPrice}')";
+            string queryString = $"INSERT INTO dbo.Orders (CustomerId, TotalOrderPrice, DoneTimeStamp, State) VALUES ({order.customerId}, 0, '{order.doneTimestamp}', '{order.state.ToString()}')";
+            // Order.
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
 
             queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
 
-            command = new SqlCommand(queryString, this.connection);
+            command = new SqlCommand(queryString, _connection);
 
             int IdScope = -1;
 
@@ -98,49 +100,34 @@ namespace App
                     IdScope = Convert.ToInt32(reader[0]);
                 }
             }
-            order.Id = IdScope;
+            order.id = IdScope;
+            
+            return IdScope;
         }
 
-        public int InsertOrdersList(OrderLine line)
+        public void InsertOrdersLine(OrderLine line)
         {
-            string queryString = $"INSERT INTO dbo.OrdersList VALUES ({line.ordersId}, {line.productId}, {line.amount})";
+            string queryString = $"INSERT INTO dbo.OrdersList (OrdersId) VALUES ({line.ordersId})";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
-
-            queryString = $"SELECT Id FROM dbo.OrdersList WHERE ordersId = {line.ordersId} AND productId = {line.ordersId}";
-
-            command = new SqlCommand(queryString, connection);
-
-            int Id = -1;
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    Id = Convert.ToInt32(reader[0]);
-                }
-            }
-            return Id;
         }
-
-
 
         public void UpdateOrder(Sales order)
         {
-            string queryString = $"UPDATE dbo.Orders SET (DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}') WHERE Id={order.Id}";
+            string queryString = $"UPDATE dbo.Orders SET DoneTimestamp='{order.doneTimestamp}', CustomerId={order.customerId}, State='{order.state.ToString()}', TotalOrderPrice='{order.totalOrderPrice}' WHERE CustomerId={order.cachedCustomerId}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
 
         public void DeleteOrder(Sales order)
         {
-            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.Id}";
+            string queryString = $"DELETE FROM dbo.Orders WHERE Id={order.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

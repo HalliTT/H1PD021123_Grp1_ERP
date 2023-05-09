@@ -2,7 +2,6 @@ namespace App
 {
     public enum State
     {
-        None,
         Created,
         Approved,
         Packaged,
@@ -12,37 +11,36 @@ namespace App
     public class Sales
     {
         public Sales(string creationTimestamp,
-                   string doneTimestamp,
-                   int customerId,
-                   State state,
-                   uint totalOrderPrice)
+                     string doneTimestamp,
+                     int customerId,
+                     State state,
+                     uint totalOrderPrice)
         {
-            this.creationTimestamp = creationTimestamp;
-            this.doneTimestamp = doneTimestamp;
-            this.customerId = customerId;
-            this.state = state;
-            this.totalOrderPrice = totalOrderPrice;
+            _creationTimestamp = creationTimestamp;
+            _doneTimestamp = doneTimestamp;
+            _customerId = customerId;
+            _state = state;
+            _totalOrderPrice = totalOrderPrice;
+
+            _cachedCustomerId = _customerId;
         }
 
-        protected int _Id;
-        public int Id
+        protected int _id;
+        public int id
         {
-            set { _Id = value; }
-            get { return _Id; }
+            set { _id = value; }
+            get { return _id; }
         }
-
 
         protected string _creationTimestamp = null!;
         public string creationTimestamp
         {
-            set { _creationTimestamp = value; }
             get { return _creationTimestamp; }
         }
 
         protected string _doneTimestamp = null!;
         public string doneTimestamp
         {
-            set { _doneTimestamp = value; }
             get { return _doneTimestamp; }
         }
 
@@ -53,18 +51,39 @@ namespace App
             get { return _customerId; }
         }
 
+        protected int _cachedCustomerId;
+        public int cachedCustomerId
+        {
+            set { _cachedCustomerId = value; }
+            get { return _cachedCustomerId; }
+        }
+
         protected State _state;
         public State state
         {
-            set { _state = value; }
             get { return _state; }
         }
 
         protected uint _totalOrderPrice;
         public uint totalOrderPrice
         {
-            set { _totalOrderPrice = value; }
             get { return _totalOrderPrice; }
+        }
+
+        public string fullName
+        {
+            get
+            {
+                var db = new Database();
+
+                var person = db.GetPerson(_customerId);
+
+                if (person.Capacity > 0)
+                {
+                    return person[0].fullName;
+                }
+                return "Unknown";
+            }
         }
     }
 }

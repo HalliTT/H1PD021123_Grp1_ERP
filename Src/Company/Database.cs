@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
 
 namespace App
 {
@@ -28,22 +27,25 @@ namespace App
             {
                 while (reader.Read())
                 {
-                    // Trying to parse string to enum<currency>
-                    App.Currency currency;
-                    Enum.TryParse<App.Currency>(Convert.ToString(reader[7]), out currency);
+                    // Trying to parse string to enum<Currency>
+                    Currency currency;
+                    Enum.TryParse<Currency>(Convert.ToString(reader[7]), out currency);
 
-                    company.Add(new Company(
-                        Convert.ToInt32(reader[0]),
+                    var obj = new Company(
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
                         Convert.ToString(reader[5]),
                         Convert.ToString(reader[6]),
-                        currency, //currency
+                        currency,
                         Convert.ToString(reader[8]),
                         Convert.ToString(reader[9])
-                    ));
+                    );
+
+                    obj.id = Convert.ToInt32(reader[0]);
+
+                    company.Add(obj);
                 }
             }
 
@@ -56,7 +58,7 @@ namespace App
             string queryString =
                 $"INSERT INTO dbo.Companies VALUES ('{company.name}', '{company.road}', '{company.houseNumber}', '{company.zipCode}', '{company.city}', '{company.country}', '{company.currency.ToString()}', '{company.cvr}', '{company.email}')";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -67,7 +69,7 @@ namespace App
             string queryString =
                 $"UPDATE dbo.Companies SET Name='{company.name}', Road='{company.road}', HouseNumber='{company.houseNumber}', ZipCode='{company.zipCode}', Country='{company.country}', Currency='{company.currency.ToString()}', Cvr='{company.cvr}', Email='{company.email}' WHERE Id={company.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -77,7 +79,7 @@ namespace App
         {
             string queryString = $"DELETE FROM dbo.Companies WHERE Id={company.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

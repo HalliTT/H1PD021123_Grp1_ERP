@@ -13,139 +13,187 @@
                       string firstName,
                       string lastName,
                       string phone,
-                      string mail,
-                      Adress address,
+                      string email,
+                      Address address,
+                      Role role)
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+            _phone = phone;
+            _email = email;
+            _address = address;
+            _role = role;
+
+            // Creation timestamp is equal to GetLastPurchase(), 
+            // since user will created when purchase has been made.
+            if (role == Role.Customer)
+            {
+                _creationTimeStamp = GetLastPurchase();
+            }
+            else
+            {
+                _creationTimeStamp = DateTime.Now.ToString();
+            }
+
+            _fullName = GetFullName();
+        }
+
+        public Person(
+                      int id,
+                      string firstName,
+                      string lastName,
+                      string phone,
+                      string email,
+                      Address address,
                       Role role,
                       string creationTimeStamp)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.phone = phone;
-            this.mail = mail;
-            this.address = address;
-            this.role = role;
-            this.creationTimeStamp = creationTimeStamp;
+            _id = id;
+            _firstName = firstName;
+            _lastName = lastName;
+            _phone = phone;
+            _email = email;
+            _address = address;
+            _role = role;
+            _creationTimeStamp = creationTimeStamp;
 
-            this._creationTimeStamp = getLastPurchase();
-            this._fullName = getFullName();
+            // Creation timestamp is equal to GetLastPurchase(), 
+            // since user will created when purchase has been made.
+            if (role == Role.Customer)
+            {
+                _creationTimeStamp = GetLastPurchase();
+            }
+            else
+            {
+                _creationTimeStamp = DateTime.Now.ToString();
+            }
+
+            _fullName = GetFullName();
         }
 
-        public Person()
-        {
-            this._fullName = getFullName();
-        }
-
-        //Id
         protected int _id;
         public int id
         {
-            get { return _id; }
             set { _id = value; }
+            get { return _id; }
         }
 
-        //Name
-        protected string _firstName;
+        protected string _firstName = null!;
         public string firstName
         {
-            get { return _firstName; }
             set { _firstName = value; }
+            get { return _firstName; }
         }
 
-        //Last Name
-        protected string _lastName;
+        protected string _lastName = null!;
         public string lastName
         {
-            get { return _lastName; }
             set { _lastName = value; }
+            get { return _lastName; }
         }
 
-        //Phone
-        protected string _phone;
+        protected string _phone = null!;
         public string phone
         {
-            get { return _phone; }
             set { _phone = value; }
+            get { return _phone; }
         }
 
-        //Email
-        protected string _mail;
-        public string mail
+        protected string _email = null!;
+        public string email
         {
-            get { return _mail; }
-            set { _mail = value; }
+            set { _email = value; }
+            get { return _email; }
         }
 
-        //Adress
-        protected Adress _adress;
-        public Adress address
+        protected Address _address = null!;
+        public Address address
         {
-            get { return _adress; }
-            set { _adress = value; }
+            set { _address = value; }
+            get { return _address; }
         }
 
-        //Role
+        public string addressAsStr
+        {
+            get { return address.ToString(); }
+        }
+
+        public string addressRoadName
+        {
+            set { address.roadName = value; }
+            get { return address.roadName; }
+        }
+
+        public string addressDoorNumber
+        {
+            set { address.doorNumber = value; }
+            get { return address.doorNumber; }
+        }
+
+        public string addressZipCode
+        {
+            set { address.zipCode = value; }
+            get { return address.zipCode; }
+        }
+
+        public string addressCity
+        {
+            set { address.city = value; }
+            get { return address.city; }
+        }
+
+        public string addressCountry
+        {
+            set { address.country = value; }
+            get { return address.country; }
+        }
+
         protected Role _role;
         public Role role
         {
             get { return _role; }
-            set { _role = value; }
         }
 
-        //creationTimeStamp
-        protected string _creationTimeStamp;
+        protected string _creationTimeStamp = null!;
         public string creationTimeStamp
         {
             get { return _creationTimeStamp; }
             set { _creationTimeStamp = value; }
         }
 
-        protected string _lastPurchase;
         public string lastPurchase
         {
-            get { return _lastPurchase; }
-            set
-            {
-                var db = new Database();
-                var orders = db.GetOrder();
-
-                foreach (var order in orders)
-                {
-                    if (order.customerId == this.id)
-                    {
-                        _lastPurchase = order.creationTimestamp;
-                    }
-                }
-            }
+            get { return GetLastPurchase(); }
         }
 
-        protected string _fullName;
+        protected string _fullName = null!;
 
         public string fullName
         {
             get { return _fullName; }
         }
 
-        public string getFullName()
+        public string GetFullName()
         {
-            return this.firstName + " " + this.lastName;
+            return _firstName + " " + _lastName;
         }
 
-        public string getLastPurchase()
+        public string GetLastPurchase()
         {
             var db = new Database();
             var orders = db.GetOrder();
 
-            var creationTimeStamp = this.creationTimeStamp;
+            var lastPurchase = _creationTimeStamp;
 
             foreach (var order in orders)
             {
-                if (order.customerId == this.id)
+                if (order.customerId == _id)
                 {
-                    creationTimeStamp = order.creationTimestamp;
+                    _creationTimeStamp = order.creationTimestamp;
                 }
             }
 
-            return creationTimeStamp;
+            return lastPurchase;
         }
     }
 }

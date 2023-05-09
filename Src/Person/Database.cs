@@ -17,11 +17,11 @@ namespace App
             string queryString = "";
             if (customerId > 0)
             {
-                queryString = $"SELECT * FROM dbo.Person WHERE Id IS '{customerId}'";
+                queryString = $"SELECT * FROM dbo.Persons WHERE Id LIKE {customerId}";
             }
             else
             {
-                queryString = $"SELECT * FROM dbo.Person";
+                queryString = $"SELECT * FROM dbo.Persons";
             }
 
             SqlCommand command = new SqlCommand(queryString, connection);
@@ -34,19 +34,21 @@ namespace App
             {
                 while (reader.Read())
                 {
-                    // Trying to parse string to enum<State>
-                    App.Role role;
-                    Enum.TryParse<App.Role>(Convert.ToString(reader[6]), out role);
+                    // Trying to parse string to enum<Role>
+                    Role role;
+                    Enum.TryParse<Role>(Convert.ToString(reader[6]), out role);
 
-                    person.Add(new Person(
+                    var obj = new Person(
+                        Convert.ToInt32(reader[0]),
                         Convert.ToString(reader[1]),
                         Convert.ToString(reader[2]),
                         Convert.ToString(reader[3]),
                         Convert.ToString(reader[4]),
-                        JsonConvert.DeserializeObject<Adress>(Convert.ToString(reader[5])), //Adress personAdress
+                        JsonConvert.DeserializeObject<Address>(Convert.ToString(reader[5])), //Address personAddress
                         role,
-                        Convert.ToString(reader[7]) //Sales timeStamp
-                        ));
+                        Convert.ToString(reader[7]));
+
+                    person.Add(obj);
                 }
             }
             return person;
@@ -55,19 +57,36 @@ namespace App
         //Add Customer
         public void InsertPerson(Person person)
         {
-            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.mail}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
+            string queryString = $"INSERT INTO dbo.Persons VALUES ('{person.firstName}', '{person.lastName}', '{person.phone}', '{person.email}', '{JsonConvert.SerializeObject(person.address)}', '{person.role.ToString()}', '{person.creationTimeStamp}')";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
+
+            queryString = "SELECT SCOPE_IDENTITY() FROM dbo.Orders";
+
+            command = new SqlCommand(queryString, _connection);
+
+            int IdScope = -1;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    IdScope = Convert.ToInt32(reader[0]);
+                }
+            }
+            person.id = IdScope;
         }
 
         //Update Customer
         public void UpdatePerson(Person person)
         {
-            string queryString = $"UPDATE dbo.Persons SET (FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.mail}', Addres='{JsonConvert.SerializeObject(person.address)}', WHERE Id={person.id}";
+            var address = new Address(person.addressCountry, person.addressZipCode, person.addressCity, person.addressRoadName, person.addressDoorNumber);
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            string queryString = $"UPDATE dbo.Persons SET FirstName='{person.firstName}', LastName='{person.lastName}', PhoneNumber='{person.phone}', Mail='{person.email}', Address='{JsonConvert.SerializeObject(address)}' WHERE Id={person.id}";
+
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }
@@ -77,7 +96,7 @@ namespace App
         {
             string queryString = $"DELETE FROM dbo.Persons WHERE Id={person.id}";
 
-            SqlCommand command = new SqlCommand(queryString, this.connection);
+            SqlCommand command = new SqlCommand(queryString, _connection);
 
             command.ExecuteNonQuery();
         }

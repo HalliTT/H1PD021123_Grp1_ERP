@@ -1,58 +1,66 @@
-﻿namespace App
+﻿using System.Text;
+
+namespace App
 {
     /// 
-    /// Adress used in Person
+    /// Address used in Person
     ///
-    public class Adress
+    public class Address
     {
         //Constructor
-        public Adress(string country, string zipCode, string city, string roadName, string doorNumber)
+        public Address(string country, string zipCode, string city, string roadName, string doorNumber)
         {
-            this.country = country;
-            this.zipCode = zipCode;
-            this.city = city;
-            this.roadName = roadName;
-            this.doorNumber = doorNumber;
+            _country = country;
+            _zipCode = zipCode;
+            _city = city;
+            _roadName = roadName;
+            _doorNumber = doorNumber;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            return sb.AppendFormat($"{_roadName}, {_doorNumber}, {_zipCode}, {_city}").ToString();
         }
 
         //Country
-        protected string _country;
+        protected string _country = null!;
         public string country
         {
-            get { return _country; }
             set { _country = value; }
+            get { return _country; }
         }
 
         //Zip
-        protected string _zipCode;
+        protected string _zipCode = null!;
         public string zipCode
         {
-            get { return _zipCode; }
             set { _zipCode = value; }
+            get { return _zipCode; }
         }
 
         //City
-        protected string _city;
+        protected string _city = null!;
         public string city
         {
-            get { return _city; }
             set { _city = value; }
+            get { return _city; }
         }
 
         //Road
-        protected string _roadName;
+        protected string _roadName = null!;
         public string roadName
         {
-            get { return _roadName; }
             set { _roadName = value; }
+            get { return _roadName; }
         }
 
         //Door
-        protected string _doorNumber;
+        protected string _doorNumber = null!;
         public string doorNumber
         {
-            get { return _doorNumber; }
             set { _doorNumber = value; }
+            get { return _doorNumber; }
         }
     }
 }

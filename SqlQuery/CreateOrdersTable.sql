@@ -7,5 +7,5 @@ create table Orders
 	DoneTimestamp TEXT NOT NULL,
 	CustomerId INT NOT NULL REFERENCES Persons(Id),
 	State TEXT NOT NULL,
-	TotalOrderPrice INT NOT NULL,
+	TotalOrderPrice MONEY NOT NULL,
 )

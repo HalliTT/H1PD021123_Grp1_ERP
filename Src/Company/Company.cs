@@ -14,23 +14,19 @@ namespace App
         /// <summary>
         /// Set Company info
         /// </summary>
-        public Company(int id, string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
+        public Company(string name, string road, string houseNumber, string zipCode, string city, string country, Currency currency, string cvr, string email)
         {
-            this.id = id;
-            this.name = name;
-            this.road = road;
-            this.houseNumber = houseNumber;
-            this.zipCode = zipCode;
-            this.city = city;
-            this.country = country;
-            this.currency = currency;
-            this.cvr = cvr;
-            this.email = email;
+            _name = name;
+            _road = road;
+            _houseNumber = houseNumber;
+            _zipCode = zipCode;
+            _city = city;
+            _country = country;
+            _currency = currency;
+            _cvr = cvr;
+            _email = email;
         }
-        public Company()
-        {
-        }
-
+        
         //Id
         protected int _id;
         public int id
@@ -39,55 +35,48 @@ namespace App
             get { return _id; }
         }
 
-        //Name
-        protected string _name;
+        protected string _name = null!;
         public string name
         {
             set { _name = value; }
             get { return _name; }
         }
 
-        //Road
-        protected string _road;
+        protected string _road = null!;
         public string road
         {
             set { _road = value; }
             get { return _road; }
         }
 
-        //House Number
-        protected string _houseNumber;
+        protected string _houseNumber = null!;
         public string houseNumber
         {
             set { _houseNumber = value; }
             get { return _houseNumber; }
         }
 
-        //Zipcode
-        protected string _zipCode;
+        protected string _zipCode = null!;
         public string zipCode
         {
             set { _zipCode = value; }
             get { return _zipCode; }
         }
 
-        //City
-        protected string _city;
+        protected string _city = null!;
         public string city
         {
             set { _city = value; }
             get { return _city; }
         }
 
-        //Country
-        protected string _country;
+        protected string _country = null!;
         public string country
         {
             set { _country = value; }
             get { return _country; }
         }
 
-        //Currency
         protected Currency _currency;
         public Currency currency
         {
@@ -95,16 +84,14 @@ namespace App
             get { return _currency; }
         }
 
-        //CVR
-        protected string _cvr;
+        protected string _cvr = null!;
         public string cvr
         {
             set { _cvr = value; }
             get { return _cvr; }
         }
 
-        //Customer Service Email
-        protected string _email;
+        protected string _email = null!;
         public string email
         {
             set { _email = value; }
