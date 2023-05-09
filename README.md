@@ -23,7 +23,7 @@ This project is written in **C#** and has a Database wich utilies **MS SQL** to 
 
 This project is using **TECHCOOL** to create screen and dispaly in console.
 
-`Additional: Too See how the code is structured:` [Database](./Docs/DatabaseDiagram.pdf) // [Classes](./Docs/ClassDiagram.pdf) `opdatere den her med link til class og database structure`
+`Additional: Too See how the code is structured:` [Database](./Docs/DatabaseDiagram.pdf) // [Classes](./Docs/ClassDiagram.pdf)
 
 ## **Technologies**
 
