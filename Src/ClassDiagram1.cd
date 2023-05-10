@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Sales">
+    <Position X="7.698" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Product">
+    <Position X="11.427" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Person">
+    <Position X="15.177" Y="0.552" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Company">
+    <Position X="18.875" Y="0.552" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="App.Program">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.MenuInterface">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Interface&lt;T&gt;">
+    <Position X="4.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgoAAAAhQAkAAAAAAAAAAAAEAAEECQABAAgAIAAA=</HashCode>
+      <FileName>Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Database">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAQEAAAACQAgAAAQAAAiAAAAAYAEAQGIIDAgAAAg=</HashCode>
+      <FileName>Company\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.SetupSalesInterface">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAQIhAAAAAAAAAAAAAAAAFAAAAQABAAAAIAAA=</HashCode>
+      <FileName>Sales\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.OrderLine">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACABAAAAAAAAAAAAAAAAAAIAAAgAAAAAhAAAAEAAA=</HashCode>
+      <FileName>Sales\OrderLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Sales">
+    <Position X="7.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAABAAAAAkAIADACAAQAAAAAAIEAAAQAAAAAlA=</HashCode>
+      <FileName>Sales\Sales.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.SetupProductInterface">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAQIhAAAAAAAAAAAAAAAAFAAAAQABAAAAIAAA=</HashCode>
+      <FileName>Product\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Product">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAAAAAgAFAEIBBAAAAGQAIEAgABACBAAAAAAgI=</HashCode>
+      <FileName>Product\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Address">
+    <Position X="15.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIQAAAAACAEAEAEAACAAAAAAAAAACAAgAAAACAQA=</HashCode>
+      <FileName>Person\Adress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.SetupPersonInterface">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAQIhAAAAAAAAAAAAAAAAFAAAAQABAAAAIAAA=</HashCode>
+      <FileName>Person\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Person">
+    <Position X="15.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACABAACAggQHAABJCAIIgAAAoAEABCEAAAlE=</HashCode>
+      <FileName>Person\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.SetupCompanyInterface">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAQIhAAAAAAAAAAAAAAAAFAAAAQABAAAAIAAA=</HashCode>
+      <FileName>Company\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App.Company">
+    <Position X="19" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIQAAAAAAAgAgAEBICCAAAAQEAABCgAgAAAACAgk=</HashCode>
+      <FileName>Company\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="App.State">
+    <Position X="6.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACAAAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Sales\Sales.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="App.Unit">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAA=</HashCode>
+      <FileName>Product\Product.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="App.Role">
+    <Position X="13.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Person\Person.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="App.Currency">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Company\Company.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
